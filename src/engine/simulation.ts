@@ -210,14 +210,31 @@ export function applyRecoveryPlan(
   // Clone loads
   const loads = INITIAL_LOADS.map((load) => ({ ...load }));
 
+  let baseDemandKW = currentState.powerDemandKW;
+  let baseWaterLoss = currentState.waterLossRateLPD;
+  let baseO2Decline = currentState.oxygenDeclineRatePctPerHour;
+
+  if (currentState.appliedPlanId) {
+    const prevPlan = scenario.recoveryPlans.find((p) => p.id === currentState.appliedPlanId);
+    if (prevPlan?.powerReductionKW) {
+      baseDemandKW += prevPlan.powerReductionKW;
+    }
+    if (prevPlan?.waterLossReductionLPD) {
+      baseWaterLoss += prevPlan.waterLossReductionLPD;
+    }
+    if (prevPlan?.oxygenDeclineReductionPctPerHour) {
+      baseO2Decline += prevPlan.oxygenDeclineReductionPctPerHour;
+    }
+  }
+
   let newSolarKW = currentState.solarOutputKW;
-  let newDemandKW = INITIAL_HABITAT_STATE.powerDemandKW;
-  let newWaterLPD = currentState.waterLossRateLPD;
-  let newO2Decline = currentState.oxygenDeclineRatePctPerHour;
+  let newDemandKW = baseDemandKW;
+  let newWaterLPD = baseWaterLoss || 25;
+  let newO2Decline = baseO2Decline || 1.6;
 
   if (scenario.id === 'solar-drop') {
     const reduction = plan.powerReductionKW ?? 0;
-    newDemandKW = Math.max(0, INITIAL_HABITAT_STATE.powerDemandKW - reduction);
+    newDemandKW = Math.max(0, baseDemandKW - reduction);
 
     // Update individual loads status
     if (plan.id === 'plan-a') {
@@ -241,11 +258,11 @@ export function applyRecoveryPlan(
     }
   } else if (scenario.id === 'water-recovery-fault') {
     const lossRed = plan.waterLossReductionLPD ?? 0;
-    newWaterLPD = Math.max(0, 25 - lossRed);
+    newWaterLPD = Math.max(0, (baseWaterLoss || 25) - lossRed);
     loads.find((l) => l.id === 'water-recovery')!.status = 'throttled';
   } else if (scenario.id === 'air-filter-fault') {
     const declineRed = plan.oxygenDeclineReductionPctPerHour ?? 0;
-    newO2Decline = Math.max(0, 1.6 - declineRed);
+    newO2Decline = Math.max(0, (baseO2Decline || 1.6) - declineRed);
     loads.find((l) => l.id === 'life-support')!.status = 'throttled';
   }
 
@@ -269,23 +286,23 @@ export function applyRecoveryPlan(
   // Recalculate faulted baseline runway for comparison
   let faultedRunway = 0;
   if (scenario.id === 'solar-drop') {
-    faultedRunway = calculateBatteryRunway(currentState.batteryKWh, currentState.solarOutputKW, 8.0).runway ?? 0;
+    faultedRunway = calculateBatteryRunway(currentState.batteryKWh, currentState.solarOutputKW, baseDemandKW).runway ?? 0;
   } else if (scenario.id === 'water-recovery-fault') {
-    faultedRunway = calculateWaterRunway(currentState.waterLitres, 25).runway ?? 0;
+    faultedRunway = calculateWaterRunway(currentState.waterLitres, baseWaterLoss || 25).runway ?? 0;
   } else if (scenario.id === 'air-filter-fault') {
-    faultedRunway = calculateOxygenRunway(currentState.oxygenIndicatorPct, 1.6).runway ?? 0;
+    faultedRunway = calculateOxygenRunway(currentState.oxygenIndicatorPct, baseO2Decline || 1.6).runway ?? 0;
   }
 
   const planOutcomes = evaluateRecoveryPlans(scenario, {
     scenarioId: scenario.id,
     faultedRunway,
     solarOutputKW: currentState.solarOutputKW,
-    powerDemandKW: 8.0,
+    powerDemandKW: baseDemandKW,
     batteryKWh: currentState.batteryKWh,
     waterLitres: currentState.waterLitres,
-    netWaterLossLPD: 25,
+    netWaterLossLPD: baseWaterLoss || 25,
     oxygenIndicatorPct: currentState.oxygenIndicatorPct,
-    declineRatePctPerHour: 1.6,
+    declineRatePctPerHour: baseO2Decline || 1.6,
   });
 
   const activePlanOutcome = planOutcomes.find((p) => p.plan.id === plan.id);
@@ -324,20 +341,21 @@ export function generateResourceForecast(
   const points: ForecastPoint[] = [];
 
   if (resource === 'battery') {
-    const capacity = HABITAT_THRESHOLDS.batteryCapacityKWh;
     const threshold = HABITAT_THRESHOLDS.batteryFloorKWh; // 18
     const initialBattery = state.batteryKWh; // 38
-    const faultedDrain = Math.max(0, 8.0 - state.solarOutputKW); // 5.0 kW
+    const currentReduction = state.appliedPlanId && appliedPlan?.id === state.appliedPlanId ? (appliedPlan.powerReductionKW ?? 0) : 0;
+    const baseDemand = state.powerDemandKW + currentReduction;
+    const faultedDrain = Math.max(0, baseDemand - state.solarOutputKW);
     
     let planDrain = faultedDrain;
     if (appliedPlan?.powerReductionKW) {
-      planDrain = Math.max(0, (8.0 - appliedPlan.powerReductionKW) - state.solarOutputKW);
+      planDrain = Math.max(0, (baseDemand - appliedPlan.powerReductionKW) - state.solarOutputKW);
     }
 
     // Project over 16 hours
     const maxHours = 16;
     for (let h = 0; h <= maxHours; h += 1) {
-      const baselineVal = initialBattery; // 38 constant
+      const baselineVal = initialBattery; // constant
       const faultedVal = Math.max(0, initialBattery - (faultedDrain * h));
       
       const pt: ForecastPoint = {
@@ -359,18 +377,19 @@ export function generateResourceForecast(
   } else if (resource === 'water') {
     const threshold = HABITAT_THRESHOLDS.waterFloorLitres; // 340
     const initialWater = state.waterLitres; // 640
-    const faultedLoss = state.waterLossRateLPD > 0 ? state.waterLossRateLPD : 25;
+    const currentWaterRed = state.appliedPlanId && appliedPlan?.id === state.appliedPlanId ? (appliedPlan.waterLossReductionLPD ?? 0) : 0;
+    const baseLoss = (state.waterLossRateLPD > 0 ? state.waterLossRateLPD : 25) + currentWaterRed;
 
-    let planLoss = faultedLoss;
+    let planLoss = baseLoss;
     if (appliedPlan?.waterLossReductionLPD) {
-      planLoss = Math.max(0, faultedLoss - appliedPlan.waterLossReductionLPD);
+      planLoss = Math.max(0, baseLoss - appliedPlan.waterLossReductionLPD);
     }
 
     // Project over 30 days
     const maxDays = 30;
     for (let d = 0; d <= maxDays; d += 2) {
       const baselineVal = initialWater;
-      const faultedVal = Math.max(0, initialWater - (faultedLoss * d));
+      const faultedVal = Math.max(0, initialWater - (baseLoss * d));
 
       const pt: ForecastPoint = {
         timeStep: d,
@@ -391,18 +410,19 @@ export function generateResourceForecast(
   } else if (resource === 'oxygen') {
     const threshold = HABITAT_THRESHOLDS.oxygenThresholdPct; // 42
     const initialO2 = state.oxygenIndicatorPct; // 82
-    const faultedDecline = state.oxygenDeclineRatePctPerHour > 0 ? state.oxygenDeclineRatePctPerHour : 1.6;
+    const currentO2Red = state.appliedPlanId && appliedPlan?.id === state.appliedPlanId ? (appliedPlan.oxygenDeclineReductionPctPerHour ?? 0) : 0;
+    const baseDecline = (state.oxygenDeclineRatePctPerHour > 0 ? state.oxygenDeclineRatePctPerHour : 1.6) + currentO2Red;
 
-    let planDecline = faultedDecline;
+    let planDecline = baseDecline;
     if (appliedPlan?.oxygenDeclineReductionPctPerHour) {
-      planDecline = Math.max(0, faultedDecline - appliedPlan.oxygenDeclineReductionPctPerHour);
+      planDecline = Math.max(0, baseDecline - appliedPlan.oxygenDeclineReductionPctPerHour);
     }
 
     // Project over 40 hours
     const maxHours = 40;
     for (let h = 0; h <= maxHours; h += 2) {
       const baselineVal = initialO2;
-      const faultedVal = Math.max(0, initialO2 - (faultedDecline * h));
+      const faultedVal = Math.max(0, initialO2 - (baseDecline * h));
 
       const pt: ForecastPoint = {
         timeStep: h,

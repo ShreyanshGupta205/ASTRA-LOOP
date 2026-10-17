@@ -25,28 +25,28 @@ export const ScenarioCard: React.FC<Props> = ({
   return (
     <div
       onClick={onSelect}
-      className={`hud-panel p-5 transition-all duration-300 cursor-pointer flex flex-col justify-between relative overflow-hidden group font-mono ${
+      className={`hud-panel rounded-2xl p-5 sm:p-6 transition-all duration-300 cursor-pointer flex flex-col justify-between relative overflow-hidden group font-mono hover:translate-y-[-2px] ${
         isSelected
-          ? 'border-white bg-[#141414] shadow-2xl'
-          : 'border-[#282828] bg-[#0c0c0c] hover:border-white/40 hover:bg-[#111111]'
+          ? 'border-white/50 bg-gradient-to-b from-white/[0.08] via-white/[0.04] to-transparent shadow-[0_16px_40px_rgba(0,0,0,0.6)]'
+          : 'border-white/10 bg-white/[0.03] hover:border-white/30 hover:bg-white/[0.05]'
       }`}
     >
       <div>
         {/* Top Header */}
         <div className="flex items-start justify-between gap-2 mb-3">
-          <div className="flex items-center gap-2.5">
+          <div className="flex items-center gap-3">
             <div
-              className={`w-9 h-9 flex items-center justify-center shrink-0 transition-colors border ${
+              className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 transition-colors border ${
                 isSelected
-                  ? 'bg-white text-black border-white'
-                  : 'bg-black/60 text-white/60 border-[#282828] group-hover:text-white group-hover:border-white/40'
+                  ? 'bg-white text-black border-white shadow-lg'
+                  : 'bg-white/[0.04] text-white/60 border-white/10 group-hover:text-white group-hover:border-white/30'
               }`}
             >
               <Icon className="w-4 h-4" />
             </div>
             <div>
               <span className="text-[9px] font-mono tracking-widest uppercase text-cyan block font-bold">
-                ANOMALY SIM // {scenario.id.toUpperCase()}
+                ANOMALY // {scenario.id.toUpperCase()}
               </span>
               <h3 className="text-sm font-bold text-white uppercase group-hover:text-cyan transition-colors font-din tracking-wide">
                 {scenario.name}
@@ -55,13 +55,13 @@ export const ScenarioCard: React.FC<Props> = ({
           </div>
 
           {isActive && (
-            <span className="text-[9px] font-mono font-bold px-2 py-0.5 bg-red/20 border border-red/60 text-red animate-spacex-pulse">
+            <span className="text-[9px] font-mono font-bold px-2.5 py-0.5 rounded-full bg-red/20 border border-red/60 text-red animate-spacex-pulse">
               FAULT ACTIVE
             </span>
           )}
         </div>
 
-        <p className="text-xs text-white/65 leading-relaxed line-clamp-3 mb-4 font-sans">
+        <p className="text-xs text-white/70 leading-relaxed line-clamp-3 mb-4 font-sans">
           {scenario.faultDescription}
         </p>
 
@@ -74,13 +74,13 @@ export const ScenarioCard: React.FC<Props> = ({
             {scenario.dependentSystems.slice(0, 3).map((sys) => (
               <span
                 key={sys}
-                className="text-[9px] px-2 py-0.5 bg-black/60 border border-[#282828] text-white/80 font-mono"
+                className="text-[9px] px-2 py-0.5 rounded-md bg-white/[0.04] border border-white/10 text-white/80 font-mono"
               >
                 {sys}
               </span>
             ))}
             {scenario.dependentSystems.length > 3 && (
-              <span className="text-[9px] px-1.5 py-0.5 bg-black/40 border border-[#282828] text-white/40 font-mono">
+              <span className="text-[9px] px-2 py-0.5 rounded-md bg-white/[0.02] border border-white/5 text-white/40 font-mono">
                 +{scenario.dependentSystems.length - 3} MORE
               </span>
             )}
@@ -89,7 +89,7 @@ export const ScenarioCard: React.FC<Props> = ({
       </div>
 
       {/* Footer */}
-      <div className="pt-3 border-t border-[#282828] flex items-center justify-between text-xs">
+      <div className="pt-3.5 border-t border-white/10 flex items-center justify-between text-xs">
         <span className="text-[10px] text-white/40 font-mono">
           TIMESCALE: <strong className="text-white uppercase font-bold">{scenario.runwayUnit}</strong>
         </span>

@@ -42,11 +42,16 @@ export const AIExplanationCopilot: React.FC<AIExplanationCopilotProps> = ({ isOp
     }
 
     if (isSolarFault) {
+      const remainingBatt = Math.max(0, habitat.batteryKWh - HABITAT_THRESHOLDS.batteryFloorKWh);
+      const battRunwayStr = habitat.netDrainKW > 0
+        ? `${(remainingBatt / habitat.netDrainKW).toFixed(1)} hours`
+        : 'indefinite (generation meets demand)';
+
       if (!isPlanApplied) {
         return {
           headline: 'CRITICAL ALERT: Photovoltaic Generation Occluded by Regolith Dust',
           details:
-            `Solar output has collapsed from 8.0 kW to ${habitat.solarOutputKW.toFixed(1)} kW due to lunar regolith dust ejecta. The habitat's base demand remains at ${habitat.powerDemandKW.toFixed(1)} kW, creating an active net deficit of -${habitat.netDrainKW.toFixed(1)} kW that is draining the Li-Ion main bus. With only ${(habitat.batteryKWh - HABITAT_THRESHOLDS.batteryFloorKWh).toFixed(1)} kWh remaining above the 18.0 kWh safety floor, the unmitigated survival runway is approximately ${( (Math.max(0, habitat.batteryKWh - 18)) / habitat.netDrainKW).toFixed(1)} hours.`,
+            `Solar output has collapsed from 8.0 kW to ${habitat.solarOutputKW.toFixed(1)} kW due to lunar regolith dust ejecta. The habitat's base demand remains at ${habitat.powerDemandKW.toFixed(1)} kW, creating an active net deficit of -${habitat.netDrainKW.toFixed(1)} kW that is draining the Li-Ion main bus. With only ${remainingBatt.toFixed(1)} kWh remaining above the 18.0 kWh safety floor, the unmitigated survival runway is approximately ${battRunwayStr}.`,
           recommendation:
             'Immediate load shedding required. Plan C (Shedding Science & External Experiments) is recommended to reduce demand to 4.5 kW and extend runtime to 13.3 hours.',
         };
@@ -54,7 +59,7 @@ export const AIExplanationCopilot: React.FC<AIExplanationCopilotProps> = ({ isOp
         return {
           headline: 'MITIGATION ACTIVE: Contingency Protocol Deployed',
           details:
-            `Contingency protocol ${habitat.appliedPlanId?.toUpperCase()} has been executed. Habitat power demand has been reconfigured down to ${habitat.powerDemandKW.toFixed(1)} kW. Net battery drain has been mitigated to -${habitat.netDrainKW.toFixed(1)} kW, extending the mission survival runway to ${((Math.max(0, habitat.batteryKWh - 18)) / habitat.netDrainKW).toFixed(1)} hours.`,
+            `Contingency protocol ${habitat.appliedPlanId?.toUpperCase()} has been executed. Habitat power demand has been reconfigured down to ${habitat.powerDemandKW.toFixed(1)} kW. Net battery drain has been mitigated to -${habitat.netDrainKW.toFixed(1)} kW, extending the mission survival runway to ${battRunwayStr}.`,
           recommendation:
             'Crew life-support systems (2.5 kW) and thermal loops (1.0 kW) are 100% safeguarded. Science activities remain suspended until EVA dust clearing.',
         };
@@ -62,19 +67,29 @@ export const AIExplanationCopilot: React.FC<AIExplanationCopilotProps> = ({ isOp
     }
 
     if (isWaterFault) {
+      const remainingWater = Math.max(0, habitat.waterLitres - HABITAT_THRESHOLDS.waterFloorLitres);
+      const waterRunwayStr = habitat.waterLossRateLPD > 0
+        ? `${(remainingWater / habitat.waterLossRateLPD).toFixed(1)} days`
+        : 'indefinite (zero net loss)';
+
       return {
         headline: 'WARNING: Closed-Loop Water Recovery Distillation Fault',
         details:
-          `Urine distillation assembly throughput has degraded, resulting in a net fluid loss of -${habitat.waterLossRateLPD} L/day. At current consumption, the remaining ${habitat.waterLitres} L reserve will reach the 340 L safety floor in approximately ${( (habitat.waterLitres - 340) / habitat.waterLossRateLPD ).toFixed(1)} days.`,
+          `Urine distillation assembly throughput has degraded, resulting in a net fluid loss of -${habitat.waterLossRateLPD} L/day. At current consumption, the remaining ${habitat.waterLitres} L reserve will reach the 340 L safety floor in approximately ${waterRunwayStr}.`,
         recommendation:
           'Initiate graywater rationing protocol and prepare redundant catalytic filtration beds.',
       };
     }
 
+    const remainingO2 = Math.max(0, habitat.oxygenIndicatorPct - HABITAT_THRESHOLDS.oxygenThresholdPct);
+    const o2RunwayStr = habitat.oxygenDeclineRatePctPerHour > 0
+      ? `${(remainingO2 / habitat.oxygenDeclineRatePctPerHour).toFixed(1)} hours`
+      : 'indefinite (stable margin)';
+
     return {
       headline: 'Atmospheric Scrubber Contaminant Saturation Detected',
       details:
-        `Trace contaminant sorbent beds have begun saturating at a rate of -${habitat.oxygenDeclineRatePctPerHour}%/hour. Current margin is ${habitat.oxygenIndicatorPct}%, with 25.0 hours until the 42% critical intervention threshold.`,
+        `Trace contaminant sorbent beds have begun saturating at a rate of -${habitat.oxygenDeclineRatePctPerHour}%/hour. Current margin is ${habitat.oxygenIndicatorPct}%, with approximately ${o2RunwayStr} until the 42% critical intervention threshold.`,
       recommendation:
         'Switch to secondary air revitalization canister and inspect particulate pre-filters.',
     };
@@ -115,14 +130,13 @@ export const AIExplanationCopilot: React.FC<AIExplanationCopilotProps> = ({ isOp
       onClick={onClose}
     >
       <div
-        className="bg-bg-panel border-2 border-cyan/50 shadow-cyan-glow max-w-2xl w-full max-h-[85vh] flex flex-col overflow-hidden sharp-brutalist"
-        style={{ borderRadius: '0px' }}
+        className="bg-[#090b10]/95 border border-cyan/40 shadow-2xl backdrop-blur-2xl max-w-2xl w-full max-h-[85vh] flex flex-col overflow-hidden rounded-3xl"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
-        <div className="p-4 border-b border-border bg-bg-secondary flex items-center justify-between">
+        <div className="p-5 border-b border-white/10 bg-white/[0.02] flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="w-8 h-8 bg-cyan/20 text-cyan flex items-center justify-center border border-cyan/50 shadow-cyan-glow">
+            <div className="w-9 h-9 rounded-xl bg-cyan/15 text-cyan flex items-center justify-center border border-cyan/40 shadow-cyan-glow">
               <Bot className="w-5 h-5" />
             </div>
             <div>
@@ -130,25 +144,25 @@ export const AIExplanationCopilot: React.FC<AIExplanationCopilotProps> = ({ isOp
                 <h3 className="font-din text-base font-bold uppercase tracking-wider text-white">
                   AstraLoop AI Mission Copilot
                 </h3>
-                <span className="text-[9px] font-mono px-1.5 py-0.5 bg-cyan text-black font-extrabold uppercase">
+                <span className="text-[9px] font-mono px-2 py-0.5 rounded-full bg-cyan text-black font-extrabold uppercase shadow-sm">
                   EXPLAINABLE LLM ASSISTANT
                 </span>
               </div>
-              <p className="text-[11px] text-text-muted font-sans">
+              <p className="text-[11px] text-text-muted font-sans mt-0.5">
                 Translating deterministic habitat avionics telemetry into plain-language mission intelligence
               </p>
             </div>
           </div>
           <button
             onClick={onClose}
-            className="text-text-muted hover:text-white p-1 cursor-pointer"
+            className="text-text-muted hover:text-white p-1.5 rounded-lg hover:bg-white/10 transition-colors cursor-pointer"
           >
             <X className="w-5 h-5" />
           </button>
         </div>
 
         {/* Prompt Category Pills */}
-        <div className="p-3 border-b border-border bg-black/40 flex flex-wrap gap-1.5 text-xs font-din font-bold uppercase">
+        <div className="p-3.5 border-b border-white/10 bg-black/40 flex flex-wrap gap-2 text-xs font-din font-bold uppercase">
           {[
             { id: 'status', label: 'STATUS ADVISORY' },
             { id: 'runway_math', label: 'RUNWAY MATH' },
@@ -159,10 +173,10 @@ export const AIExplanationCopilot: React.FC<AIExplanationCopilotProps> = ({ isOp
             <button
               key={tab.id}
               onClick={() => setSelectedPrompt(tab.id)}
-              className={`px-2.5 py-1 text-[11px] border transition-colors cursor-pointer ${
+              className={`px-3 py-1.5 text-[11px] border rounded-xl transition-all duration-200 cursor-pointer ${
                 selectedPrompt === tab.id
-                  ? 'bg-cyan text-black border-cyan'
-                  : 'bg-bg-secondary text-text-muted hover:text-white border-border'
+                  ? 'bg-cyan text-black border-cyan font-extrabold shadow-cyan-glow/20'
+                  : 'bg-white/[0.03] text-text-muted hover:text-white border-white/10 hover:border-white/20'
               }`}
             >
               {tab.label}
@@ -171,9 +185,9 @@ export const AIExplanationCopilot: React.FC<AIExplanationCopilotProps> = ({ isOp
         </div>
 
         {/* Advisory Body */}
-        <div className="p-5 overflow-y-auto space-y-4 max-h-[60vh]">
+        <div className="p-6 overflow-y-auto space-y-4 max-h-[60vh]">
           {/* Headline Banner */}
-          <div className="p-3.5 bg-bg-secondary border border-border">
+          <div className="p-4 rounded-2xl bg-white/[0.03] border border-white/10 shadow-sm">
             <div className="flex items-center gap-2 text-xs font-din font-bold uppercase tracking-wide mb-1 text-cyan">
               <Lightbulb className="w-4 h-4 text-cyan" />
               <span>{promptAnswers[selectedPrompt].title}</span>
@@ -184,7 +198,7 @@ export const AIExplanationCopilot: React.FC<AIExplanationCopilotProps> = ({ isOp
           </div>
 
           {/* Operational Recommendation Box */}
-          <div className="p-3.5 bg-cyan/5 border-l-2 border-cyan space-y-1">
+          <div className="p-4 rounded-xl bg-cyan/10 border-l-4 border-cyan space-y-1 shadow-sm">
             <span className="text-[10px] font-mono text-cyan uppercase font-bold tracking-widest block">
               RECOMMENDED FLIGHT DIRECTOR ACTION
             </span>
@@ -194,20 +208,20 @@ export const AIExplanationCopilot: React.FC<AIExplanationCopilotProps> = ({ isOp
           </div>
 
           {/* Scope Honesty Tag */}
-          <div className="p-2.5 bg-black border border-white/10 text-[10px] font-mono text-text-muted flex items-center justify-between">
+          <div className="p-3 rounded-xl bg-white/[0.02] border border-white/10 text-[10px] font-mono text-text-muted flex items-center justify-between">
             <span>MODEL INTEGRITY: 100% DETERMINISTIC</span>
-            <span className="text-teal">HALLUCINATION RISK: 0.0%</span>
+            <span className="text-teal font-bold">HALLUCINATION RISK: 0.0%</span>
           </div>
         </div>
 
         {/* Footer */}
-        <div className="p-3 border-t border-border bg-bg-secondary flex items-center justify-between">
+        <div className="p-4 border-t border-white/10 bg-white/[0.02] flex items-center justify-between">
           <span className="text-[11px] font-mono text-text-muted">
             SHUNYA 2026 • SPACE & BEYOND IDEATHON
           </span>
           <button
             onClick={onClose}
-            className="px-3 py-1 bg-bg-panel hover:bg-white/10 border border-border text-xs text-white font-din font-bold uppercase cursor-pointer"
+            className="px-4 py-2 bg-white/[0.05] hover:bg-white/10 border border-white/15 rounded-xl text-xs text-white font-din font-bold uppercase transition-all duration-200 cursor-pointer"
           >
             DISMISS COPILOT
           </button>

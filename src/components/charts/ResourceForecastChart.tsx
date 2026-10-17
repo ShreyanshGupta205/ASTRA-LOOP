@@ -21,6 +21,43 @@ interface Props {
   onResourceChange: (res: 'battery' | 'water' | 'oxygen') => void;
 }
 
+interface CustomTooltipProps {
+  active?: boolean;
+  payload?: any[];
+  label?: string;
+  unit: string;
+  threshold: number;
+}
+
+const CustomForecastTooltip: React.FC<CustomTooltipProps> = ({ active, payload, label, unit, threshold }) => {
+  if (active && payload && payload.length) {
+    return (
+      <div className="bg-bg-panel/95 backdrop-blur-md border border-cyan/40 p-3 rounded shadow-2xl font-mono text-xs space-y-1.5 min-w-48">
+        <div className="font-bold text-white border-b border-border/80 pb-1 flex justify-between tracking-wider">
+          <span className="text-cyan">{label}</span>
+          <span className="text-[9px] text-text-muted">PREDICTIVE HUD</span>
+        </div>
+        {payload.map((entry: any, index: number) => (
+          <div key={`item-${index}`} className="flex items-center justify-between gap-3">
+            <span className="flex items-center gap-1.5" style={{ color: entry.color }}>
+              <span className="w-1.5 h-1.5 rounded-sm" style={{ backgroundColor: entry.color }} />
+              <span className="text-text-muted text-[10px] uppercase">{entry.name}:</span>
+            </span>
+            <span className="font-bold text-white tabular-nums">
+              {entry.value} {unit}
+            </span>
+          </div>
+        ))}
+        <div className="pt-1 border-t border-border/40 text-[10px] text-red flex justify-between">
+          <span>FLOOR LIMIT:</span>
+          <span>{threshold} {unit}</span>
+        </div>
+      </div>
+    );
+  }
+  return null;
+};
+
 export const ResourceForecastChart: React.FC<Props> = ({
   forecastPoints,
   resource,
@@ -62,36 +99,6 @@ export const ResourceForecastChart: React.FC<Props> = ({
   }[resource];
 
   const hasRecoveryCurve = forecastPoints.some((p) => p.recoveryValue !== undefined);
-
-  // Custom SpaceX Telemetry Tooltip
-  const CustomTooltip = ({ active, payload, label }: any) => {
-    if (active && payload && payload.length) {
-      return (
-        <div className="bg-bg-panel/95 backdrop-blur-md border border-cyan/40 p-3 rounded shadow-2xl font-mono text-xs space-y-1.5 min-w-48">
-          <div className="font-bold text-white border-b border-border/80 pb-1 flex justify-between tracking-wider">
-            <span className="text-cyan">{label}</span>
-            <span className="text-[9px] text-text-muted">PREDICTIVE HUD</span>
-          </div>
-          {payload.map((entry: any, index: number) => (
-            <div key={`item-${index}`} className="flex items-center justify-between gap-3">
-              <span className="flex items-center gap-1.5" style={{ color: entry.color }}>
-                <span className="w-1.5 h-1.5 rounded-sm" style={{ backgroundColor: entry.color }} />
-                <span className="text-text-muted text-[10px] uppercase">{entry.name}:</span>
-              </span>
-              <span className="font-bold text-white tabular-nums">
-                {entry.value} {configs.unit}
-              </span>
-            </div>
-          ))}
-          <div className="pt-1 border-t border-border/40 text-[10px] text-red flex justify-between">
-            <span>FLOOR LIMIT:</span>
-            <span>{configs.threshold} {configs.unit}</span>
-          </div>
-        </div>
-      );
-    }
-    return null;
-  };
 
   return (
     <div className="hud-panel rounded p-4 lg:p-5 flex flex-col justify-between">
@@ -147,7 +154,7 @@ export const ResourceForecastChart: React.FC<Props> = ({
               unit={` ${configs.unit}`}
               tick={{ fill: '#7A8C9E', fontSize: 10, fontFamily: 'JetBrains Mono' }}
             />
-            <Tooltip content={<CustomTooltip />} />
+            <Tooltip content={<CustomForecastTooltip unit={configs.unit} threshold={configs.threshold} />} />
             <Legend
               wrapperStyle={{ paddingTop: '8px', fontSize: '10px', fontFamily: 'JetBrains Mono' }}
               iconType="plainline"

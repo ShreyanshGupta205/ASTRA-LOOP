@@ -21,15 +21,15 @@ export const AlertPanel: React.FC = () => {
   };
 
   return (
-    <div className="hud-panel rounded p-4 lg:p-5 flex flex-col h-full font-mono">
-      <div className="flex items-center justify-between pb-3 mb-3 border-b border-border/80">
+    <div className="hud-panel rounded-2xl p-5 lg:p-6 border border-white/10 shadow-2xl flex flex-col h-full font-mono">
+      <div className="flex items-center justify-between pb-3.5 mb-3.5 border-b border-white/10">
         <div className="flex items-center gap-2">
           <Terminal className="w-4 h-4 text-cyan" />
           <h2 className="text-xs font-bold uppercase tracking-wider text-white">
             AVIONICS EVENT & ALARM LOG
           </h2>
         </div>
-        <span className="text-[9px] px-2 py-0.5 rounded bg-bg-secondary text-cyan border border-border">
+        <span className="text-[10px] px-2.5 py-0.5 rounded-full bg-cyan/10 text-cyan border border-cyan/30 font-bold">
           {state.events.length} ENTRIES
         </span>
       </div>
@@ -39,7 +39,7 @@ export const AlertPanel: React.FC = () => {
         {state.events.map((evt) => (
           <div
             key={evt.id}
-            className="p-2.5 rounded bg-bg-secondary/90 border border-border/70 hover:border-cyan/40 transition-colors flex items-start gap-2.5"
+            className="p-3 rounded-xl bg-white/[0.02] border border-white/10 hover:border-cyan/40 hover:bg-white/[0.05] transition-all duration-200 flex items-start gap-2.5"
           >
             <div className="mt-0.5">{getEventIcon(evt.type)}</div>
             <div className="flex-1 min-w-0">
@@ -47,7 +47,7 @@ export const AlertPanel: React.FC = () => {
                 <span className="text-[10px] font-bold text-cyan uppercase tracking-wide truncate">
                   [{evt.source}]
                 </span>
-                <span className="text-[10px] text-text-muted/70 shrink-0 tabular-nums">
+                <span className="text-[10px] text-text-muted shrink-0 tabular-nums">
                   {evt.formattedTime}
                 </span>
               </div>

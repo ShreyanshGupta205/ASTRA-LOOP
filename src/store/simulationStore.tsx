@@ -128,30 +128,58 @@ function recalculateDynamicStateAtTime(
 
   if (state.activeScenario?.id === 'solar-drop') {
     const floor = HABITAT_THRESHOLDS.batteryFloorKWh; // 18.0 kWh
+    const faultedDrainRate = Math.max(
+      0,
+      (state.activeScenarioInputs['powerDemandKW'] ?? 8.0) - (state.activeScenarioInputs['solarOutputKW'] ?? 3.0)
+    );
+
     if (state.planAppliedAtSimTime !== null && state.planAppliedBatteryKWh !== null) {
       if (t <= state.planAppliedAtSimTime) {
-        // Before plan: faulted drain rate 5.0 kW
-        const calculated = state.initialBatteryReserve - (5.0 * t);
+        const calculated = state.initialBatteryReserve - (faultedDrainRate * t);
         batteryKWh = Math.max(floor, Math.round(calculated * 10) / 10);
       } else {
-        // After plan: plan drain rate
         const timeSincePlan = t - state.planAppliedAtSimTime;
         const calculated = state.planAppliedBatteryKWh - (currentDrain * timeSincePlan);
         batteryKWh = Math.max(floor, Math.round(calculated * 10) / 10);
       }
     } else {
-      const calculated = state.initialBatteryReserve - (currentDrain * t);
+      const calculated = state.initialBatteryReserve - (faultedDrainRate * t);
       batteryKWh = Math.max(floor, Math.round(calculated * 10) / 10);
     }
   } else if (state.activeScenario?.id === 'water-recovery-fault') {
     const floor = HABITAT_THRESHOLDS.waterFloorLitres; // 340 L
-    const daysElapsed = t / 24;
-    const calculated = state.initialWaterReserve - (currentWaterLoss * daysElapsed);
-    waterLitres = Math.max(floor, Math.round(calculated * 10) / 10);
+    const faultedLossRate = state.activeScenarioInputs['netWaterLossLPD'] ?? 25;
+
+    if (state.planAppliedAtSimTime !== null && state.planAppliedWaterLitres !== null) {
+      if (t <= state.planAppliedAtSimTime) {
+        const calculated = state.initialWaterReserve - (faultedLossRate * (t / 24));
+        waterLitres = Math.max(floor, Math.round(calculated * 10) / 10);
+      } else {
+        const timeSincePlanDays = (t - state.planAppliedAtSimTime) / 24;
+        const calculated = state.planAppliedWaterLitres - (currentWaterLoss * timeSincePlanDays);
+        waterLitres = Math.max(floor, Math.round(calculated * 10) / 10);
+      }
+    } else {
+      const calculated = state.initialWaterReserve - (faultedLossRate * (t / 24));
+      waterLitres = Math.max(floor, Math.round(calculated * 10) / 10);
+    }
   } else if (state.activeScenario?.id === 'air-filter-fault') {
     const floor = HABITAT_THRESHOLDS.oxygenThresholdPct; // 42%
-    const calculated = state.initialOxygenReserve - (currentO2Decline * t);
-    oxygenIndicatorPct = Math.max(floor, Math.round(calculated * 10) / 10);
+    const faultedDeclineRate = state.activeScenarioInputs['declineRatePctPerHour'] ?? 1.6;
+
+    if (state.planAppliedAtSimTime !== null && state.planAppliedO2Pct !== null) {
+      if (t <= state.planAppliedAtSimTime) {
+        const calculated = state.initialOxygenReserve - (faultedDeclineRate * t);
+        oxygenIndicatorPct = Math.max(floor, Math.round(calculated * 10) / 10);
+      } else {
+        const timeSincePlanHours = t - state.planAppliedAtSimTime;
+        const calculated = state.planAppliedO2Pct - (currentO2Decline * timeSincePlanHours);
+        oxygenIndicatorPct = Math.max(floor, Math.round(calculated * 10) / 10);
+      }
+    } else {
+      const calculated = state.initialOxygenReserve - (faultedDeclineRate * t);
+      oxygenIndicatorPct = Math.max(floor, Math.round(calculated * 10) / 10);
+    }
   }
 
   const updatedState: HabitatState = {

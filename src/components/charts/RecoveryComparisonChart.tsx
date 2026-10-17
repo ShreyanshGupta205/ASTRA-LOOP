@@ -21,6 +21,39 @@ interface Props {
   onSelectPlan: (planId: string) => void;
 }
 
+interface CustomBarTooltipProps {
+  active?: boolean;
+  payload?: any[];
+  runwayUnit: 'hours' | 'days';
+  faultedRunway: number;
+}
+
+const CustomBarTooltip: React.FC<CustomBarTooltipProps> = ({ active, payload, runwayUnit, faultedRunway }) => {
+  if (active && payload && payload.length) {
+    const item = payload[0].payload;
+    return (
+      <div className="bg-[#0b0d13]/95 backdrop-blur-xl border border-cyan/40 p-3.5 rounded-xl shadow-2xl font-mono text-xs space-y-1.5">
+        <div className="font-bold text-white flex items-center gap-2 border-b border-white/10 pb-1.5">
+          <span className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: item.color }} />
+          <span className="uppercase">{item.fullName || item.name}</span>
+        </div>
+        <div className="text-text-muted">
+          RUNWAY:{' '}
+          <strong className="text-white tabular-nums text-sm font-bold">
+            {item.runway.toFixed(1)} {runwayUnit.toUpperCase()}
+          </strong>
+        </div>
+        {!item.isFaulted && (
+          <div className="text-teal font-bold text-[11px]">
+            +{(item.runway - faultedRunway).toFixed(1)} {runwayUnit.toUpperCase()} DELTA
+          </div>
+        )}
+      </div>
+    );
+  }
+  return null;
+};
+
 export const RecoveryComparisonChart: React.FC<Props> = ({
   faultedRunway,
   planOutcomes,
@@ -46,35 +79,9 @@ export const RecoveryComparisonChart: React.FC<Props> = ({
     })),
   ];
 
-  const CustomBarTooltip = ({ active, payload }: any) => {
-    if (active && payload && payload.length) {
-      const item = payload[0].payload;
-      return (
-        <div className="bg-bg-panel/95 backdrop-blur-md border border-cyan/40 p-3 rounded shadow-2xl font-mono text-xs space-y-1">
-          <div className="font-bold text-white flex items-center gap-1.5 border-b border-border/80 pb-1">
-            <span className="w-2 h-2 rounded-sm" style={{ backgroundColor: item.color }} />
-            <span className="uppercase">{item.fullName || item.name}</span>
-          </div>
-          <div className="text-text-muted">
-            RUNWAY:{' '}
-            <strong className="text-white tabular-nums text-sm font-bold">
-              {item.runway.toFixed(1)} {runwayUnit.toUpperCase()}
-            </strong>
-          </div>
-          {!item.isFaulted && (
-            <div className="text-teal font-bold text-[11px]">
-              +{(item.runway - faultedRunway).toFixed(1)} {runwayUnit.toUpperCase()} DELTA
-            </div>
-          )}
-        </div>
-      );
-    }
-    return null;
-  };
-
   return (
-    <div className="hud-panel rounded p-4 lg:p-5 flex flex-col justify-between font-mono">
-      <div className="flex items-center justify-between mb-4 pb-3 border-b border-border/60">
+    <div className="hud-panel rounded-2xl p-5 lg:p-6 border border-white/10 shadow-2xl flex flex-col justify-between font-mono">
+      <div className="flex items-center justify-between mb-4 pb-3 border-b border-white/10">
         <div>
           <div className="flex items-center gap-2">
             <BarChart3 className="w-4 h-4 text-cyan" />
@@ -86,7 +93,7 @@ export const RecoveryComparisonChart: React.FC<Props> = ({
             Calculated survivability runway comparison across alternative mitigation plans
           </p>
         </div>
-        <span className="text-[10px] font-bold text-cyan uppercase tracking-widest px-2 py-0.5 rounded bg-bg-secondary border border-border">
+        <span className="text-[10px] font-bold text-cyan uppercase tracking-widest px-3 py-1 rounded-full bg-cyan/10 border border-cyan/30">
           UNIT: {runwayUnit.toUpperCase()}
         </span>
       </div>
@@ -109,7 +116,7 @@ export const RecoveryComparisonChart: React.FC<Props> = ({
               unit={` ${runwayUnit === 'hours' ? 'h' : 'd'}`}
               tick={{ fill: '#7A8C9E', fontSize: 10, fontFamily: 'JetBrains Mono' }}
             />
-            <Tooltip content={<CustomBarTooltip />} />
+            <Tooltip content={<CustomBarTooltip runwayUnit={runwayUnit} faultedRunway={faultedRunway} />} />
 
             {/* Baseline threshold reference */}
             <ReferenceLine
@@ -127,7 +134,7 @@ export const RecoveryComparisonChart: React.FC<Props> = ({
 
             <Bar
               dataKey="runway"
-              radius={[2, 2, 0, 0]}
+              radius={[6, 6, 0, 0]}
               onClick={(entry: any) => {
                 const targetId = entry?.id || entry?.payload?.id;
                 const isFaulted = entry?.isFaulted || entry?.payload?.isFaulted;
@@ -151,7 +158,7 @@ export const RecoveryComparisonChart: React.FC<Props> = ({
         </ResponsiveContainer>
       </div>
 
-      <div className="mt-3 pt-3 border-t border-border/50 flex items-center justify-between text-[10px] text-text-muted">
+      <div className="mt-3 pt-3 border-t border-white/10 flex items-center justify-between text-[10px] text-text-muted">
         <span>CLICK PROTOCOL BAR TO PREVIEW TRAJECTORY</span>
         <span className="text-teal font-bold uppercase tracking-wider">LONGER VECTOR = SUPERIOR ENDURANCE</span>
       </div>

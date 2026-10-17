@@ -16,11 +16,6 @@
     overflow-x: hidden;
   }
 
-  /* Zero border radius everywhere */
-  *, ::before, ::after {
-    border-radius: 0px !important;
-  }
-
   /* D-DIN / Barlow Condensed aerospace headlines */
   h1, h2, h3, h4 {
     font-family: 'Barlow Condensed', Oswald, sans-serif;
@@ -36,39 +31,56 @@
 
   /* SpaceX Minimal Scrollbar */
   ::-webkit-scrollbar {
-    width: 4px;
-    height: 4px;
+    width: 6px;
+    height: 6px;
   }
   ::-webkit-scrollbar-track {
     background: #050505;
   }
   ::-webkit-scrollbar-thumb {
-    background: #222222;
+    background: #26262a;
+    border-radius: 9999px;
   }
   ::-webkit-scrollbar-thumb:hover {
-    background: #65DDF5;
+    background: #00E5FF;
   }
 }
 
-/* SpaceX Tactical HUD Grid */
+/* SpaceX Tactical Subtle Ambient Grid */
 .spacex-grid {
   background-image: 
-    linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
-  background-size: 40px 40px;
+    linear-gradient(to right, rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+  background-size: 48px 48px;
 }
 
-/* SpaceX Instrument Frame with Precision Fine Borders */
+/* Sleek Aerospace HUD Glassmorphic Panel */
 .hud-panel {
   position: relative;
-  background-color: #0c0c0c;
-  border: 1px solid #282828;
-  border-radius: 0px !important;
-  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  background-color: rgba(13, 15, 20, 0.72);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 0.875rem;
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.7);
+  transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .hud-panel:hover {
-  border-color: rgba(255, 255, 255, 0.25);
+  border-color: rgba(255, 255, 255, 0.18);
+  box-shadow: 0 16px 40px -10px rgba(0, 0, 0, 0.85);
+}
+
+/* Sub-panels and inner telemetry modules */
+.hud-inner-panel {
+  background-color: rgba(0, 0, 0, 0.45);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 0.625rem;
+  transition: all 0.2s ease;
+}
+
+.hud-inner-panel:hover {
+  border-color: rgba(255, 255, 255, 0.12);
 }
 
 /* Pulse radar effect */
@@ -136,7 +148,7 @@
   transition-timing-function: cubic-bezier(0.19, 1, 0.22, 1);
 }
 
-/* Zero radius sharp brutalist borders */
+/* Refined subtle border radius */
 .sharp-brutalist {
-  border-radius: 0px !important;
+  border-radius: 0.5rem;
 }

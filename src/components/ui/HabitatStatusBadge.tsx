@@ -45,7 +45,7 @@ export const HabitatStatusBadge: React.FC<Props> = ({ status, size = 'md' }) => 
 
   return (
     <div
-      className={`inline-flex items-center rounded border ${config.color} ${config.glow} ${sizeClasses} transition-all duration-300`}
+      className={`inline-flex items-center rounded-full border ${config.color} ${config.glow} ${sizeClasses} transition-all duration-300 backdrop-blur-md`}
       title={config.desc}
     >
       <span className={`w-1.5 h-1.5 rounded-full ${config.dot}`} />

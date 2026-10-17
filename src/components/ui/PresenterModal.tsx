@@ -175,14 +175,13 @@ export const PresenterModal: React.FC<Props> = ({ isOpen, onClose }) => {
       onClick={onClose}
     >
       <div
-        className="bg-bg-panel border-2 border-white/20 shadow-2xl max-w-4xl w-full max-h-[90vh] flex flex-col overflow-hidden font-sans sharp-brutalist"
-        style={{ borderRadius: '0px' }}
+        className="bg-[#090b10]/95 border border-white/20 shadow-2xl backdrop-blur-2xl max-w-4xl w-full max-h-[90vh] flex flex-col overflow-hidden font-sans rounded-3xl"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Modal Header */}
-        <div className="p-4 sm:p-5 border-b border-border flex items-center justify-between bg-bg-secondary/90">
+        <div className="p-4 sm:p-5 border-b border-white/10 flex items-center justify-between bg-white/[0.02]">
           <div className="flex items-center gap-3">
-            <div className="w-9 h-9 bg-cyan/15 text-cyan flex items-center justify-center border border-cyan/40 shadow-cyan-glow">
+            <div className="w-9 h-9 rounded-xl bg-cyan/15 text-cyan flex items-center justify-center border border-cyan/40 shadow-cyan-glow">
               <Sparkles className="w-5 h-5" />
             </div>
             <div>
@@ -190,18 +189,18 @@ export const PresenterModal: React.FC<Props> = ({ isOpen, onClose }) => {
                 <h2 className="text-base font-bold font-din uppercase tracking-wider text-white">
                   AstraLoop Presenter Guide & Slide Deck
                 </h2>
-                <span className="text-[10px] font-mono px-2 py-0.5 bg-bg-panel text-cyan border border-border">
+                <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-cyan/10 text-cyan border border-cyan/30">
                   TEAM HACKDEVS
                 </span>
               </div>
-              <p className="text-xs text-text-muted font-sans">
+              <p className="text-xs text-text-muted font-sans mt-0.5">
                 Shunya 2026 • Space & Beyond Ideathon • Complete 9-Slide Deck & Judge Defense Guide
               </p>
             </div>
           </div>
           <button
             onClick={onClose}
-            className="text-text-muted hover:text-white p-1.5 hover:bg-white/10 transition-colors cursor-pointer"
+            className="text-text-muted hover:text-white p-1.5 rounded-lg hover:bg-white/10 transition-colors cursor-pointer"
             aria-label="Close presenter guide"
           >
             <X className="w-5 h-5" />

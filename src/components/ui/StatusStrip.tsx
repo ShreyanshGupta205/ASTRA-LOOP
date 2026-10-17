@@ -13,28 +13,31 @@ export const StatusStrip: React.FC = () => {
   let urgentColor = 'text-teal';
 
   if (state.habitat.activeScenarioId === 'solar-drop') {
-    urgentThresholdText = isApplied
-      ? 'BATTERY SAFETY FLOOR: 18 kWh (13.3h RUNWAY)'
-      : 'BATTERY SAFETY FLOOR: 18 kWh (4.0h RUNWAY)';
+    const remainingUsable = Math.max(0, state.habitat.batteryKWh - 18.0);
+    const drain = state.habitat.netDrainKW;
+    const currentRunway = drain > 0 ? `${(remainingUsable / drain).toFixed(1)}h` : 'STABLE';
+    urgentThresholdText = `BATTERY SAFETY FLOOR: 18 kWh (${currentRunway} RUNWAY)`;
     urgentColor = isApplied ? 'text-amber' : 'text-red';
   } else if (state.habitat.activeScenarioId === 'water-recovery-fault') {
-    urgentThresholdText = isApplied
-      ? 'WATER SAFETY FLOOR: 340 L (60d RUNWAY)'
-      : 'WATER SAFETY FLOOR: 340 L (12d RUNWAY)';
+    const remainingWater = Math.max(0, state.habitat.waterLitres - 340);
+    const loss = state.habitat.waterLossRateLPD;
+    const currentRunway = loss > 0 ? `${(remainingWater / loss).toFixed(1)}d` : 'BALANCED';
+    urgentThresholdText = `WATER SAFETY FLOOR: 340 L (${currentRunway} RUNWAY)`;
     urgentColor = isApplied ? 'text-amber' : 'text-red';
   } else if (state.habitat.activeScenarioId === 'air-filter-fault') {
-    urgentThresholdText = isApplied
-      ? 'O2 THRESHOLD: 42% (200h RUNWAY)'
-      : 'O2 THRESHOLD: 42% (25h RUNWAY)';
+    const remainingMargin = Math.max(0, state.habitat.oxygenIndicatorPct - 42);
+    const decline = state.habitat.oxygenDeclineRatePctPerHour;
+    const currentRunway = decline > 0 ? `${(remainingMargin / decline).toFixed(1)}h` : 'STABLE';
+    urgentThresholdText = `O2 THRESHOLD: 42% (${currentRunway} RUNWAY)`;
     urgentColor = isApplied ? 'text-amber' : 'text-red';
   }
 
   return (
-    <div className="hud-panel p-4 lg:p-5 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-4 border-l-4 border-l-cyan bg-[#0c0c0c] border border-[#282828] font-sans">
+    <div className="hud-panel rounded-2xl p-4 lg:p-6 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-5 bg-gradient-to-r from-white/[0.05] via-white/[0.02] to-transparent backdrop-blur-xl border border-white/10 shadow-xl font-sans">
       {/* Metric 1: System State & Scenario Title */}
-      <div className="flex items-center gap-3.5">
+      <div className="flex items-center gap-4">
         <div
-          className={`w-10 h-10 flex items-center justify-center shrink-0 border ${
+          className={`w-11 h-11 rounded-xl flex items-center justify-center shrink-0 border transition-all ${
             isFault
               ? isApplied
                 ? 'bg-amber/15 text-amber border-amber/40 shadow-amber-glow'
@@ -47,15 +50,15 @@ export const StatusStrip: React.FC = () => {
         <div>
           <div className="text-[10px] font-mono uppercase tracking-widest text-white/50 flex items-center gap-2">
             <span>OPERATIONAL READINESS</span>
-            <span>//</span>
-            <span className="text-cyan font-bold">STAGE 01</span>
+            <span className="text-white/20">//</span>
+            <span className="text-cyan font-bold tracking-wider">STAGE 01</span>
           </div>
-          <div className="text-sm font-bold font-din uppercase tracking-wide text-white flex items-center gap-2 mt-0.5">
+          <div className="text-sm sm:text-base font-bold font-din uppercase tracking-wide text-white flex items-center gap-2 mt-0.5">
             <span>
               {state.activeScenario ? state.activeScenario.name.toUpperCase() : 'FLIGHT EQUILIBRIUM (NO ACTIVE FAULT)'}
             </span>
             {isApplied && (
-              <span className="text-[9px] font-mono font-bold px-2 py-0.5 bg-teal/20 text-teal border border-teal/40">
+              <span className="text-[9px] font-mono font-bold px-2 py-0.5 rounded-full bg-teal/20 text-teal border border-teal/40">
                 PLAN ACTIVE
               </span>
             )}
@@ -64,7 +67,7 @@ export const StatusStrip: React.FC = () => {
       </div>
 
       {/* Metric 2: Primary Limiting Constraint */}
-      <div className="hidden sm:block font-mono">
+      <div className="hidden sm:block font-mono bg-white/[0.03] border border-white/5 px-4 py-2.5 rounded-xl">
         <div className="text-[10px] font-mono uppercase tracking-widest text-white/50">
           CRITICAL CONSTRAINT THRESHOLD
         </div>
@@ -78,18 +81,18 @@ export const StatusStrip: React.FC = () => {
         {!isFault ? (
           <button
             onClick={() => triggerScenarioWithFeedback('solar-drop')}
-            className="flex items-center gap-2 px-5 py-2.5 bg-white hover:bg-neutral-200 text-black font-din font-bold text-xs tracking-[0.16em] uppercase transition-all shadow-lg active:scale-95 cursor-pointer"
+            className="flex items-center gap-2 px-6 py-3 rounded-xl bg-white hover:bg-cyan text-black font-din font-bold text-xs tracking-[0.16em] uppercase transition-all shadow-lg active:scale-95 cursor-pointer group"
             title="Launch primary solar drop demonstration loop"
           >
-            <Play className="w-3.5 h-3.5 fill-black" />
+            <Play className="w-3.5 h-3.5 fill-black group-hover:fill-black transition-colors" />
             <span>ENGAGE SOLAR DROP DEMO</span>
           </button>
         ) : (
-          <div className="flex items-center gap-2.5">
+          <div className="flex items-center gap-3">
             {!isApplied && (
               <button
                 onClick={() => navigate('recovery-plans')}
-                className="flex items-center gap-1.5 px-5 py-2.5 bg-white hover:bg-neutral-200 text-black font-din font-bold text-xs tracking-[0.16em] uppercase shadow-lg transition-all cursor-pointer"
+                className="flex items-center gap-2 px-5 py-3 rounded-xl bg-white hover:bg-cyan text-black font-din font-bold text-xs tracking-[0.16em] uppercase shadow-lg transition-all active:scale-95 cursor-pointer"
               >
                 <Zap className="w-3.5 h-3.5 fill-black" />
                 <span>EVALUATE RESPONSE</span>
@@ -97,7 +100,7 @@ export const StatusStrip: React.FC = () => {
             )}
             <button
               onClick={resetSimulation}
-              className="flex items-center gap-1.5 px-4 py-2.5 bg-black/60 hover:bg-[#161616] border border-[#333333] hover:border-white text-white/70 hover:text-white text-xs font-din font-bold tracking-[0.16em] uppercase transition-all cursor-pointer"
+              className="flex items-center gap-2 px-4 py-3 rounded-xl bg-white/[0.04] hover:bg-white/10 border border-white/10 hover:border-white/30 text-white/70 hover:text-white text-xs font-din font-bold tracking-[0.16em] uppercase transition-all cursor-pointer"
             >
               <RotateCcw className="w-3.5 h-3.5" />
               <span>ABORT / RESET</span>

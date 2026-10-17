@@ -43,28 +43,28 @@ export const DependencyMap: React.FC = () => {
     switch (status) {
       case 'critical':
         return {
-          border: 'border-red glow-border-red bg-red-dark',
-          badge: 'bg-red text-black font-bold',
+          border: 'border-red/60 shadow-red-glow/30 bg-red-dark/80',
+          badge: 'bg-red text-white font-bold',
           text: 'text-red',
           dot: 'bg-red animate-spacex-pulse',
         };
       case 'warning':
         return {
-          border: 'border-amber glow-border-amber bg-amber-dark',
+          border: 'border-amber/50 shadow-amber-glow/20 bg-amber-dark/60',
           badge: 'bg-amber text-black font-bold',
           text: 'text-amber',
           dot: 'bg-amber',
         };
       case 'throttled':
         return {
-          border: 'border-cyan glow-border-cyan bg-cyan-dark',
+          border: 'border-cyan/50 shadow-cyan-glow/20 bg-cyan-dark/60',
           badge: 'bg-cyan text-black font-bold',
           text: 'text-cyan',
           dot: 'bg-cyan',
         };
       case 'offline':
         return {
-          border: 'border-white/5 bg-bg-panel/30 opacity-40',
+          border: 'border-white/5 bg-white/[0.01] opacity-40',
           badge: 'bg-white/10 text-text-muted',
           text: 'text-text-muted',
           dot: 'bg-text-muted',
@@ -72,7 +72,7 @@ export const DependencyMap: React.FC = () => {
       case 'nominal':
       default:
         return {
-          border: 'border-white/10 bg-bg-panel hover:border-teal/50 hover:bg-bg-elevated',
+          border: 'border-white/10 bg-white/[0.03] hover:border-teal/50 hover:bg-white/[0.06]',
           badge: 'bg-teal-dark text-teal border border-teal/40',
           text: 'text-teal',
           dot: 'bg-teal',
@@ -81,8 +81,8 @@ export const DependencyMap: React.FC = () => {
   };
 
   return (
-    <div className="hud-panel rounded p-4 lg:p-5">
-      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 mb-4 pb-3 border-b border-border/60">
+    <div className="hud-panel rounded-2xl p-5 lg:p-6 border border-white/10 shadow-2xl">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 mb-5 pb-3 border-b border-white/10">
         <div>
           <div className="flex items-center gap-2">
             <Layers className="w-4 h-4 text-cyan" />
@@ -113,10 +113,10 @@ export const DependencyMap: React.FC = () => {
       </div>
 
       {/* SpaceX Avionics Rack Columns */}
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-4 p-3 bg-bg-secondary/90 rounded border border-border/60 font-mono">
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-4 p-4 bg-white/[0.02] rounded-2xl border border-white/10 font-mono shadow-inner">
         {/* Column 1: Power Generation */}
         <div className="space-y-3">
-          <div className="text-[10px] uppercase tracking-widest text-text-muted font-bold border-b border-border/60 pb-1 flex items-center justify-between">
+          <div className="text-[10px] uppercase tracking-widest text-text-muted font-bold border-b border-white/10 pb-1.5 flex items-center justify-between">
             <span>STAGE 1: GENERATION</span>
             <span className="text-cyan">BUS-A</span>
           </div>
@@ -126,7 +126,7 @@ export const DependencyMap: React.FC = () => {
             return (
               <div
                 key={node.id}
-                className={`p-3 rounded border transition-all ${style.border}`}
+                className={`p-3 rounded-xl border transition-all duration-200 ${style.border}`}
               >
                 <div className="flex items-center justify-between mb-1">
                   <div className="flex items-center gap-2">
@@ -134,7 +134,7 @@ export const DependencyMap: React.FC = () => {
                     <span className="text-xs font-bold text-white uppercase">{node.label}</span>
                   </div>
                 </div>
-                <div className="flex items-center justify-between text-xs mt-2 border-t border-border/40 pt-1.5">
+                <div className="flex items-center justify-between text-xs mt-2 border-t border-white/10 pt-1.5">
                   <span className="text-[10px] text-text-muted uppercase">{node.category}</span>
                   <span className={`font-bold tabular-nums text-xs ${style.text}`}>{node.metric}</span>
                 </div>
@@ -145,7 +145,7 @@ export const DependencyMap: React.FC = () => {
 
         {/* Column 2: Distribution & Storage */}
         <div className="space-y-3">
-          <div className="text-[10px] uppercase tracking-widest text-text-muted font-bold border-b border-border/60 pb-1 flex items-center justify-between">
+          <div className="text-[10px] uppercase tracking-widest text-text-muted font-bold border-b border-white/10 pb-1.5 flex items-center justify-between">
             <span>STAGE 2: 120V BUS</span>
             <span className="text-cyan">MAIN-B</span>
           </div>
@@ -155,7 +155,7 @@ export const DependencyMap: React.FC = () => {
             return (
               <div
                 key={node.id}
-                className={`p-3 rounded border transition-all ${style.border}`}
+                className={`p-3 rounded-xl border transition-all duration-200 ${style.border}`}
               >
                 <div className="flex items-center justify-between mb-1">
                   <div className="flex items-center gap-2">
@@ -163,7 +163,7 @@ export const DependencyMap: React.FC = () => {
                     <span className="text-xs font-bold text-white uppercase">{node.label}</span>
                   </div>
                 </div>
-                <div className="flex items-center justify-between text-xs mt-2 border-t border-border/40 pt-1.5">
+                <div className="flex items-center justify-between text-xs mt-2 border-t border-white/10 pt-1.5">
                   <span className="text-[10px] text-text-muted uppercase">{node.category}</span>
                   <span className={`font-bold tabular-nums text-xs ${style.text}`}>{node.metric}</span>
                 </div>
@@ -171,7 +171,7 @@ export const DependencyMap: React.FC = () => {
             );
           })}
 
-          <div className="text-[10px] uppercase tracking-widest text-text-muted font-bold border-b border-border/60 pb-1 pt-1 flex items-center justify-between">
+          <div className="text-[10px] uppercase tracking-widest text-text-muted font-bold border-b border-white/10 pb-1.5 pt-1 flex items-center justify-between">
             <span>STAGE 3: STORAGE</span>
             <span className="text-cyan">LI-ION</span>
           </div>
@@ -181,7 +181,7 @@ export const DependencyMap: React.FC = () => {
             return (
               <div
                 key={node.id}
-                className={`p-3 rounded border transition-all ${style.border}`}
+                className={`p-3 rounded-xl border transition-all duration-200 ${style.border}`}
               >
                 <div className="flex items-center justify-between mb-1">
                   <div className="flex items-center gap-2">
@@ -189,7 +189,7 @@ export const DependencyMap: React.FC = () => {
                     <span className="text-xs font-bold text-white uppercase">{node.label}</span>
                   </div>
                 </div>
-                <div className="flex items-center justify-between text-xs mt-2 border-t border-border/40 pt-1.5">
+                <div className="flex items-center justify-between text-xs mt-2 border-t border-white/10 pt-1.5">
                   <span className="text-[10px] text-text-muted uppercase">{node.category}</span>
                   <span className={`font-bold tabular-nums text-xs ${style.text}`}>{node.metric}</span>
                 </div>
@@ -200,7 +200,7 @@ export const DependencyMap: React.FC = () => {
 
         {/* Column 3: Electrical Consumers (Sum = 8.0 kW) */}
         <div className="space-y-2 md:col-span-1">
-          <div className="text-[10px] uppercase tracking-widest text-text-muted font-bold border-b border-border/60 pb-1 flex items-center justify-between">
+          <div className="text-[10px] uppercase tracking-widest text-text-muted font-bold border-b border-white/10 pb-1.5 flex items-center justify-between">
             <span>CONSUMERS (8.0 kW)</span>
             <span className="text-cyan">LOADS</span>
           </div>
@@ -210,7 +210,7 @@ export const DependencyMap: React.FC = () => {
             return (
               <div
                 key={node.id}
-                className={`p-2 rounded border transition-all ${style.border}`}
+                className={`p-2.5 rounded-xl border transition-all duration-200 ${style.border}`}
               >
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-1.5">
@@ -230,7 +230,7 @@ export const DependencyMap: React.FC = () => {
 
         {/* Column 4: ECLSS Fluid & Atmosphere Reservoirs */}
         <div className="space-y-3">
-          <div className="text-[10px] uppercase tracking-widest text-text-muted font-bold border-b border-border/60 pb-1 flex items-center justify-between">
+          <div className="text-[10px] uppercase tracking-widest text-text-muted font-bold border-b border-white/10 pb-1.5 flex items-center justify-between">
             <span>ECLSS RESERVES</span>
             <span className="text-cyan">OUTCOMES</span>
           </div>
@@ -240,7 +240,7 @@ export const DependencyMap: React.FC = () => {
             return (
               <div
                 key={node.id}
-                className={`p-3 rounded border transition-all ${style.border}`}
+                className={`p-3 rounded-xl border transition-all duration-200 ${style.border}`}
               >
                 <div className="flex items-center justify-between mb-1">
                   <div className="flex items-center gap-2">
@@ -248,7 +248,7 @@ export const DependencyMap: React.FC = () => {
                     <span className="text-xs font-bold text-white uppercase">{node.label}</span>
                   </div>
                 </div>
-                <div className="flex items-center justify-between text-xs mt-2 border-t border-border/40 pt-1.5">
+                <div className="flex items-center justify-between text-xs mt-2 border-t border-white/10 pt-1.5">
                   <span className="text-[10px] text-text-muted uppercase">{node.category}</span>
                   <span className={`font-bold tabular-nums text-xs ${style.text}`}>{node.metric}</span>
                 </div>
@@ -256,7 +256,7 @@ export const DependencyMap: React.FC = () => {
             );
           })}
 
-          <div className="p-2.5 rounded bg-bg-elevated/70 border border-border/70 text-[10px] text-text-muted leading-relaxed">
+          <div className="p-3 rounded-xl bg-white/[0.03] border border-white/10 text-[10px] text-text-muted leading-relaxed">
             <strong className="text-cyan block uppercase tracking-wider mb-0.5">AVIONICS BUS RULE:</strong>
             Faults propagate down direct modeled electrical and ECLSS pipelines with zero unmodeled crosstalk.
           </div>

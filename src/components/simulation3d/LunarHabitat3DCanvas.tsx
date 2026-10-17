@@ -3,6 +3,8 @@ import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import { useSimulation } from '../../store/simulationStore';
 import { HABITAT_THRESHOLDS } from '../../data/initialState';
+import { SCENARIO_DEFINITIONS } from '../../scenarios/scenarioDefinitions';
+import { RecoveryPlan } from '../../types/habitat';
 import {
   Eye,
   Camera,
@@ -1037,14 +1039,13 @@ export const LunarHabitat3DCanvas: React.FC<LunarHabitat3DCanvasProps> = ({
   return (
     <div
       ref={containerRef}
-      className={`relative w-full ${heightClass} bg-black border border-white/15 overflow-hidden select-none font-mono ${className}`}
-      style={{ borderRadius: '0px' }}
+      className={`relative w-full ${heightClass} bg-black border border-white/15 overflow-hidden select-none font-mono rounded-2xl ${className}`}
     >
       {/* 3D Viewport Controls & HUD Overlay */}
       {/* Top Left: Simulation Engine Status Tag */}
       <div className="absolute top-4 left-4 z-20 flex flex-wrap items-center gap-2 pointer-events-none">
-        <div className="flex items-center gap-2 px-3 py-1.5 bg-black/85 border border-white/20 backdrop-blur-md pointer-events-auto sharp-brutalist" style={{ borderRadius: '0px' }}>
-          <span className="w-2 h-2 bg-cyan animate-pulse" />
+        <div className="flex items-center gap-2 px-3.5 py-1.5 bg-black/60 border border-white/15 backdrop-blur-xl rounded-full pointer-events-auto shadow-lg">
+          <span className="w-2 h-2 rounded-full bg-cyan animate-pulse" />
           <span className="text-xs font-din font-bold uppercase tracking-widest text-white">
             SIMULATION ARENA // DIGITAL TWIN
           </span>
@@ -1054,7 +1055,7 @@ export const LunarHabitat3DCanvas: React.FC<LunarHabitat3DCanvasProps> = ({
         </div>
 
         {activeScenario && (
-          <div className="flex items-center gap-1.5 px-2.5 py-1.5 bg-red/15 border border-red/60 text-red text-xs font-mono font-bold pointer-events-auto animate-pulse sharp-brutalist" style={{ borderRadius: '0px' }}>
+          <div className="flex items-center gap-1.5 px-3 py-1.5 bg-red/15 border border-red/50 text-red text-xs font-mono font-bold pointer-events-auto animate-pulse rounded-full backdrop-blur-md shadow-lg">
             <AlertTriangle className="w-3.5 h-3.5" />
             <span className="uppercase tracking-wider">
               ANOMALY ACTIVE: {activeScenario.name}
@@ -1063,7 +1064,7 @@ export const LunarHabitat3DCanvas: React.FC<LunarHabitat3DCanvasProps> = ({
         )}
 
         {habitat.appliedPlanId && (
-          <div className="flex items-center gap-1.5 px-2.5 py-1.5 bg-teal/15 border border-teal/60 text-teal text-xs font-mono font-bold pointer-events-auto sharp-brutalist" style={{ borderRadius: '0px' }}>
+          <div className="flex items-center gap-1.5 px-3 py-1.5 bg-teal/15 border border-teal/50 text-teal text-xs font-mono font-bold pointer-events-auto rounded-full backdrop-blur-md shadow-lg">
             <CheckCircle2 className="w-3.5 h-3.5" />
             <span className="uppercase tracking-wider">
               PROTOCOL DEPLOYED: {habitat.appliedPlanId.toUpperCase()}
@@ -1073,16 +1074,15 @@ export const LunarHabitat3DCanvas: React.FC<LunarHabitat3DCanvasProps> = ({
       </div>
 
       {/* Top Right: Camera Presets, Labels Toggle & Fullscreen */}
-      <div className="absolute top-4 right-4 z-20 flex items-center gap-1.5 flex-wrap justify-end">
+      <div className="absolute top-4 right-4 z-20 flex items-center gap-2 flex-wrap justify-end">
         {/* Toggle 3D Labels */}
         <button
           onClick={() => setShowLabels(!showLabels)}
-          className={`flex items-center gap-1.5 px-2.5 py-1.5 text-[10px] font-din font-bold tracking-wider uppercase border transition-colors cursor-pointer sharp-brutalist backdrop-blur-md ${
+          className={`flex items-center gap-1.5 px-3 py-1.5 text-[10px] font-din font-bold tracking-wider uppercase border transition-all duration-200 cursor-pointer rounded-xl backdrop-blur-xl shadow-lg ${
             showLabels
               ? 'bg-cyan text-black border-cyan font-extrabold shadow-cyan-glow/20'
-              : 'bg-black/80 text-white/70 border-white/20 hover:text-white'
+              : 'bg-black/60 text-white/70 border-white/15 hover:text-white hover:bg-black/80'
           }`}
-          style={{ borderRadius: '0px' }}
           title="Toggle 3D Subsystem Floating HUD Labels"
         >
           <Tag className="w-3 h-3" />
@@ -1090,7 +1090,7 @@ export const LunarHabitat3DCanvas: React.FC<LunarHabitat3DCanvasProps> = ({
         </button>
 
         {/* Camera Preset Dropdown / Bar */}
-        <div className="flex items-center bg-black/80 border border-white/20 p-1 backdrop-blur-md sharp-brutalist" style={{ borderRadius: '0px' }}>
+        <div className="flex items-center bg-black/60 border border-white/15 p-1 rounded-xl backdrop-blur-xl shadow-lg">
           <span className="text-[10px] text-white/50 px-2 font-din uppercase tracking-wider hidden sm:inline">
             CAMERA:
           </span>
@@ -1107,12 +1107,11 @@ export const LunarHabitat3DCanvas: React.FC<LunarHabitat3DCanvasProps> = ({
             <button
               key={v.id}
               onClick={() => switchCameraView(v.id as any)}
-              className={`px-2 py-1 text-[10px] font-din font-bold tracking-wider uppercase transition-colors cursor-pointer sharp-brutalist ${
+              className={`px-2.5 py-1 text-[10px] font-din font-bold tracking-wider uppercase transition-all duration-200 cursor-pointer rounded-lg ${
                 activeCameraView === v.id
-                  ? 'bg-cyan text-black font-extrabold'
+                  ? 'bg-cyan text-black font-extrabold shadow-sm'
                   : 'text-white/70 hover:text-white hover:bg-white/10'
               }`}
-              style={{ borderRadius: '0px' }}
             >
               {v.label}
             </button>
@@ -1121,8 +1120,7 @@ export const LunarHabitat3DCanvas: React.FC<LunarHabitat3DCanvasProps> = ({
 
         <button
           onClick={toggleFullscreen}
-          className="p-2 bg-black/80 border border-white/20 text-white/80 hover:text-white hover:bg-white/10 transition-colors cursor-pointer backdrop-blur-md sharp-brutalist"
-          style={{ borderRadius: '0px' }}
+          className="p-2 bg-black/60 border border-white/15 rounded-xl text-white/80 hover:text-white hover:bg-white/10 transition-all duration-200 cursor-pointer backdrop-blur-xl shadow-lg"
           title="Toggle Fullscreen"
           aria-label="Toggle Fullscreen"
         >
@@ -1154,12 +1152,12 @@ export const LunarHabitat3DCanvas: React.FC<LunarHabitat3DCanvasProps> = ({
               isSelected ? 'scale-110' : 'hover:scale-105'
             }`}
           >
-            <div className={`px-2 py-0.5 border text-[9px] font-mono tracking-widest font-bold uppercase shadow-lg flex items-center gap-1.5 backdrop-blur-md sharp-brutalist ${
+            <div className={`px-2.5 py-1 border text-[9px] font-mono tracking-widest font-bold uppercase shadow-xl flex items-center gap-1.5 backdrop-blur-xl rounded-full ${
               isSelected
                 ? 'bg-cyan text-black border-cyan'
-                : 'bg-black/85 text-white/90 border-white/30 group-hover:border-cyan group-hover:text-cyan'
-            }`} style={{ borderRadius: '0px' }}>
-              <span className={`w-1.5 h-1.5 ${
+                : 'bg-black/75 text-white/90 border-white/20 group-hover:border-cyan group-hover:text-cyan'
+            }`}>
+              <span className={`w-1.5 h-1.5 rounded-full ${
                 lbl.category === 'POWER' ? 'bg-amber' : lbl.category === 'ECLSS' ? 'bg-teal' : 'bg-cyan'
               }`} />
               <span>[{lbl.code}] {lbl.name}</span>
@@ -1173,12 +1171,11 @@ export const LunarHabitat3DCanvas: React.FC<LunarHabitat3DCanvasProps> = ({
       {/* Floating 3D Telemetry Inspection Card */}
       {inspectedModule && (
         <div
-          className="absolute bottom-6 left-6 z-20 max-w-md w-full bg-black/95 border-2 border-cyan/70 p-5 shadow-cyan-glow backdrop-blur-md sharp-brutalist"
-          style={{ borderRadius: '0px' }}
+          className="absolute bottom-6 left-6 z-20 max-w-md w-full bg-[#0b0e14]/90 border border-cyan/50 p-5 shadow-2xl backdrop-blur-xl rounded-2xl"
         >
-          <div className="flex items-center justify-between pb-2 mb-3 border-b border-white/20">
+          <div className="flex items-center justify-between pb-2.5 mb-3 border-b border-white/10">
             <div className="flex items-center gap-2">
-              <span className="text-[10px] font-mono px-1.5 py-0.5 bg-cyan/20 text-cyan border border-cyan/40 font-bold">
+              <span className="text-[10px] font-mono px-2 py-0.5 bg-cyan/20 text-cyan border border-cyan/40 font-bold rounded-full">
                 {inspectedModule.code}
               </span>
               <span className="text-sm font-din font-bold uppercase tracking-wider text-white">
@@ -1187,17 +1184,17 @@ export const LunarHabitat3DCanvas: React.FC<LunarHabitat3DCanvasProps> = ({
             </div>
             <button
               onClick={() => setInspectedModule(null)}
-              className="text-white/50 hover:text-white text-base font-bold cursor-pointer px-1"
+              className="text-white/50 hover:text-white text-base font-bold cursor-pointer px-1.5 py-0.5 rounded-lg hover:bg-white/10 transition-colors"
             >
               &times;
             </button>
           </div>
 
           <div className="space-y-2 text-xs font-mono mb-3">
-            <div className="flex justify-between">
+            <div className="flex justify-between items-center">
               <span className="text-white/50">OPERATIONAL STATUS:</span>
               <span
-                className={`font-bold px-1.5 py-0.2 border ${
+                className={`font-bold px-2.5 py-0.5 border rounded-full text-[10px] ${
                   inspectedModule.status === 'NOMINAL'
                     ? 'text-teal border-teal/40 bg-teal/10'
                     : inspectedModule.status === 'WARNING'
@@ -1206,7 +1203,6 @@ export const LunarHabitat3DCanvas: React.FC<LunarHabitat3DCanvasProps> = ({
                     ? 'text-red border-red/40 bg-red/10 animate-pulse'
                     : 'text-cyan border-cyan/40 bg-cyan/10'
                 }`}
-                style={{ borderRadius: '0px' }}
               >
                 {inspectedModule.status}
               </span>
@@ -1225,18 +1221,17 @@ export const LunarHabitat3DCanvas: React.FC<LunarHabitat3DCanvasProps> = ({
             {inspectedModule.description}
           </p>
 
-          <div className="p-2 bg-white/[0.03] border border-white/10 text-[10px] text-text-muted font-mono leading-relaxed mb-3">
+          <div className="p-3 bg-white/[0.03] border border-white/10 rounded-xl text-[10px] text-text-muted font-mono leading-relaxed mb-3">
             <strong className="text-white/80 block mb-0.5 uppercase tracking-wider">ENGINEERING ASSUMPTIONS:</strong>
             {inspectedModule.assumptions}
           </div>
 
           {/* Direct Interactive Controls */}
-          <div className="flex items-center gap-2 pt-1 border-t border-white/10">
+          <div className="flex items-center gap-2 pt-2 border-t border-white/10">
             {inspectedModule.category === 'POWER' && (
               <button
                 onClick={() => triggerScenarioWithFeedback('solar-drop')}
-                className="flex-1 py-1.5 bg-red/20 hover:bg-red/30 border border-red/60 text-red text-xs font-din font-bold uppercase tracking-wider transition-colors cursor-pointer"
-                style={{ borderRadius: '0px' }}
+                className="flex-1 py-2 bg-red/20 hover:bg-red/30 border border-red/60 text-red text-xs font-din font-bold uppercase tracking-wider transition-all duration-200 rounded-xl cursor-pointer"
               >
                 INJECT OCCLUSION FAULT
               </button>
@@ -1245,14 +1240,21 @@ export const LunarHabitat3DCanvas: React.FC<LunarHabitat3DCanvasProps> = ({
             {inspectedModule.category === 'SCIENCE' && (
               <button
                 onClick={() => {
-                  const planC = state.activeScenario?.recoveryPlans.find((p) => p.id === 'plan-c');
-                  if (planC) applyPlanWithFeedback(planC);
+                  if (!state.activeScenario) {
+                    triggerScenarioWithFeedback('solar-drop');
+                    setTimeout(() => {
+                      const planC = SCENARIO_DEFINITIONS['solar-drop'].recoveryPlans.find((p: RecoveryPlan) => p.id === 'plan-c');
+                      if (planC) applyPlanWithFeedback(planC);
+                    }, 250);
+                  } else {
+                    const plan = state.activeScenario.recoveryPlans.find((p: RecoveryPlan) => p.throttledSubsystems?.includes('labs-lighting') || p.id.includes('c')) || state.activeScenario.recoveryPlans[0];
+                    if (plan) applyPlanWithFeedback(plan);
+                  }
                 }}
-                disabled={habitat.appliedPlanId === 'plan-c'}
-                className="flex-1 py-1.5 bg-cyan/20 hover:bg-cyan/30 border border-cyan/60 text-cyan text-xs font-din font-bold uppercase tracking-wider transition-colors cursor-pointer disabled:opacity-40"
-                style={{ borderRadius: '0px' }}
+                disabled={Boolean(habitat.appliedPlanId)}
+                className="flex-1 py-2 bg-cyan/20 hover:bg-cyan/30 border border-cyan/60 text-cyan text-xs font-din font-bold uppercase tracking-wider transition-all duration-200 rounded-xl cursor-pointer disabled:opacity-40"
               >
-                {habitat.appliedPlanId === 'plan-c' ? 'LAB ALREADY SHED' : 'DEPLOY PLAN C (SHED LAB)'}
+                {habitat.appliedPlanId ? 'LOAD SHED ACTIVE' : 'DEPLOY MITIGATION (SHED LAB)'}
               </button>
             )}
 
@@ -1267,8 +1269,7 @@ export const LunarHabitat3DCanvas: React.FC<LunarHabitat3DCanvasProps> = ({
                 else if (codePrefix.includes('lab')) switchCameraView('science');
                 else switchCameraView('orbit');
               }}
-              className="px-3 py-1.5 bg-white/10 hover:bg-white/20 border border-white/20 text-white text-xs font-din font-bold uppercase tracking-wider transition-colors cursor-pointer flex items-center gap-1"
-              style={{ borderRadius: '0px' }}
+              className="px-3.5 py-2 bg-white/10 hover:bg-white/20 border border-white/20 text-white text-xs font-din font-bold uppercase tracking-wider transition-all duration-200 rounded-xl cursor-pointer flex items-center gap-1.5"
             >
               <Crosshair className="w-3.5 h-3.5" />
               <span>FOCUS</span>
@@ -1278,7 +1279,7 @@ export const LunarHabitat3DCanvas: React.FC<LunarHabitat3DCanvasProps> = ({
       )}
 
       {/* Bottom Center: Navigation Hint */}
-      <div className="absolute bottom-4 right-4 z-20 pointer-events-none hidden md:flex items-center gap-3 text-[10px] text-white/50 font-mono bg-black/75 px-3 py-1 border border-white/15 backdrop-blur-sm sharp-brutalist" style={{ borderRadius: '0px' }}>
+      <div className="absolute bottom-4 right-4 z-20 pointer-events-none hidden md:flex items-center gap-3 text-[10px] text-white/50 font-mono bg-black/60 px-4 py-1.5 border border-white/15 backdrop-blur-md rounded-full">
         <span>ROTATE: LEFT CLICK + DRAG</span>
         <span>•</span>
         <span>PAN: RIGHT CLICK + DRAG</span>
