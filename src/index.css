@@ -1,0 +1,142 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    color-scheme: dark;
+  }
+
+  /* Deep Space Monochromatic Brutalism: Pitch black #050505 */
+  body {
+    background-color: #050505;
+    color: #FFFFFF;
+    font-family: 'Inter', system-ui, sans-serif;
+    letter-spacing: -0.01em;
+    overflow-x: hidden;
+  }
+
+  /* Zero border radius everywhere */
+  *, ::before, ::after {
+    border-radius: 0px !important;
+  }
+
+  /* D-DIN / Barlow Condensed aerospace headlines */
+  h1, h2, h3, h4 {
+    font-family: 'Barlow Condensed', Oswald, sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+
+  /* Precise tabular monospace numerals for all telemetry readouts */
+  .tabular-nums {
+    font-variant-numeric: tabular-nums;
+    font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
+  }
+
+  /* SpaceX Minimal Scrollbar */
+  ::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #050505;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #222222;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #65DDF5;
+  }
+}
+
+/* SpaceX Tactical HUD Grid */
+.spacex-grid {
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+/* SpaceX Instrument Frame with Precision Fine Borders */
+.hud-panel {
+  position: relative;
+  background-color: #0c0c0c;
+  border: 1px solid #282828;
+  border-radius: 0px !important;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.hud-panel:hover {
+  border-color: rgba(255, 255, 255, 0.25);
+}
+
+/* Pulse radar effect */
+@keyframes spacex-pulse {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.6;
+    transform: scale(1.05);
+  }
+}
+
+.animate-spacex-pulse {
+  animation: spacex-pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Glow lines */
+.glow-border-cyan {
+  border-color: #65DDF5 !important;
+  box-shadow: 0 0 15px rgba(101, 221, 245, 0.35);
+}
+
+.glow-border-red {
+  border-color: #FF6277 !important;
+  box-shadow: 0 0 15px rgba(255, 98, 119, 0.4);
+}
+
+.glow-border-amber {
+  border-color: #FFC15A !important;
+  box-shadow: 0 0 15px rgba(255, 193, 90, 0.35);
+}
+
+.glow-border-teal {
+  border-color: #00FF88 !important;
+  box-shadow: 0 0 15px rgba(0, 255, 136, 0.35);
+}
+
+/* SpaceX Monochromatic Brutalism */
+.spacex-nav-link {
+  position: relative;
+  letter-spacing: 0.12em;
+}
+
+.spacex-nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 100%;
+  height: 1.5px;
+  background-color: #FFFFFF;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.spacex-nav-link:hover::after,
+.spacex-nav-link.active::after {
+  transform: scaleX(1);
+}
+
+.ease-spacex {
+  transition-timing-function: cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+/* Zero radius sharp brutalist borders */
+.sharp-brutalist {
+  border-radius: 0px !important;
+}
