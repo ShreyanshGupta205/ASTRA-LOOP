@@ -1,0 +1,85 @@
+import { HabitatState, ResourceThresholds, SubsystemLoad } from '../types/habitat';
+
+export const HABITAT_THRESHOLDS: ResourceThresholds = {
+  batteryFloorKWh: 18,
+  batteryCapacityKWh: 100,
+  waterFloorLitres: 340,
+  waterCapacityLitres: 1000,
+  oxygenThresholdPct: 42,
+  oxygenNominalPct: 100,
+};
+
+export const INITIAL_LOADS: SubsystemLoad[] = [
+  {
+    id: 'life-support',
+    name: 'Life Support & ECLSS',
+    baselineKW: 2.5,
+    currentKW: 2.5,
+    category: 'critical',
+    status: 'nominal',
+    description: 'CO2 scrubbers, cabin pressurization, and primary air circulation',
+  },
+  {
+    id: 'heating',
+    name: 'Thermal Control & Heating',
+    baselineKW: 1.0,
+    currentKW: 1.0,
+    category: 'critical',
+    status: 'nominal',
+    description: 'Active thermal loop and radiator heating to survive lunar night',
+  },
+  {
+    id: 'communications',
+    name: 'Lunar Comms & Telemetry',
+    baselineKW: 0.5,
+    currentKW: 0.5,
+    category: 'essential',
+    status: 'nominal',
+    description: 'Deep space network relay and habitat internal data bus',
+  },
+  {
+    id: 'water-recovery',
+    name: 'Water Recovery Unit',
+    baselineKW: 1.0,
+    currentKW: 1.0,
+    category: 'essential',
+    status: 'nominal',
+    description: 'Greywater distillation and urine processor assembly',
+  },
+  {
+    id: 'labs-lighting',
+    name: 'Labs & Habitat Lighting',
+    baselineKW: 1.5,
+    currentKW: 1.5,
+    category: 'non-essential',
+    status: 'nominal',
+    description: 'Geology workstations, workstation compute, and cabin lighting',
+  },
+  {
+    id: 'experiments',
+    name: 'External Experiments',
+    baselineKW: 1.5,
+    currentKW: 1.5,
+    category: 'payload',
+    status: 'nominal',
+    description: 'Lunar regolith smelting and exterior sensor packages',
+  },
+];
+
+export const INITIAL_HABITAT_STATE: HabitatState = {
+  batteryKWh: 38,
+  solarOutputKW: 8.0,
+  powerDemandKW: 8.0,
+  netPowerKW: 0.0,
+  netDrainKW: 0.0,
+  waterLitres: 640,
+  waterLossRateLPD: 0.0,
+  oxygenIndicatorPct: 82,
+  oxygenDeclineRatePctPerHour: 0.0,
+  loads: INITIAL_LOADS,
+  status: 'STABLE',
+  activeScenarioId: null,
+  appliedPlanId: null,
+  isFaultActive: false,
+  timestamp: Date.now(),
+};
