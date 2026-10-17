@@ -62,11 +62,11 @@ export const GuidedDemoTour: React.FC<Props> = ({ isOpen, onClose }) => {
   };
 
   return (
-    <div className="fixed bottom-6 right-6 z-50 max-w-xl w-[92vw] sm:w-[540px] bg-[#090b10]/95 border border-cyan/40 text-white shadow-2xl p-5 sm:p-6 font-mono text-xs rounded-3xl select-none backdrop-blur-2xl">
+    <div className="fixed bottom-6 right-6 z-50 max-w-xl w-[92vw] sm:w-[540px] bg-[#080808] border border-cyan/50 text-white shadow-2xl p-5 sm:p-6 font-mono text-xs sharp-brutalist select-none backdrop-blur-2xl">
       {/* Top Header Bar */}
-      <div className="flex items-center justify-between border-b border-white/10 pb-3 mb-4">
+      <div className="flex items-center justify-between border-b border-[#222222] pb-3 mb-4">
         <div className="flex items-center gap-3">
-          <div className="w-8 h-8 rounded-xl bg-cyan text-black flex items-center justify-center font-bold shadow-cyan-glow">
+          <div className="w-8 h-8 bg-cyan text-black flex items-center justify-center font-bold shadow-cyan-glow sharp-brutalist">
             <Compass className="w-4 h-4 animate-spin-slow" />
           </div>
           <div>
@@ -74,11 +74,11 @@ export const GuidedDemoTour: React.FC<Props> = ({ isOpen, onClose }) => {
               <span className="font-din font-extrabold uppercase tracking-widest text-white text-sm">
                 2-MIN GUIDED PITCH TOUR
               </span>
-              <span className="text-[10px] bg-cyan/20 text-cyan px-2 py-0.5 rounded-full border border-cyan/40 font-bold">
+              <span className="text-[10px] bg-[#050505] text-cyan px-2 py-0.5 sharp-brutalist border border-cyan/40 font-bold">
                 P.11 SCRIPT
               </span>
             </div>
-            <span className="text-[10px] text-text-muted mt-0.5 block">
+            <span className="text-[10px] text-white/50 mt-0.5 block">
               Official Hackathon Narration Flow: Step {step} of 5
             </span>
           </div>
@@ -86,7 +86,7 @@ export const GuidedDemoTour: React.FC<Props> = ({ isOpen, onClose }) => {
 
         <button
           onClick={onClose}
-          className="text-text-muted hover:text-white p-1.5 rounded-lg hover:bg-white/10 transition-colors cursor-pointer"
+          className="text-white/50 hover:text-white p-2 border border-transparent hover:border-[#333333] hover:bg-white/10 transition-colors cursor-pointer sharp-brutalist"
           aria-label="Exit Guided Demo"
         >
           <X className="w-4 h-4" />
@@ -105,16 +105,16 @@ export const GuidedDemoTour: React.FC<Props> = ({ isOpen, onClose }) => {
           <button
             key={s.num}
             onClick={() => handleStepChange(s.num)}
-            className={`py-2 px-1 text-center transition-all duration-200 cursor-pointer border rounded-xl ${
+            className={`py-2 px-1 text-center transition-all duration-200 cursor-pointer border sharp-brutalist ${
               step === s.num
                 ? 'bg-cyan text-black font-extrabold border-cyan shadow-cyan-glow'
                 : step > s.num
                 ? 'bg-teal/20 text-teal border-teal/40'
-                : 'bg-white/[0.03] text-text-muted border-white/10 hover:border-white/30'
+                : 'bg-[#050505] text-white/50 border-[#222222] hover:border-white/30'
             }`}
           >
-            <div className="text-[10px] font-bold">0{s.num}</div>
-            <div className="text-[8px] truncate hidden sm:block mt-0.5">{s.label}</div>
+            <div className="text-[10px] font-bold font-din">0{s.num}</div>
+            <div className="text-[8px] truncate hidden sm:block mt-0.5 font-din uppercase">{s.label}</div>
           </button>
         ))}
       </div>
@@ -223,24 +223,24 @@ export const GuidedDemoTour: React.FC<Props> = ({ isOpen, onClose }) => {
       </div>
 
       {/* Navigation Controls */}
-      <div className="flex items-center justify-between pt-3.5 border-t border-white/10 mt-4 font-din">
+      <div className="flex items-center justify-between pt-3.5 border-t border-[#222222] mt-4 font-din">
         <button
           onClick={() => handleStepChange(Math.max(1, step - 1))}
           disabled={step === 1}
-          className="px-3.5 py-2 bg-white/[0.04] border border-white/10 hover:border-white/30 text-white text-xs font-bold uppercase tracking-wider flex items-center gap-1.5 rounded-xl disabled:opacity-30 disabled:cursor-not-allowed cursor-pointer transition-all duration-200"
+          className="px-4 py-2.5 bg-[#050505] border border-[#333333] hover:border-white text-white text-xs font-bold uppercase tracking-[0.14em] flex items-center gap-1.5 sharp-brutalist disabled:opacity-30 disabled:cursor-not-allowed cursor-pointer transition-all duration-200"
         >
           <ChevronLeft className="w-3.5 h-3.5" />
           <span>PREVIOUS</span>
         </button>
 
-        <span className="text-[10px] font-mono text-text-muted">
+        <span className="text-[10px] font-mono text-white/50">
           {step === 5 ? 'DEMO COMPLETE' : `UP NEXT: STEP ${step + 1}`}
         </span>
 
         {step < 5 ? (
           <button
             onClick={() => handleStepChange(step + 1)}
-            className="px-4 py-2 bg-cyan hover:bg-white text-black text-xs font-bold uppercase tracking-wider flex items-center gap-1.5 rounded-xl shadow-cyan-glow cursor-pointer transition-all duration-200"
+            className="px-5 py-2.5 bg-cyan hover:bg-white text-black text-xs font-bold uppercase tracking-[0.16em] flex items-center gap-1.5 sharp-brutalist shadow-cyan-glow cursor-pointer transition-all duration-200"
           >
             <span>NEXT STEP</span>
             <ChevronRight className="w-3.5 h-3.5" />
@@ -251,7 +251,7 @@ export const GuidedDemoTour: React.FC<Props> = ({ isOpen, onClose }) => {
               handleStepChange(1);
               onClose();
             }}
-            className="px-4 py-2 bg-teal text-black text-xs font-bold uppercase tracking-wider flex items-center gap-1.5 rounded-xl shadow-teal-glow cursor-pointer transition-all duration-200"
+            className="px-5 py-2.5 bg-teal text-black text-xs font-bold uppercase tracking-[0.16em] flex items-center gap-1.5 sharp-brutalist shadow-teal-glow cursor-pointer transition-all duration-200"
           >
             <CheckCircle2 className="w-3.5 h-3.5" />
             <span>FINISH TOUR</span>

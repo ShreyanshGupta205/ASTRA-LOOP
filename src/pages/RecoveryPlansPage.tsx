@@ -40,22 +40,23 @@ export const RecoveryPlansPage: React.FC = () => {
   if (!active || !result) {
     return (
       <div className="space-y-8 font-sans">
-        {/* 0. Aerospace Cinematic Page Header */}
-        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-5 pb-6 border-b border-white/10">
+        {/* 0. Aerospace Cinematic Page Header (SpaceX Homepage Style) */}
+        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-5 pb-6 border-b border-[#333333]">
           <div>
             <div className="flex flex-wrap items-center gap-2 mb-2">
-              <span className="text-xs font-mono font-bold px-3 py-1 rounded-full bg-cyan/10 border border-cyan/30 text-cyan">
-                03 / RECOVERY MATRIX
+              <span className="w-2 h-2 rounded-full bg-cyan animate-pulse" />
+              <span className="font-din text-xs sm:text-sm font-bold tracking-[0.2em] text-white/80 uppercase block">
+                04 / RECOVERY MATRIX
               </span>
+              <span className="text-white/30 text-xs font-mono">//</span>
               <span className="text-xs font-mono text-white/50 tracking-wider">
-                ALGORITHMIC TRADEOFF OPTIMIZATION // DETERMINISTIC RUNWAY
+                ALGORITHMIC TRADEOFF OPTIMIZATION • DETERMINISTIC RUNWAY
               </span>
             </div>
-            <h1 className="text-3xl sm:text-4xl font-extrabold uppercase tracking-[0.03em] text-white font-din flex items-center gap-3">
-              <LifeBuoy className="w-7 h-7 text-cyan" />
+            <h1 className="font-din text-3xl sm:text-5xl md:text-6xl font-extrabold uppercase tracking-[0.04em] text-white leading-[1.05] mb-3">
               RECOVERY PLANS & CONTINGENCY PROTOCOLS
             </h1>
-            <p className="text-xs sm:text-sm text-white/70 max-w-3xl font-sans mt-1 leading-relaxed">
+            <p className="text-white/80 font-sans text-sm md:text-base max-w-3xl leading-relaxed font-normal">
               Evaluate alternative mitigation responses, compare calculated runtime extensions, and commit protocols.
             </p>
           </div>
@@ -63,13 +64,13 @@ export const RecoveryPlansPage: React.FC = () => {
           <div className="flex items-center gap-3 shrink-0">
             <button
               onClick={() => navigate('scenario-lab')}
-              className="px-4 py-3 rounded-xl bg-white/[0.04] hover:bg-white/10 border border-white/10 hover:border-white/30 text-white/80 hover:text-white font-din font-bold text-xs uppercase tracking-[0.16em] transition-all flex items-center gap-2 cursor-pointer"
+              className="px-5 py-3.5 border border-white/40 hover:border-white bg-transparent hover:bg-white/10 text-white font-din font-bold text-xs uppercase tracking-[0.16em] transition-all flex items-center gap-2 cursor-pointer sharp-brutalist"
             >
               <span>SCENARIO LAB</span>
             </button>
             <button
               onClick={() => navigate('digital-twin-3d')}
-              className="px-6 py-3 rounded-xl bg-white hover:bg-cyan text-black font-din font-bold text-xs uppercase tracking-[0.16em] transition-all flex items-center gap-2 cursor-pointer shadow-xl group"
+              className="px-6 py-3.5 bg-white hover:bg-cyan text-black font-din font-bold text-xs uppercase tracking-[0.18em] transition-all duration-300 flex items-center gap-2 cursor-pointer sharp-brutalist shadow-2xl group"
             >
               <span>3D SIMULATION ARENA</span>
               <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
@@ -78,16 +79,16 @@ export const RecoveryPlansPage: React.FC = () => {
         </div>
 
         {/* Aerospace Zero-Fault Readiness Panel */}
-        <div className="hud-panel rounded-2xl p-8 sm:p-12 bg-gradient-to-b from-white/[0.05] via-white/[0.02] to-transparent backdrop-blur-xl border border-white/10 text-center max-w-4xl mx-auto space-y-8 shadow-2xl">
-          <div className="w-16 h-16 rounded-2xl bg-teal/15 text-teal border border-teal/40 mx-auto flex items-center justify-center shadow-teal-glow">
+        <div className="hud-panel p-8 sm:p-12 bg-[#080808] border border-[#333333] text-center max-w-4xl mx-auto space-y-8 shadow-2xl sharp-brutalist">
+          <div className="w-16 h-16 bg-teal/15 text-teal border border-teal/40 mx-auto flex items-center justify-center shadow-teal-glow sharp-brutalist">
             <ShieldCheck className="w-8 h-8" />
           </div>
 
           <div>
-            <span className="text-xs font-mono tracking-widest text-teal uppercase font-bold block mb-2 bg-teal/10 border border-teal/30 px-3 py-1 rounded-full w-fit mx-auto">
+            <span className="text-xs font-din font-bold tracking-[0.2em] text-teal uppercase block mb-2 bg-teal/10 border border-teal/30 px-4 py-1.5 w-fit mx-auto sharp-brutalist">
               SYSTEM STATUS: NOMINAL FLIGHT EQUILIBRIUM
             </span>
-            <h2 className="text-3xl font-extrabold font-din uppercase tracking-wide text-white">
+            <h2 className="text-3xl sm:text-4xl font-extrabold font-din uppercase tracking-wide text-white">
               NO ACTIVE FAULT INCIDENT DETECTED
             </h2>
             <p className="text-xs sm:text-sm text-white/70 mt-3 max-w-xl mx-auto leading-relaxed font-sans">
@@ -99,7 +100,7 @@ export const RecoveryPlansPage: React.FC = () => {
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-left font-mono">
             <button
               onClick={() => triggerScenarioWithFeedback('solar-drop')}
-              className="p-5 rounded-xl bg-white/[0.03] hover:bg-white/[0.07] border border-white/10 hover:border-red/60 transition-all cursor-pointer group text-left hover:translate-y-[-2px] shadow-lg"
+              className="p-5 bg-[#050505] hover:bg-white/[0.04] border border-[#333333] hover:border-red/60 transition-all cursor-pointer group text-left sharp-brutalist shadow-lg"
             >
               <div className="flex items-center justify-between text-[10px] text-amber mb-2">
                 <span className="font-bold">CASE 01</span>
@@ -118,7 +119,7 @@ export const RecoveryPlansPage: React.FC = () => {
 
             <button
               onClick={() => triggerScenarioWithFeedback('water-recovery-fault')}
-              className="p-5 rounded-xl bg-white/[0.03] hover:bg-white/[0.07] border border-white/10 hover:border-teal/60 transition-all cursor-pointer group text-left hover:translate-y-[-2px] shadow-lg"
+              className="p-5 bg-[#050505] hover:bg-white/[0.04] border border-[#333333] hover:border-teal/60 transition-all cursor-pointer group text-left sharp-brutalist shadow-lg"
             >
               <div className="flex items-center justify-between text-[10px] text-teal mb-2">
                 <span className="font-bold">CASE 02</span>
@@ -137,7 +138,7 @@ export const RecoveryPlansPage: React.FC = () => {
 
             <button
               onClick={() => triggerScenarioWithFeedback('air-filter-fault')}
-              className="p-5 rounded-xl bg-white/[0.03] hover:bg-white/[0.07] border border-white/10 hover:border-cyan/60 transition-all cursor-pointer group text-left hover:translate-y-[-2px] shadow-lg"
+              className="p-5 bg-[#050505] hover:bg-white/[0.04] border border-[#333333] hover:border-cyan/60 transition-all cursor-pointer group text-left sharp-brutalist shadow-lg"
             >
               <div className="flex items-center justify-between text-[10px] text-cyan mb-2">
                 <span className="font-bold">CASE 03</span>
@@ -158,14 +159,14 @@ export const RecoveryPlansPage: React.FC = () => {
           <div className="pt-2 flex flex-wrap items-center justify-center gap-4">
             <button
               onClick={() => triggerScenarioWithFeedback('solar-drop')}
-              className="px-7 py-3.5 rounded-xl bg-white hover:bg-cyan text-black font-din font-bold text-xs uppercase tracking-[0.16em] transition-all cursor-pointer shadow-xl flex items-center gap-2 group"
+              className="px-8 py-4 bg-white hover:bg-cyan text-black font-din font-bold text-xs uppercase tracking-[0.18em] transition-all duration-300 cursor-pointer shadow-2xl flex items-center gap-2 group sharp-brutalist"
             >
               <Play className="w-3.5 h-3.5 fill-black" />
               <span>LAUNCH PRIMARY SOLAR DROP DEMO</span>
             </button>
             <button
               onClick={() => navigate('scenario-lab')}
-              className="px-6 py-3.5 rounded-xl bg-white/[0.04] hover:bg-white/10 border border-white/10 hover:border-white/30 text-white font-din font-bold text-xs uppercase tracking-[0.16em] transition-all cursor-pointer flex items-center gap-2"
+              className="px-6 py-4 border border-white/40 hover:border-white bg-transparent hover:bg-white/10 text-white font-din font-bold text-xs uppercase tracking-[0.18em] transition-all cursor-pointer flex items-center gap-2 sharp-brutalist"
             >
               <span>OPEN SCENARIO LAB</span>
               <ArrowRight className="w-3.5 h-3.5" />
@@ -184,22 +185,23 @@ export const RecoveryPlansPage: React.FC = () => {
 
   return (
     <div className="space-y-8 font-sans">
-      {/* 0. Aerospace Cinematic Page Header */}
-      <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-5 pb-6 border-b border-white/10">
+      {/* 0. Aerospace Cinematic Page Header (SpaceX Homepage Style) */}
+      <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-5 pb-6 border-b border-[#333333]">
         <div>
           <div className="flex flex-wrap items-center gap-2 mb-2">
-            <span className="text-xs font-mono font-bold px-3 py-1 rounded-full bg-red/15 border border-red/40 text-red animate-spacex-pulse">
+            <span className="w-2 h-2 rounded-full bg-red animate-pulse" />
+            <span className="font-din text-xs sm:text-sm font-bold tracking-[0.2em] text-red uppercase block">
               ACTIVE INCIDENT: {active.name.toUpperCase()}
             </span>
+            <span className="text-white/30 text-xs font-mono">//</span>
             <span className="text-xs font-mono text-white/50 tracking-wider">
-              FAULTED RUNWAY: <strong className="text-red font-bold font-mono">{result.faultedRunway.toFixed(1)} {result.runwayUnit}</strong> // DETERMINISTIC MITIGATION
+              FAULTED RUNWAY: <strong className="text-red font-bold font-mono">{result.faultedRunway.toFixed(1)} {result.runwayUnit}</strong> • DETERMINISTIC MITIGATION
             </span>
           </div>
-          <h1 className="text-3xl sm:text-4xl font-extrabold uppercase tracking-[0.03em] text-white font-din flex items-center gap-3">
-            <LifeBuoy className="w-7 h-7 text-cyan" />
+          <h1 className="font-din text-3xl sm:text-5xl md:text-6xl font-extrabold uppercase tracking-[0.04em] text-white leading-[1.05] mb-3">
             CONTINGENCY PROTOCOL OPTIMIZATION
           </h1>
-          <p className="text-xs sm:text-sm text-white/70 max-w-3xl font-sans mt-1 leading-relaxed">
+          <p className="text-white/80 font-sans text-sm md:text-base max-w-3xl leading-relaxed font-normal">
             Active Incident: <strong className="text-white font-mono">{active.name}</strong> • Immediate Depletion Threshold:{' '}
             <strong className="text-red font-mono tabular-nums">{result.faultedRunway.toFixed(1)} {result.runwayUnit}</strong>. Select and commit an endurance recovery protocol.
           </p>
@@ -207,21 +209,21 @@ export const RecoveryPlansPage: React.FC = () => {
 
         <div className="flex items-center gap-3 shrink-0">
           {state.habitat.appliedPlanId && (
-            <span className="text-xs font-mono font-bold text-teal flex items-center gap-1.5 px-3 py-2 rounded-xl bg-teal/15 border border-teal/40 shadow-teal-glow">
+            <span className="text-xs font-mono font-bold text-teal flex items-center gap-1.5 px-3.5 py-2.5 bg-teal/15 border border-teal/40 shadow-teal-glow sharp-brutalist">
               <ShieldCheck className="w-4 h-4" />
               <span>PROTOCOL ACTIVE</span>
             </span>
           )}
           <button
             onClick={resetSimulation}
-            className="px-4 py-3 rounded-xl bg-white/[0.04] hover:bg-white/10 border border-white/10 hover:border-white/30 text-white/80 hover:text-white font-din font-bold text-xs uppercase tracking-[0.16em] transition-all flex items-center gap-2 cursor-pointer"
+            className="px-5 py-3.5 border border-white/40 hover:border-white bg-transparent hover:bg-white/10 text-white font-din font-bold text-xs uppercase tracking-[0.16em] transition-all flex items-center gap-2 cursor-pointer sharp-brutalist"
           >
             <RotateCcw className="w-3.5 h-3.5" />
             <span>ABORT / RESET</span>
           </button>
           <button
             onClick={() => navigate('digital-twin-3d')}
-            className="px-6 py-3 rounded-xl bg-white hover:bg-cyan text-black font-din font-bold text-xs uppercase tracking-[0.16em] transition-all flex items-center gap-2 cursor-pointer shadow-xl group"
+            className="px-6 py-3.5 bg-white hover:bg-cyan text-black font-din font-bold text-xs uppercase tracking-[0.18em] transition-all duration-300 flex items-center gap-2 cursor-pointer sharp-brutalist shadow-2xl group"
           >
             <span>3D ARENA</span>
             <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
@@ -231,13 +233,13 @@ export const RecoveryPlansPage: React.FC = () => {
 
       {/* Applied Confirmation Banner */}
       {state.habitat.appliedPlanId && (
-        <div className="p-5 rounded-2xl bg-teal/[0.07] border border-teal/40 backdrop-blur-xl flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 font-mono shadow-teal-glow">
+        <div className="p-5 bg-[#080808] border border-teal/50 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 font-mono shadow-teal-glow sharp-brutalist">
           <div className="flex items-center gap-3.5">
-            <div className="w-10 h-10 rounded-xl bg-teal text-black flex items-center justify-center shrink-0 font-bold shadow-teal-glow">
+            <div className="w-10 h-10 bg-teal text-black flex items-center justify-center shrink-0 font-bold shadow-teal-glow sharp-brutalist">
               <CheckCircle2 className="w-5 h-5" />
             </div>
             <div>
-              <div className="text-xs font-bold text-teal uppercase tracking-widest font-din">
+              <div className="text-xs font-bold text-teal uppercase tracking-[0.16em] font-din">
                 CONTINGENCY PROTOCOL DEPLOYED // TELEMETRY STREAM SYNCHRONIZED
               </div>
               <p className="text-xs text-white/80 mt-0.5 font-sans leading-relaxed">
@@ -251,7 +253,7 @@ export const RecoveryPlansPage: React.FC = () => {
           </div>
           <button
             onClick={() => triggerScenarioWithFeedback(active.id, state.activeScenarioInputs)}
-            className="text-xs font-mono text-cyan hover:text-white px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 hover:border-cyan/50 shrink-0 cursor-pointer uppercase tracking-wider font-bold transition-all"
+            className="text-xs font-mono text-cyan hover:text-white px-3 py-1.5 bg-white/5 border border-white/10 hover:border-cyan/50 shrink-0 cursor-pointer uppercase tracking-wider font-bold transition-all sharp-brutalist"
           >
             Revert to Fault State
           </button>

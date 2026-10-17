@@ -32,19 +32,19 @@ const CustomBarTooltip: React.FC<CustomBarTooltipProps> = ({ active, payload, ru
   if (active && payload && payload.length) {
     const item = payload[0].payload;
     return (
-      <div className="bg-[#0b0d13]/95 backdrop-blur-xl border border-cyan/40 p-3.5 rounded-xl shadow-2xl font-mono text-xs space-y-1.5">
-        <div className="font-bold text-white flex items-center gap-2 border-b border-white/10 pb-1.5">
-          <span className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: item.color }} />
-          <span className="uppercase">{item.fullName || item.name}</span>
+      <div className="bg-[#080808] border border-[#333333] p-3.5 sharp-brutalist shadow-2xl font-mono text-xs space-y-1.5">
+        <div className="font-bold text-white flex items-center gap-2 border-b border-[#222222] pb-1.5 font-din uppercase tracking-wider">
+          <span className="w-2 h-2" style={{ backgroundColor: item.color }} />
+          <span>{item.fullName || item.name}</span>
         </div>
-        <div className="text-text-muted">
+        <div className="text-white/60">
           RUNWAY:{' '}
-          <strong className="text-white tabular-nums text-sm font-bold">
+          <strong className="text-white tabular-nums text-sm font-bold font-din">
             {item.runway.toFixed(1)} {runwayUnit.toUpperCase()}
           </strong>
         </div>
         {!item.isFaulted && (
-          <div className="text-teal font-bold text-[11px]">
+          <div className="text-teal font-bold text-[11px] font-din tracking-wide">
             +{(item.runway - faultedRunway).toFixed(1)} {runwayUnit.toUpperCase()} DELTA
           </div>
         )}
@@ -80,20 +80,20 @@ export const RecoveryComparisonChart: React.FC<Props> = ({
   ];
 
   return (
-    <div className="hud-panel rounded-2xl p-5 lg:p-6 border border-white/10 shadow-2xl flex flex-col justify-between font-mono">
-      <div className="flex items-center justify-between mb-4 pb-3 border-b border-white/10">
+    <div className="bg-[#080808] border border-[#333333] p-5 lg:p-6 sharp-brutalist shadow-2xl flex flex-col justify-between font-mono">
+      <div className="flex items-center justify-between mb-4 pb-3 border-b border-[#222222]">
         <div>
           <div className="flex items-center gap-2">
             <BarChart3 className="w-4 h-4 text-cyan" />
-            <h3 className="text-xs font-bold uppercase tracking-wider text-white">
+            <h3 className="text-xs sm:text-sm font-extrabold font-din uppercase tracking-[0.14em] text-white">
               CONTINGENCY RUNWAY TRADE STUDY
             </h3>
           </div>
-          <p className="text-[11px] text-text-muted mt-0.5">
+          <p className="text-[11px] text-white/50 mt-0.5">
             Calculated survivability runway comparison across alternative mitigation plans
           </p>
         </div>
-        <span className="text-[10px] font-bold text-cyan uppercase tracking-widest px-3 py-1 rounded-full bg-cyan/10 border border-cyan/30">
+        <span className="text-[10px] font-bold text-cyan uppercase tracking-widest px-3 py-1 bg-[#050505] border border-[#333333] sharp-brutalist">
           UNIT: {runwayUnit.toUpperCase()}
         </span>
       </div>
@@ -134,7 +134,7 @@ export const RecoveryComparisonChart: React.FC<Props> = ({
 
             <Bar
               dataKey="runway"
-              radius={[6, 6, 0, 0]}
+              radius={[0, 0, 0, 0]}
               onClick={(entry: any) => {
                 const targetId = entry?.id || entry?.payload?.id;
                 const isFaulted = entry?.isFaulted || entry?.payload?.isFaulted;
@@ -158,9 +158,9 @@ export const RecoveryComparisonChart: React.FC<Props> = ({
         </ResponsiveContainer>
       </div>
 
-      <div className="mt-3 pt-3 border-t border-white/10 flex items-center justify-between text-[10px] text-text-muted">
+      <div className="mt-3 pt-3 border-t border-[#222222] flex items-center justify-between text-[10px] text-white/50">
         <span>CLICK PROTOCOL BAR TO PREVIEW TRAJECTORY</span>
-        <span className="text-teal font-bold uppercase tracking-wider">LONGER VECTOR = SUPERIOR ENDURANCE</span>
+        <span className="text-teal font-bold uppercase tracking-wider font-din">LONGER VECTOR = SUPERIOR ENDURANCE</span>
       </div>
     </div>
   );

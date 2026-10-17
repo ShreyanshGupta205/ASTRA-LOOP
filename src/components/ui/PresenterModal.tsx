@@ -175,32 +175,32 @@ export const PresenterModal: React.FC<Props> = ({ isOpen, onClose }) => {
       onClick={onClose}
     >
       <div
-        className="bg-[#090b10]/95 border border-white/20 shadow-2xl backdrop-blur-2xl max-w-4xl w-full max-h-[90vh] flex flex-col overflow-hidden font-sans rounded-3xl"
+        className="bg-[#080808] border border-[#333333] shadow-2xl backdrop-blur-2xl max-w-4xl w-full max-h-[90vh] flex flex-col overflow-hidden font-sans sharp-brutalist"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Modal Header */}
-        <div className="p-4 sm:p-5 border-b border-white/10 flex items-center justify-between bg-white/[0.02]">
+        <div className="p-4 sm:p-5 border-b border-[#222222] flex items-center justify-between bg-[#050505]">
           <div className="flex items-center gap-3">
-            <div className="w-9 h-9 rounded-xl bg-cyan/15 text-cyan flex items-center justify-center border border-cyan/40 shadow-cyan-glow">
+            <div className="w-9 h-9 bg-cyan/15 text-cyan flex items-center justify-center border border-cyan/40 shadow-cyan-glow sharp-brutalist">
               <Sparkles className="w-5 h-5" />
             </div>
             <div>
               <div className="flex items-center gap-2">
-                <h2 className="text-base font-bold font-din uppercase tracking-wider text-white">
+                <h2 className="text-base font-extrabold font-din uppercase tracking-[0.14em] text-white">
                   AstraLoop Presenter Guide & Slide Deck
                 </h2>
-                <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-cyan/10 text-cyan border border-cyan/30">
+                <span className="text-[10px] font-mono px-2 py-0.5 bg-[#050505] text-cyan border border-cyan/40 font-bold sharp-brutalist">
                   TEAM HACKDEVS
                 </span>
               </div>
-              <p className="text-xs text-text-muted font-sans mt-0.5">
+              <p className="text-xs text-white/50 font-sans mt-0.5">
                 Shunya 2026 • Space & Beyond Ideathon • Complete 9-Slide Deck & Judge Defense Guide
               </p>
             </div>
           </div>
           <button
             onClick={onClose}
-            className="text-text-muted hover:text-white p-1.5 rounded-lg hover:bg-white/10 transition-colors cursor-pointer"
+            className="text-white/50 hover:text-white p-2 border border-transparent hover:border-[#333333] hover:bg-white/5 transition-colors cursor-pointer sharp-brutalist"
             aria-label="Close presenter guide"
           >
             <X className="w-5 h-5" />

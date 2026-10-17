@@ -98,22 +98,23 @@ export const ScenarioLabPage: React.FC = () => {
 
   return (
     <div className="space-y-8 font-sans">
-      {/* 0. Aerospace Cinematic Page Header */}
-      <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-5 pb-6 border-b border-white/10">
+      {/* 0. Aerospace Cinematic Page Header (SpaceX Homepage Style) */}
+      <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-5 pb-6 border-b border-[#333333]">
         <div>
           <div className="flex flex-wrap items-center gap-2 mb-2">
-            <span className="text-xs font-mono font-bold px-3 py-1 rounded-full bg-cyan/10 border border-cyan/30 text-cyan">
-              02 / ANOMALY LAB
+            <span className="w-2 h-2 rounded-full bg-cyan animate-pulse" />
+            <span className="font-din text-xs sm:text-sm font-bold tracking-[0.2em] text-white/80 uppercase block">
+              03 / ANOMALY LAB
             </span>
+            <span className="text-white/30 text-xs font-mono">//</span>
             <span className="text-xs font-mono text-white/50 tracking-wider">
-              FAULT INJECTION SUITE // SENSITIVITY CALIBRATION
+              FAULT INJECTION SUITE • SENSITIVITY CALIBRATION
             </span>
           </div>
-          <h1 className="text-3xl sm:text-4xl font-extrabold uppercase tracking-[0.03em] text-white font-din flex items-center gap-3">
-            <FlaskConical className="w-7 h-7 text-cyan" />
+          <h1 className="font-din text-3xl sm:text-5xl md:text-6xl font-extrabold uppercase tracking-[0.04em] text-white leading-[1.05] mb-3">
             ANOMALY SIMULATION & PARAMETER LAB
           </h1>
-          <p className="text-xs sm:text-sm text-white/70 max-w-3xl font-sans mt-1 leading-relaxed">
+          <p className="text-white/80 font-sans text-sm md:text-base max-w-3xl leading-relaxed font-normal">
             Inject deterministic lunar habitat resource anomalies, stress-test subsystem boundaries, and compute threshold runway with continuous parametric sensitivity.
           </p>
         </div>
@@ -121,14 +122,14 @@ export const ScenarioLabPage: React.FC = () => {
         <div className="flex items-center gap-3 shrink-0">
           <button
             onClick={resetSimulation}
-            className="px-4 py-3 rounded-xl bg-white/[0.04] hover:bg-white/10 border border-white/10 hover:border-white/30 text-white/80 hover:text-white font-din font-bold text-xs uppercase tracking-[0.16em] transition-all flex items-center gap-2 cursor-pointer"
+            className="px-5 py-3.5 border border-white/40 hover:border-white bg-transparent hover:bg-white/10 text-white font-din font-bold text-xs uppercase tracking-[0.16em] transition-all flex items-center gap-2 cursor-pointer sharp-brutalist"
           >
             <RotateCcw className="w-3.5 h-3.5" />
             <span>RESET TO BASELINE</span>
           </button>
           <button
             onClick={() => navigate('digital-twin-3d')}
-            className="px-6 py-3 rounded-xl bg-white hover:bg-cyan text-black font-din font-bold text-xs uppercase tracking-[0.16em] transition-all flex items-center gap-2 cursor-pointer shadow-xl group"
+            className="px-6 py-3.5 bg-white hover:bg-cyan text-black font-din font-bold text-xs uppercase tracking-[0.18em] transition-all duration-300 flex items-center gap-2 cursor-pointer sharp-brutalist shadow-2xl group"
           >
             <span>3D SIMULATION ARENA</span>
             <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
@@ -159,15 +160,15 @@ export const ScenarioLabPage: React.FC = () => {
       {/* 2. Parameter Tuning & Live Preview Grid */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Left 2 Cols: Parameter Sliders */}
-        <div className="lg:col-span-2 hud-panel rounded-2xl p-6 sm:p-8 space-y-6 bg-gradient-to-b from-white/[0.04] via-white/[0.02] to-transparent backdrop-blur-xl border border-white/10 shadow-xl">
-          <div className="flex items-center justify-between border-b border-white/10 pb-4">
+        <div className="lg:col-span-2 hud-panel p-6 sm:p-8 space-y-6 bg-[#080808] border border-[#333333] shadow-2xl sharp-brutalist">
+          <div className="flex items-center justify-between border-b border-[#333333] pb-4">
             <div className="flex items-center gap-2.5">
               <Sliders className="w-5 h-5 text-cyan" />
-              <h2 className="text-sm font-bold font-din uppercase tracking-wider text-white">
+              <h2 className="text-sm font-bold font-din uppercase tracking-[0.16em] text-white">
                 STEP 2: CALIBRATE ANOMALY PARAMETERS
               </h2>
             </div>
-            <span className="text-[10px] font-mono text-cyan bg-cyan/10 border border-cyan/30 px-2.5 py-1 rounded-full">
+            <span className="text-[10px] font-mono text-cyan bg-cyan/10 border border-cyan/30 px-2.5 py-1 sharp-brutalist font-bold">
               BOUNDED NUMERICAL SLIDERS
             </span>
           </div>
@@ -267,14 +268,14 @@ export const ScenarioLabPage: React.FC = () => {
           </div>
 
           {/* Action Button: Run Simulation */}
-          <div className="pt-5 border-t border-white/10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+          <div className="pt-5 border-t border-[#333333] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
             <span className="text-[11px] font-mono text-white/50">
               SYNCS CALIBRATED PARAMETERS ACROSS ALL AVIONICS, DEPENDENCY SCHEMATICS, AND PREDICTIVE ENGINES.
             </span>
             <button
               onClick={handleRunSimulation}
               disabled={state.isComputing}
-              className="flex items-center gap-2 px-7 py-3.5 rounded-xl bg-white hover:bg-cyan text-black font-din font-bold text-xs uppercase tracking-[0.18em] transition-all shadow-xl active:scale-95 cursor-pointer disabled:opacity-50 shrink-0"
+              className="flex items-center gap-2 px-8 py-4 bg-white hover:bg-cyan text-black font-din font-bold text-xs uppercase tracking-[0.18em] transition-all duration-300 shadow-2xl active:scale-95 cursor-pointer disabled:opacity-50 shrink-0 sharp-brutalist"
             >
               {state.isComputing ? (
                 <>
@@ -294,20 +295,20 @@ export const ScenarioLabPage: React.FC = () => {
         {/* Right Col: Live Scenario Preview & Sensitivity Card */}
         <div className="space-y-6">
           {/* Live Outcome Preview */}
-          <div className="hud-panel rounded-2xl p-6 space-y-4 bg-gradient-to-b from-white/[0.04] to-transparent backdrop-blur-xl border border-white/10 shadow-xl">
-            <div className="flex items-center justify-between border-b border-white/10 pb-3">
-              <span className="text-xs font-mono font-bold text-cyan uppercase tracking-wider flex items-center gap-2">
+          <div className="hud-panel p-6 space-y-4 bg-[#080808] border border-[#333333] shadow-2xl sharp-brutalist">
+            <div className="flex items-center justify-between border-b border-[#333333] pb-3">
+              <span className="text-xs font-din font-bold text-cyan uppercase tracking-[0.16em] flex items-center gap-2">
                 <Sparkles className="w-4 h-4" />
                 PREDICTIVE ENGINE HUD
               </span>
-              <span className="text-[10px] font-mono px-2.5 py-0.5 rounded-full bg-white/5 border border-white/10 text-white/60">
+              <span className="text-[10px] font-mono px-2.5 py-0.5 bg-white/5 border border-white/10 text-white/60 sharp-brutalist">
                 REACTIVE CALC
               </span>
             </div>
 
             <div className="space-y-3.5">
-              <div className="p-4 rounded-xl bg-white/[0.03] border border-white/10">
-                <span className="text-[10px] font-mono text-white/50 block uppercase tracking-wider">
+              <div className="p-4 bg-white/[0.03] border border-white/10 sharp-brutalist">
+                <span className="text-[10px] font-mono text-white/50 block uppercase tracking-[0.2em]">
                   PREDICTED FAULT RUNWAY
                 </span>
                 <div className="flex items-baseline gap-2 mt-1">
@@ -339,7 +340,7 @@ export const ScenarioLabPage: React.FC = () => {
               </div>
 
               {state.habitat.activeScenarioId === selectedScenarioId && (
-                <div className="p-3.5 rounded-xl bg-teal/10 border border-teal/40 text-teal text-xs font-mono flex items-center gap-2.5">
+                <div className="p-3.5 bg-teal/10 border border-teal/40 text-teal text-xs font-mono flex items-center gap-2.5 sharp-brutalist">
                   <CheckCircle2 className="w-4 h-4 shrink-0" />
                   <span>ACTIVE: This scenario is currently injected into live avionics.</span>
                 </div>
@@ -347,26 +348,26 @@ export const ScenarioLabPage: React.FC = () => {
             </div>
           </div>
 
-          {/* Sensitivity Exploration Section (Blueprint Page 5 Extension) */}
-          <div className="hud-panel rounded-2xl p-6 space-y-4 bg-gradient-to-b from-white/[0.04] to-transparent backdrop-blur-xl border border-white/10 shadow-xl font-mono">
-            <div className="flex items-center justify-between border-b border-white/10 pb-3">
+          {/* Sensitivity Exploration Section */}
+          <div className="hud-panel p-6 space-y-4 bg-[#080808] border border-[#333333] shadow-2xl font-mono sharp-brutalist">
+            <div className="flex items-center justify-between border-b border-[#333333] pb-3">
               <div className="flex items-center gap-2">
                 <TrendingDown className="w-4 h-4 text-amber" />
-                <h3 className="text-xs font-bold text-white uppercase tracking-wider font-din">
+                <h3 className="text-xs font-bold text-white uppercase tracking-[0.16em] font-din">
                   SENSITIVITY ANALYSIS PANEL
                 </h3>
               </div>
-              <span className="text-[10px] font-mono text-cyan px-2.5 py-0.5 rounded-full bg-cyan/10 border border-cyan/30">
+              <span className="text-[10px] font-mono text-cyan px-2.5 py-0.5 bg-cyan/10 border border-cyan/30 sharp-brutalist">
                 P.05 EXTENSION
               </span>
             </div>
 
-            <p className="text-[11px] text-white/60 leading-relaxed font-sans">
+            <p className="text-[11px] text-white/70 leading-relaxed font-sans">
               Test how threshold runway responds when consumption assumptions and subsystem drain fluctuate:
             </p>
 
             {/* Interactive Variance Slider */}
-            <div className="space-y-2.5 p-3.5 rounded-xl bg-white/[0.03] border border-white/10">
+            <div className="space-y-2.5 p-3.5 bg-white/[0.03] border border-white/10 sharp-brutalist">
               <div className="flex items-center justify-between text-xs">
                 <span className="text-white/60 text-[11px] uppercase tracking-wider">Demand / Loss Strain:</span>
                 <span className={`font-mono font-bold tabular-nums ${sensitivityVariancePct >= 0 ? 'text-amber' : 'text-teal'}`}>
@@ -380,7 +381,7 @@ export const ScenarioLabPage: React.FC = () => {
                 step={5}
                 value={sensitivityVariancePct}
                 onChange={(e) => setSensitivityVariancePct(Number(e.target.value))}
-                className="w-full h-2.5 rounded-full bg-white/[0.08] appearance-none cursor-pointer accent-cyan border border-white/10"
+                className="w-full h-2 bg-black appearance-none cursor-pointer accent-cyan border border-white/20 sharp-brutalist"
               />
               <div className="flex justify-between text-[9px] text-white/40 font-mono">
                 <span>-40% CONSERVATION</span>
@@ -390,7 +391,7 @@ export const ScenarioLabPage: React.FC = () => {
             </div>
 
             {/* Elasticity Results */}
-            <div className="p-3.5 rounded-xl bg-white/[0.03] border border-white/10 text-xs space-y-2 font-mono">
+            <div className="p-3.5 bg-white/[0.03] border border-white/10 text-xs space-y-2 font-mono sharp-brutalist">
               <div className="flex justify-between text-white/60 text-[11px]">
                 <span>Adjusted Drain Rate:</span>
                 <span className="text-white font-bold tabular-nums">
@@ -411,7 +412,7 @@ export const ScenarioLabPage: React.FC = () => {
               </div>
             </div>
 
-            <p className="text-[10px] text-white/40 italic font-sans">
+            <p className="text-[10px] text-white/50 italic font-sans">
               "Demonstrates that the model depends on transparent assumptions rather than pretending to know the future exactly." — Blueprint p.05
             </p>
           </div>

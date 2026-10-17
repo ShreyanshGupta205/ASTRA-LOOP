@@ -130,39 +130,39 @@ export const AIExplanationCopilot: React.FC<AIExplanationCopilotProps> = ({ isOp
       onClick={onClose}
     >
       <div
-        className="bg-[#090b10]/95 border border-cyan/40 shadow-2xl backdrop-blur-2xl max-w-2xl w-full max-h-[85vh] flex flex-col overflow-hidden rounded-3xl"
+        className="bg-[#080808] border border-[#333333] shadow-2xl backdrop-blur-2xl max-w-2xl w-full max-h-[85vh] flex flex-col overflow-hidden sharp-brutalist"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
-        <div className="p-5 border-b border-white/10 bg-white/[0.02] flex items-center justify-between">
+        <div className="p-5 border-b border-[#222222] bg-[#050505] flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="w-9 h-9 rounded-xl bg-cyan/15 text-cyan flex items-center justify-center border border-cyan/40 shadow-cyan-glow">
+            <div className="w-9 h-9 bg-cyan/15 text-cyan flex items-center justify-center border border-cyan/40 shadow-cyan-glow sharp-brutalist">
               <Bot className="w-5 h-5" />
             </div>
             <div>
               <div className="flex items-center gap-2">
-                <h3 className="font-din text-base font-bold uppercase tracking-wider text-white">
+                <h3 className="font-din text-base font-extrabold uppercase tracking-[0.14em] text-white">
                   AstraLoop AI Mission Copilot
                 </h3>
-                <span className="text-[9px] font-mono px-2 py-0.5 rounded-full bg-cyan text-black font-extrabold uppercase shadow-sm">
+                <span className="text-[9px] font-mono px-2 py-0.5 bg-cyan text-black font-extrabold uppercase sharp-brutalist shadow-sm">
                   EXPLAINABLE LLM ASSISTANT
                 </span>
               </div>
-              <p className="text-[11px] text-text-muted font-sans mt-0.5">
+              <p className="text-[11px] text-white/50 font-sans mt-0.5">
                 Translating deterministic habitat avionics telemetry into plain-language mission intelligence
               </p>
             </div>
           </div>
           <button
             onClick={onClose}
-            className="text-text-muted hover:text-white p-1.5 rounded-lg hover:bg-white/10 transition-colors cursor-pointer"
+            className="text-white/50 hover:text-white p-2 border border-transparent hover:border-[#333333] hover:bg-white/5 transition-colors cursor-pointer sharp-brutalist"
           >
             <X className="w-5 h-5" />
           </button>
         </div>
 
         {/* Prompt Category Pills */}
-        <div className="p-3.5 border-b border-white/10 bg-black/40 flex flex-wrap gap-2 text-xs font-din font-bold uppercase">
+        <div className="p-3.5 border-b border-[#222222] bg-[#050505] flex flex-wrap gap-2 text-xs font-din font-bold uppercase">
           {[
             { id: 'status', label: 'STATUS ADVISORY' },
             { id: 'runway_math', label: 'RUNWAY MATH' },
@@ -173,10 +173,10 @@ export const AIExplanationCopilot: React.FC<AIExplanationCopilotProps> = ({ isOp
             <button
               key={tab.id}
               onClick={() => setSelectedPrompt(tab.id)}
-              className={`px-3 py-1.5 text-[11px] border rounded-xl transition-all duration-200 cursor-pointer ${
+              className={`px-3.5 py-1.5 text-[11px] border sharp-brutalist transition-all duration-200 cursor-pointer ${
                 selectedPrompt === tab.id
                   ? 'bg-cyan text-black border-cyan font-extrabold shadow-cyan-glow/20'
-                  : 'bg-white/[0.03] text-text-muted hover:text-white border-white/10 hover:border-white/20'
+                  : 'bg-[#080808] text-white/50 hover:text-white border-[#222222] hover:border-white/30'
               }`}
             >
               {tab.label}
@@ -187,7 +187,7 @@ export const AIExplanationCopilot: React.FC<AIExplanationCopilotProps> = ({ isOp
         {/* Advisory Body */}
         <div className="p-6 overflow-y-auto space-y-4 max-h-[60vh]">
           {/* Headline Banner */}
-          <div className="p-4 rounded-2xl bg-white/[0.03] border border-white/10 shadow-sm">
+          <div className="p-4 bg-[#050505] border border-[#222222] sharp-brutalist shadow-sm">
             <div className="flex items-center gap-2 text-xs font-din font-bold uppercase tracking-wide mb-1 text-cyan">
               <Lightbulb className="w-4 h-4 text-cyan" />
               <span>{promptAnswers[selectedPrompt].title}</span>
@@ -198,30 +198,30 @@ export const AIExplanationCopilot: React.FC<AIExplanationCopilotProps> = ({ isOp
           </div>
 
           {/* Operational Recommendation Box */}
-          <div className="p-4 rounded-xl bg-cyan/10 border-l-4 border-cyan space-y-1 shadow-sm">
-            <span className="text-[10px] font-mono text-cyan uppercase font-bold tracking-widest block">
+          <div className="p-4 bg-[#080808] border-l-4 border-l-cyan border border-[#222222] sharp-brutalist space-y-1 shadow-sm">
+            <span className="text-[10px] font-mono text-cyan uppercase font-bold tracking-widest block font-din">
               RECOMMENDED FLIGHT DIRECTOR ACTION
             </span>
-            <p className="text-xs text-text-secondary leading-relaxed font-sans">
+            <p className="text-xs text-white/80 leading-relaxed font-sans">
               {advisory.recommendation}
             </p>
           </div>
 
           {/* Scope Honesty Tag */}
-          <div className="p-3 rounded-xl bg-white/[0.02] border border-white/10 text-[10px] font-mono text-text-muted flex items-center justify-between">
+          <div className="p-3 bg-[#050505] border border-[#222222] sharp-brutalist text-[10px] font-mono text-white/50 flex items-center justify-between">
             <span>MODEL INTEGRITY: 100% DETERMINISTIC</span>
-            <span className="text-teal font-bold">HALLUCINATION RISK: 0.0%</span>
+            <span className="text-teal font-bold font-din uppercase">HALLUCINATION RISK: 0.0%</span>
           </div>
         </div>
 
         {/* Footer */}
-        <div className="p-4 border-t border-white/10 bg-white/[0.02] flex items-center justify-between">
-          <span className="text-[11px] font-mono text-text-muted">
+        <div className="p-4 border-t border-[#222222] bg-[#050505] flex items-center justify-between">
+          <span className="text-[11px] font-mono text-white/50 font-din uppercase">
             SHUNYA 2026 • SPACE & BEYOND IDEATHON
           </span>
           <button
             onClick={onClose}
-            className="px-4 py-2 bg-white/[0.05] hover:bg-white/10 border border-white/15 rounded-xl text-xs text-white font-din font-bold uppercase transition-all duration-200 cursor-pointer"
+            className="px-5 py-2.5 bg-[#080808] hover:bg-white/10 border border-[#333333] hover:border-white text-xs text-white font-din font-bold uppercase tracking-[0.14em] transition-all duration-200 cursor-pointer sharp-brutalist"
           >
             DISMISS COPILOT
           </button>

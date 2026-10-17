@@ -32,25 +32,25 @@ interface CustomTooltipProps {
 const CustomForecastTooltip: React.FC<CustomTooltipProps> = ({ active, payload, label, unit, threshold }) => {
   if (active && payload && payload.length) {
     return (
-      <div className="bg-bg-panel/95 backdrop-blur-md border border-cyan/40 p-3 rounded shadow-2xl font-mono text-xs space-y-1.5 min-w-48">
-        <div className="font-bold text-white border-b border-border/80 pb-1 flex justify-between tracking-wider">
-          <span className="text-cyan">{label}</span>
+      <div className="bg-[#080808] border border-[#333333] p-3.5 sharp-brutalist shadow-2xl font-mono text-xs space-y-1.5 min-w-48">
+        <div className="font-bold text-white border-b border-[#222222] pb-1 flex justify-between tracking-wider">
+          <span className="text-cyan font-din uppercase">{label}</span>
           <span className="text-[9px] text-text-muted">PREDICTIVE HUD</span>
         </div>
         {payload.map((entry: any, index: number) => (
           <div key={`item-${index}`} className="flex items-center justify-between gap-3">
             <span className="flex items-center gap-1.5" style={{ color: entry.color }}>
-              <span className="w-1.5 h-1.5 rounded-sm" style={{ backgroundColor: entry.color }} />
-              <span className="text-text-muted text-[10px] uppercase">{entry.name}:</span>
+              <span className="w-1.5 h-1.5" style={{ backgroundColor: entry.color }} />
+              <span className="text-text-muted text-[10px] uppercase font-din">{entry.name}:</span>
             </span>
             <span className="font-bold text-white tabular-nums">
               {entry.value} {unit}
             </span>
           </div>
         ))}
-        <div className="pt-1 border-t border-border/40 text-[10px] text-red flex justify-between">
-          <span>FLOOR LIMIT:</span>
-          <span>{threshold} {unit}</span>
+        <div className="pt-1 border-t border-[#222222] text-[10px] text-red flex justify-between">
+          <span className="font-din uppercase font-bold">FLOOR LIMIT:</span>
+          <span className="font-bold">{threshold} {unit}</span>
         </div>
       </div>
     );
@@ -101,31 +101,31 @@ export const ResourceForecastChart: React.FC<Props> = ({
   const hasRecoveryCurve = forecastPoints.some((p) => p.recoveryValue !== undefined);
 
   return (
-    <div className="hud-panel rounded p-4 lg:p-5 flex flex-col justify-between">
+    <div className="bg-[#080808] border border-[#333333] p-4 lg:p-6 sharp-brutalist flex flex-col justify-between">
       {/* Header with SpaceX Switcher Tabs */}
-      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 mb-4 pb-3 border-b border-border/60">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 mb-4 pb-3 border-b border-[#222222]">
         <div>
           <div className="flex items-center gap-2">
             <Activity className="w-4 h-4 text-cyan" />
-            <h2 className="text-xs font-bold font-mono tracking-wider uppercase text-white">
+            <h2 className="text-xs sm:text-sm font-extrabold font-din tracking-[0.14em] uppercase text-white">
               {configs.name}
             </h2>
           </div>
-          <p className="text-[11px] font-mono text-text-muted mt-0.5">
+          <p className="text-[11px] font-mono text-white/50 mt-0.5">
             Real-time deterministic simulation curve modeling flight threshold runway
           </p>
         </div>
 
         {/* Telemetry Switcher Buttons */}
-        <div className="flex items-center rounded bg-bg-secondary p-1 border border-border text-xs shrink-0 font-mono">
+        <div className="flex items-center bg-[#050505] p-1 border border-[#333333] text-xs shrink-0 font-mono sharp-brutalist">
           {(['battery', 'water', 'oxygen'] as const).map((r) => (
             <button
               key={r}
               onClick={() => onResourceChange(r)}
-              className={`px-3 py-1 rounded text-xs font-bold uppercase tracking-wider transition-all cursor-pointer ${
+              className={`px-3.5 py-1.5 text-xs font-din font-bold uppercase tracking-[0.14em] transition-all cursor-pointer sharp-brutalist ${
                 resource === r
                   ? 'bg-cyan text-black shadow-cyan-glow'
-                  : 'text-text-muted hover:text-white'
+                  : 'text-white/60 hover:text-white hover:bg-white/5'
               }`}
             >
               {r}

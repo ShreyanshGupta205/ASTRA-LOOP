@@ -81,42 +81,42 @@ export const DependencyMap: React.FC = () => {
   };
 
   return (
-    <div className="hud-panel rounded-2xl p-5 lg:p-6 border border-white/10 shadow-2xl">
-      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 mb-5 pb-3 border-b border-white/10">
+    <div className="bg-[#080808] border border-[#333333] p-5 lg:p-6 sharp-brutalist shadow-2xl">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 mb-5 pb-3 border-b border-[#222222]">
         <div>
           <div className="flex items-center gap-2">
             <Layers className="w-4 h-4 text-cyan" />
-            <h2 className="text-sm font-bold font-mono tracking-wider uppercase text-white">
+            <h2 className="text-sm font-extrabold font-din tracking-[0.14em] uppercase text-white">
               AVIONICS SUBSYSTEM DEPENDENCY SCHEMATIC
             </h2>
           </div>
-          <p className="text-[11px] font-mono text-text-muted mt-0.5">
+          <p className="text-[11px] font-mono text-white/50 mt-0.5">
             120V DC power distribution bus, critical life support loops, and fluid reserve topology
           </p>
         </div>
 
         {/* Legend */}
-        <div className="flex items-center gap-3 text-[10px] font-mono text-text-muted">
+        <div className="flex items-center gap-3 text-[10px] font-mono text-white/50">
           <span className="flex items-center gap-1.5">
-            <span className="w-1.5 h-1.5 rounded-full bg-teal" /> NOMINAL
+            <span className="w-1.5 h-1.5 rounded-full bg-teal" /> <span className="font-din uppercase">NOMINAL</span>
           </span>
           <span className="flex items-center gap-1.5">
-            <span className="w-1.5 h-1.5 rounded-full bg-amber" /> DEGRADED
+            <span className="w-1.5 h-1.5 rounded-full bg-amber" /> <span className="font-din uppercase">DEGRADED</span>
           </span>
           <span className="flex items-center gap-1.5">
-            <span className="w-1.5 h-1.5 rounded-full bg-red animate-spacex-pulse" /> FAULT
+            <span className="w-1.5 h-1.5 rounded-full bg-red animate-spacex-pulse" /> <span className="font-din uppercase">FAULT</span>
           </span>
           <span className="flex items-center gap-1.5">
-            <span className="w-1.5 h-1.5 rounded-full bg-cyan" /> THROTTLED
+            <span className="w-1.5 h-1.5 rounded-full bg-cyan" /> <span className="font-din uppercase">THROTTLED</span>
           </span>
         </div>
       </div>
 
       {/* SpaceX Avionics Rack Columns */}
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-4 p-4 bg-white/[0.02] rounded-2xl border border-white/10 font-mono shadow-inner">
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-4 p-4 bg-[#050505] sharp-brutalist border border-[#222222] font-mono shadow-inner">
         {/* Column 1: Power Generation */}
         <div className="space-y-3">
-          <div className="text-[10px] uppercase tracking-widest text-text-muted font-bold border-b border-white/10 pb-1.5 flex items-center justify-between">
+          <div className="text-[10px] uppercase tracking-widest text-white/50 font-bold border-b border-[#222222] pb-1.5 flex items-center justify-between font-din">
             <span>STAGE 1: GENERATION</span>
             <span className="text-cyan">BUS-A</span>
           </div>
@@ -126,16 +126,16 @@ export const DependencyMap: React.FC = () => {
             return (
               <div
                 key={node.id}
-                className={`p-3 rounded-xl border transition-all duration-200 ${style.border}`}
+                className={`p-3 sharp-brutalist border transition-all duration-200 ${style.border}`}
               >
                 <div className="flex items-center justify-between mb-1">
                   <div className="flex items-center gap-2">
                     <Icon className={`w-3.5 h-3.5 ${style.text}`} />
-                    <span className="text-xs font-bold text-white uppercase">{node.label}</span>
+                    <span className="text-xs font-bold text-white uppercase font-din">{node.label}</span>
                   </div>
                 </div>
                 <div className="flex items-center justify-between text-xs mt-2 border-t border-white/10 pt-1.5">
-                  <span className="text-[10px] text-text-muted uppercase">{node.category}</span>
+                  <span className="text-[10px] text-white/50 uppercase font-din">{node.category}</span>
                   <span className={`font-bold tabular-nums text-xs ${style.text}`}>{node.metric}</span>
                 </div>
               </div>
@@ -145,7 +145,7 @@ export const DependencyMap: React.FC = () => {
 
         {/* Column 2: Distribution & Storage */}
         <div className="space-y-3">
-          <div className="text-[10px] uppercase tracking-widest text-text-muted font-bold border-b border-white/10 pb-1.5 flex items-center justify-between">
+          <div className="text-[10px] uppercase tracking-widest text-white/50 font-bold border-b border-[#222222] pb-1.5 flex items-center justify-between font-din">
             <span>STAGE 2: 120V BUS</span>
             <span className="text-cyan">MAIN-B</span>
           </div>
@@ -155,23 +155,23 @@ export const DependencyMap: React.FC = () => {
             return (
               <div
                 key={node.id}
-                className={`p-3 rounded-xl border transition-all duration-200 ${style.border}`}
+                className={`p-3 sharp-brutalist border transition-all duration-200 ${style.border}`}
               >
                 <div className="flex items-center justify-between mb-1">
                   <div className="flex items-center gap-2">
                     <Icon className={`w-3.5 h-3.5 ${style.text}`} />
-                    <span className="text-xs font-bold text-white uppercase">{node.label}</span>
+                    <span className="text-xs font-bold text-white uppercase font-din">{node.label}</span>
                   </div>
                 </div>
                 <div className="flex items-center justify-between text-xs mt-2 border-t border-white/10 pt-1.5">
-                  <span className="text-[10px] text-text-muted uppercase">{node.category}</span>
+                  <span className="text-[10px] text-white/50 uppercase font-din">{node.category}</span>
                   <span className={`font-bold tabular-nums text-xs ${style.text}`}>{node.metric}</span>
                 </div>
               </div>
             );
           })}
 
-          <div className="text-[10px] uppercase tracking-widest text-text-muted font-bold border-b border-white/10 pb-1.5 pt-1 flex items-center justify-between">
+          <div className="text-[10px] uppercase tracking-widest text-white/50 font-bold border-b border-[#222222] pb-1.5 pt-1 flex items-center justify-between font-din">
             <span>STAGE 3: STORAGE</span>
             <span className="text-cyan">LI-ION</span>
           </div>
@@ -181,16 +181,16 @@ export const DependencyMap: React.FC = () => {
             return (
               <div
                 key={node.id}
-                className={`p-3 rounded-xl border transition-all duration-200 ${style.border}`}
+                className={`p-3 sharp-brutalist border transition-all duration-200 ${style.border}`}
               >
                 <div className="flex items-center justify-between mb-1">
                   <div className="flex items-center gap-2">
                     <Icon className={`w-3.5 h-3.5 ${style.text}`} />
-                    <span className="text-xs font-bold text-white uppercase">{node.label}</span>
+                    <span className="text-xs font-bold text-white uppercase font-din">{node.label}</span>
                   </div>
                 </div>
                 <div className="flex items-center justify-between text-xs mt-2 border-t border-white/10 pt-1.5">
-                  <span className="text-[10px] text-text-muted uppercase">{node.category}</span>
+                  <span className="text-[10px] text-white/50 uppercase font-din">{node.category}</span>
                   <span className={`font-bold tabular-nums text-xs ${style.text}`}>{node.metric}</span>
                 </div>
               </div>
@@ -200,7 +200,7 @@ export const DependencyMap: React.FC = () => {
 
         {/* Column 3: Electrical Consumers (Sum = 8.0 kW) */}
         <div className="space-y-2 md:col-span-1">
-          <div className="text-[10px] uppercase tracking-widest text-text-muted font-bold border-b border-white/10 pb-1.5 flex items-center justify-between">
+          <div className="text-[10px] uppercase tracking-widest text-white/50 font-bold border-b border-[#222222] pb-1.5 flex items-center justify-between font-din">
             <span>CONSUMERS (8.0 kW)</span>
             <span className="text-cyan">LOADS</span>
           </div>
@@ -210,12 +210,12 @@ export const DependencyMap: React.FC = () => {
             return (
               <div
                 key={node.id}
-                className={`p-2.5 rounded-xl border transition-all duration-200 ${style.border}`}
+                className={`p-2.5 sharp-brutalist border transition-all duration-200 ${style.border}`}
               >
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-1.5">
                     <Icon className={`w-3 h-3 shrink-0 ${style.text}`} />
-                    <span className="text-[11px] font-bold text-white truncate max-w-[125px]">
+                    <span className="text-[11px] font-bold text-white truncate max-w-[125px] font-din uppercase">
                       {node.label}
                     </span>
                   </div>
@@ -230,7 +230,7 @@ export const DependencyMap: React.FC = () => {
 
         {/* Column 4: ECLSS Fluid & Atmosphere Reservoirs */}
         <div className="space-y-3">
-          <div className="text-[10px] uppercase tracking-widest text-text-muted font-bold border-b border-white/10 pb-1.5 flex items-center justify-between">
+          <div className="text-[10px] uppercase tracking-widest text-white/50 font-bold border-b border-[#222222] pb-1.5 flex items-center justify-between font-din">
             <span>ECLSS RESERVES</span>
             <span className="text-cyan">OUTCOMES</span>
           </div>
@@ -240,24 +240,24 @@ export const DependencyMap: React.FC = () => {
             return (
               <div
                 key={node.id}
-                className={`p-3 rounded-xl border transition-all duration-200 ${style.border}`}
+                className={`p-3 sharp-brutalist border transition-all duration-200 ${style.border}`}
               >
                 <div className="flex items-center justify-between mb-1">
                   <div className="flex items-center gap-2">
                     <Icon className={`w-3.5 h-3.5 ${style.text}`} />
-                    <span className="text-xs font-bold text-white uppercase">{node.label}</span>
+                    <span className="text-xs font-bold text-white uppercase font-din">{node.label}</span>
                   </div>
                 </div>
                 <div className="flex items-center justify-between text-xs mt-2 border-t border-white/10 pt-1.5">
-                  <span className="text-[10px] text-text-muted uppercase">{node.category}</span>
+                  <span className="text-[10px] text-white/50 uppercase font-din">{node.category}</span>
                   <span className={`font-bold tabular-nums text-xs ${style.text}`}>{node.metric}</span>
                 </div>
               </div>
             );
           })}
 
-          <div className="p-3 rounded-xl bg-white/[0.03] border border-white/10 text-[10px] text-text-muted leading-relaxed">
-            <strong className="text-cyan block uppercase tracking-wider mb-0.5">AVIONICS BUS RULE:</strong>
+          <div className="p-3 bg-[#080808] border border-[#222222] sharp-brutalist text-[10px] text-white/50 leading-relaxed">
+            <strong className="text-cyan block uppercase tracking-wider mb-0.5 font-din">AVIONICS BUS RULE:</strong>
             Faults propagate down direct modeled electrical and ECLSS pipelines with zero unmodeled crosstalk.
           </div>
         </div>

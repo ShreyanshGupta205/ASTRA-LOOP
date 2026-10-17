@@ -101,22 +101,23 @@ export const HistoryPage: React.FC = () => {
 
   return (
     <div className="space-y-8 font-sans">
-      {/* 0. Aerospace Cinematic Page Header */}
-      <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-5 pb-6 border-b border-white/10">
+      {/* 0. Aerospace Cinematic Page Header (SpaceX Homepage Style) */}
+      <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-5 pb-6 border-b border-[#333333]">
         <div>
           <div className="flex flex-wrap items-center gap-2 mb-2">
-            <span className="text-xs font-mono font-bold px-3 py-1 rounded-full bg-cyan/10 border border-cyan/30 text-cyan">
-              04 / TELEMETRY AUDIT
+            <span className="w-2 h-2 rounded-full bg-cyan animate-pulse" />
+            <span className="font-din text-xs sm:text-sm font-bold tracking-[0.2em] text-white/80 uppercase block">
+              05 / TELEMETRY AUDIT TRAIL
             </span>
+            <span className="text-white/30 text-xs font-mono">//</span>
             <span className="text-xs font-mono text-white/50 tracking-wider">
-              FLIGHT INCIDENT LEDGER // VERIFIED DETERMINISTIC ACTIONS
+              FLIGHT INCIDENT LEDGER • VERIFIED DETERMINISTIC ACTIONS
             </span>
           </div>
-          <h1 className="text-3xl sm:text-4xl font-extrabold uppercase tracking-[0.03em] text-white font-din flex items-center gap-3">
-            <History className="w-7 h-7 text-cyan" />
+          <h1 className="font-din text-3xl sm:text-5xl md:text-6xl font-extrabold uppercase tracking-[0.04em] text-white leading-[1.05] mb-3">
             SIMULATION SESSION HISTORY & AUDIT TRAIL
           </h1>
-          <p className="text-xs sm:text-sm text-white/70 max-w-3xl font-sans mt-1 leading-relaxed">
+          <p className="text-white/80 font-sans text-sm md:text-base max-w-3xl leading-relaxed font-normal">
             Persisted record of actual scenario triggers, parametric assumptions, and applied recovery decisions stored in browser localStorage.
           </p>
         </div>
@@ -126,7 +127,7 @@ export const HistoryPage: React.FC = () => {
             <>
               <button
                 onClick={handleExportMarkdownReport}
-                className="flex items-center gap-2 px-5 py-3 rounded-xl bg-white hover:bg-cyan text-black font-din font-bold text-xs uppercase tracking-[0.16em] transition-all shadow-xl cursor-pointer"
+                className="flex items-center gap-2 px-6 py-3.5 bg-white hover:bg-cyan text-black font-din font-bold text-xs uppercase tracking-[0.18em] transition-all duration-300 shadow-2xl cursor-pointer sharp-brutalist"
                 title="Download formatted Markdown Mission Incident Briefing Report"
               >
                 <Download className="w-3.5 h-3.5" />
@@ -134,7 +135,7 @@ export const HistoryPage: React.FC = () => {
               </button>
               <button
                 onClick={handleExportJSON}
-                className="flex items-center gap-2 px-4 py-3 rounded-xl bg-white/[0.04] hover:bg-white/10 border border-white/10 hover:border-white/30 text-white font-din font-bold text-xs uppercase tracking-[0.16em] transition-all cursor-pointer"
+                className="flex items-center gap-2 px-5 py-3.5 border border-white/40 hover:border-white bg-transparent hover:bg-white/10 text-white font-din font-bold text-xs uppercase tracking-[0.16em] transition-all cursor-pointer sharp-brutalist"
                 title="Download JSON run audit report"
               >
                 <Download className="w-3.5 h-3.5 text-white/60" />
@@ -142,7 +143,7 @@ export const HistoryPage: React.FC = () => {
               </button>
               <button
                 onClick={() => setIsClearDialogOpen(true)}
-                className="flex items-center gap-2 px-4 py-3 rounded-xl bg-white/[0.04] hover:bg-red/10 border border-white/10 hover:border-red/40 text-white/60 hover:text-red font-din font-bold text-xs uppercase tracking-[0.16em] transition-all cursor-pointer"
+                className="flex items-center gap-2 px-5 py-3.5 border border-red/40 hover:border-red bg-red/10 hover:bg-red text-red hover:text-white font-din font-bold text-xs uppercase tracking-[0.16em] transition-all cursor-pointer sharp-brutalist"
               >
                 <Trash2 className="w-3.5 h-3.5" />
                 <span>CLEAR LEDGER</span>
@@ -151,7 +152,7 @@ export const HistoryPage: React.FC = () => {
           )}
           <button
             onClick={resetSimulation}
-            className="flex items-center gap-2 px-4 py-3 rounded-xl bg-white/[0.04] hover:bg-white/10 border border-white/10 hover:border-white/30 text-white/80 hover:text-white font-din font-bold text-xs uppercase tracking-[0.16em] transition-all cursor-pointer"
+            className="flex items-center gap-2 px-5 py-3.5 border border-white/40 hover:border-white bg-transparent hover:bg-white/10 text-white font-din font-bold text-xs uppercase tracking-[0.16em] transition-all cursor-pointer sharp-brutalist"
           >
             <RotateCcw className="w-3.5 h-3.5" />
             <span>RESET</span>
@@ -161,28 +162,28 @@ export const HistoryPage: React.FC = () => {
 
       {/* Summary Telemetry Strip */}
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 font-mono text-xs">
-        <div className="p-4 sm:p-5 rounded-2xl bg-white/[0.03] border border-white/10 backdrop-blur-xl">
-          <span className="text-[10px] text-white/50 block uppercase tracking-widest font-mono">RECORDED INCIDENTS</span>
+        <div className="p-4 sm:p-5 bg-[#080808] border border-[#333333] sharp-brutalist shadow-lg">
+          <span className="text-[10px] text-white/50 block uppercase tracking-[0.2em] font-mono">RECORDED INCIDENTS</span>
           <span className="text-2xl font-extrabold text-white font-din tabular-nums mt-0.5 block">{runs.length} RUNS</span>
         </div>
-        <div className="p-4 sm:p-5 rounded-2xl bg-white/[0.03] border border-white/10 backdrop-blur-xl">
-          <span className="text-[10px] text-white/50 block uppercase tracking-widest font-mono">HABITAT DESIGNATION</span>
+        <div className="p-4 sm:p-5 bg-[#080808] border border-[#333333] sharp-brutalist shadow-lg">
+          <span className="text-[10px] text-white/50 block uppercase tracking-[0.2em] font-mono">HABITAT DESIGNATION</span>
           <span className="text-2xl font-extrabold text-cyan font-din mt-0.5 block">DEMO-01 (89.9°S)</span>
         </div>
-        <div className="p-4 sm:p-5 rounded-2xl bg-white/[0.03] border border-white/10 backdrop-blur-xl">
-          <span className="text-[10px] text-white/50 block uppercase tracking-widest font-mono">AUDIT INTEGRITY</span>
+        <div className="p-4 sm:p-5 bg-[#080808] border border-[#333333] sharp-brutalist shadow-lg">
+          <span className="text-[10px] text-white/50 block uppercase tracking-[0.2em] font-mono">AUDIT INTEGRITY</span>
           <span className="text-2xl font-extrabold text-teal font-din mt-0.5 block">DETERMINISTIC</span>
         </div>
-        <div className="p-4 sm:p-5 rounded-2xl bg-white/[0.03] border border-white/10 backdrop-blur-xl">
-          <span className="text-[10px] text-white/50 block uppercase tracking-widest font-mono">STORAGE ENGINE</span>
+        <div className="p-4 sm:p-5 bg-[#080808] border border-[#333333] sharp-brutalist shadow-lg">
+          <span className="text-[10px] text-white/50 block uppercase tracking-[0.2em] font-mono">STORAGE ENGINE</span>
           <span className="text-2xl font-extrabold text-white font-din mt-0.5 block">LOCAL STORAGE</span>
         </div>
       </div>
 
       {/* Main Table or Empty State */}
       {runs.length === 0 ? (
-        <div className="hud-panel rounded-2xl p-12 text-center max-w-xl mx-auto space-y-5 font-mono bg-gradient-to-b from-white/[0.04] to-transparent border border-white/10 backdrop-blur-xl shadow-2xl">
-          <div className="w-16 h-16 rounded-2xl bg-cyan/10 text-cyan border border-cyan/30 mx-auto flex items-center justify-center shadow-cyan-glow">
+        <div className="hud-panel p-12 text-center max-w-xl mx-auto space-y-5 font-mono bg-[#080808] border border-[#333333] shadow-2xl sharp-brutalist">
+          <div className="w-16 h-16 bg-cyan/10 text-cyan border border-cyan/30 mx-auto flex items-center justify-center shadow-cyan-glow sharp-brutalist">
             <History className="w-8 h-8" />
           </div>
           <div>
@@ -196,17 +197,17 @@ export const HistoryPage: React.FC = () => {
           <div className="pt-2">
             <button
               onClick={() => resetSimulation()}
-              className="px-6 py-3 rounded-xl bg-white hover:bg-cyan text-black font-din font-bold text-xs uppercase tracking-[0.16em] transition-all cursor-pointer shadow-xl"
+              className="px-8 py-4 bg-white hover:bg-cyan text-black font-din font-bold text-xs uppercase tracking-[0.18em] transition-all duration-300 cursor-pointer shadow-2xl sharp-brutalist"
             >
               LAUNCH SIMULATION IN LAB
             </button>
           </div>
         </div>
       ) : (
-        <div className="hud-panel rounded-2xl bg-white/[0.03] border border-white/10 backdrop-blur-xl overflow-hidden shadow-2xl">
+        <div className="bg-[#080808] border border-[#333333] sharp-brutalist overflow-hidden shadow-2xl">
           <div className="overflow-x-auto">
             <table className="w-full text-left text-xs font-mono">
-              <thead className="bg-white/[0.04] border-b border-white/10 text-[11px] font-mono text-white/50 uppercase tracking-wider">
+              <thead className="bg-[#0c0c0c] border-b border-[#222222] text-[11px] font-mono text-white/60 uppercase tracking-[0.14em]">
                 <tr>
                   <th className="px-5 py-4">TIMESTAMP</th>
                   <th className="px-5 py-4">FAULT SCENARIO</th>
@@ -252,7 +253,7 @@ export const HistoryPage: React.FC = () => {
                           e.stopPropagation();
                           setSelectedRun(run);
                         }}
-                        className="px-3.5 py-1.5 rounded-lg bg-white/[0.04] hover:bg-white/15 border border-white/10 hover:border-white/30 text-white/70 hover:text-white text-[11px] font-din font-bold uppercase tracking-wider transition-all"
+                        className="px-4 py-2 border border-[#333333] hover:border-white bg-[#050505] hover:bg-white/10 text-white/80 hover:text-white text-[11px] font-din font-bold uppercase tracking-[0.16em] transition-all sharp-brutalist"
                       >
                         INSPECT
                       </button>
@@ -268,41 +269,41 @@ export const HistoryPage: React.FC = () => {
       {/* Inspect Modal Dialog */}
       {selectedRun && (
         <div
-          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-xl animate-fadeIn"
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-xl animate-fadeIn"
           role="dialog"
           aria-modal="true"
           onClick={() => setSelectedRun(null)}
         >
           <div
-            className="bg-[#090b10]/95 border border-white/20 rounded-2xl max-w-lg w-full p-6 sm:p-8 space-y-5 font-mono shadow-2xl backdrop-blur-2xl"
+            className="bg-[#080808] border border-[#333333] max-w-lg w-full p-6 sm:p-8 space-y-5 font-mono shadow-2xl sharp-brutalist"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="flex items-start justify-between border-b border-white/10 pb-4">
+            <div className="flex items-start justify-between border-b border-[#222222] pb-4">
               <div>
-                <span className="text-[10px] font-mono uppercase text-cyan block tracking-widest font-bold">
+                <span className="text-[10px] font-mono uppercase text-cyan block tracking-[0.2em] font-bold">
                   RUN ID: {selectedRun.id} • {selectedRun.formattedTime}
                 </span>
-                <h3 className="text-2xl font-bold text-white font-din uppercase mt-0.5">
+                <h3 className="text-2xl font-extrabold text-white font-din uppercase tracking-[0.04em] mt-1">
                   {selectedRun.scenarioName}
                 </h3>
               </div>
               <button
                 onClick={() => setSelectedRun(null)}
-                className="text-white/50 hover:text-white p-1.5 rounded-lg hover:bg-white/10 transition-colors cursor-pointer"
+                className="text-white/50 hover:text-white p-2 border border-transparent hover:border-[#333333] hover:bg-white/5 transition-colors cursor-pointer sharp-brutalist"
               >
                 <X className="w-5 h-5" />
               </button>
             </div>
 
             {/* Run details */}
-            <div className="space-y-3.5 text-xs">
-              <div className="p-4 rounded-xl bg-white/[0.03] border border-white/10 space-y-2.5">
-                <span className="font-bold text-white uppercase text-[10px] tracking-wider block font-din">
+            <div className="space-y-4 text-xs">
+              <div className="p-4 bg-[#050505] border border-[#222222] space-y-2.5 sharp-brutalist">
+                <span className="font-bold text-white uppercase text-[10px] tracking-[0.18em] block font-din">
                   CALIBRATED INPUT PARAMETERS:
                 </span>
                 <div className="grid grid-cols-2 gap-2 font-mono text-[11px] text-white/70">
                   {Object.entries(selectedRun.inputs).map(([k, v]) => (
-                    <div key={k} className="flex justify-between border-b border-white/5 pb-1">
+                    <div key={k} className="flex justify-between border-b border-[#1a1a1a] pb-1">
                       <span>{k}:</span>
                       <strong className="text-white font-bold">{v}</strong>
                     </div>
@@ -311,13 +312,13 @@ export const HistoryPage: React.FC = () => {
               </div>
 
               <div className="grid grid-cols-2 gap-3.5">
-                <div className="p-4 rounded-xl bg-red/[0.06] border border-red/40">
+                <div className="p-4 bg-[#0c0808] border border-red/40 sharp-brutalist">
                   <span className="text-[10px] font-mono text-red block uppercase tracking-wider font-bold">FAULTED RUNWAY</span>
                   <span className="text-3xl font-extrabold font-din text-red tabular-nums mt-0.5 block">
                     {selectedRun.faultedRunway.toFixed(1)} {selectedRun.runwayUnit}
                   </span>
                 </div>
-                <div className="p-4 rounded-xl bg-teal/[0.06] border border-teal/40">
+                <div className="p-4 bg-[#080d0b] border border-teal/40 sharp-brutalist">
                   <span className="text-[10px] font-mono text-teal block uppercase tracking-wider font-bold">RECOVERED RUNWAY</span>
                   <span className="text-3xl font-extrabold font-din text-teal tabular-nums mt-0.5 block">
                     {selectedRun.postRecoveryRunway?.toFixed(1) || '—'} {selectedRun.runwayUnit}
@@ -325,8 +326,8 @@ export const HistoryPage: React.FC = () => {
                 </div>
               </div>
 
-              <div className="p-4 rounded-xl bg-white/[0.03] border border-white/10">
-                <span className="font-bold text-white uppercase text-[10px] tracking-wider block mb-1 font-din">
+              <div className="p-4 bg-[#050505] border border-[#222222] sharp-brutalist">
+                <span className="font-bold text-white uppercase text-[10px] tracking-[0.18em] block mb-1 font-din">
                   COMMITTED RECOVERY PROTOCOL:
                 </span>
                 <p className="text-white/80 leading-relaxed font-sans text-xs">
@@ -335,10 +336,10 @@ export const HistoryPage: React.FC = () => {
               </div>
             </div>
 
-            <div className="flex justify-end pt-4 border-t border-white/10">
+            <div className="flex justify-end pt-4 border-t border-[#222222]">
               <button
                 onClick={() => setSelectedRun(null)}
-                className="px-6 py-2.5 rounded-xl text-xs font-din font-bold uppercase tracking-[0.16em] bg-white hover:bg-cyan text-black cursor-pointer shadow-lg transition-all"
+                className="px-6 py-3 text-xs font-din font-bold uppercase tracking-[0.18em] bg-white hover:bg-cyan text-black cursor-pointer shadow-lg transition-all sharp-brutalist"
               >
                 CLOSE AUDIT VIEW
               </button>

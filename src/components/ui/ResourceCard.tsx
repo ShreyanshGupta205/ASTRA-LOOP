@@ -83,18 +83,18 @@ export const ResourceCard: React.FC<ResourceCardProps> = ({
 
   return (
     <div
-      className={`relative hud-panel rounded-2xl p-5 sm:p-6 bg-gradient-to-b from-white/[0.05] via-white/[0.02] to-transparent backdrop-blur-xl border flex flex-col justify-between font-mono transition-all duration-300 hover:translate-y-[-2px] ${statusStyles.border} ${statusStyles.accentGlow}`}
+      className={`relative hud-panel p-5 sm:p-6 bg-[#080808] border flex flex-col justify-between font-mono transition-all duration-300 sharp-brutalist ${statusStyles.border} ${statusStyles.accentGlow}`}
     >
       {/* Top Telemetry Header */}
       <div>
         <div className="flex items-start justify-between gap-2 mb-3">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-white/[0.05] border border-white/10 flex items-center justify-center shrink-0 shadow-inner">
+            <div className="w-10 h-10 bg-white/[0.04] border border-white/10 flex items-center justify-center shrink-0 sharp-brutalist">
               <Icon className={`w-4 h-4 ${statusStyles.iconText}`} />
             </div>
             <div>
               <div className="flex items-center gap-1.5">
-                <span className="text-[10px] font-mono tracking-widest text-white/50 uppercase">
+                <span className="text-[10px] font-mono tracking-[0.2em] text-white/50 uppercase">
                   SYS.{id.toUpperCase()}
                 </span>
                 <span className="text-white/30 text-[10px] font-mono">//</span>
@@ -118,7 +118,7 @@ export const ResourceCard: React.FC<ResourceCardProps> = ({
               onClick={() => setShowTooltip(!showTooltip)}
               onMouseEnter={() => setShowTooltip(true)}
               onMouseLeave={() => setShowTooltip(false)}
-              className="text-white/40 hover:text-white p-1.5 rounded-lg hover:bg-white/10 transition-colors cursor-pointer"
+              className="text-white/40 hover:text-white p-1.5 hover:bg-white/10 transition-colors cursor-pointer sharp-brutalist"
               aria-label={`More info on ${title}`}
             >
               <Info className="w-3.5 h-3.5" />
@@ -126,9 +126,9 @@ export const ResourceCard: React.FC<ResourceCardProps> = ({
 
             {/* Technical Detail Hover Overlay */}
             {showTooltip && (
-              <div className="absolute right-0 top-8 w-72 p-4 rounded-xl bg-[#090b10]/95 backdrop-blur-xl border border-white/15 text-xs text-white/80 shadow-2xl z-30 font-mono text-[11px] leading-relaxed pointer-events-none">
+              <div className="absolute right-0 top-8 w-72 p-4 bg-[#080808] border border-white/20 text-xs text-white/80 shadow-2xl z-30 font-mono text-[11px] leading-relaxed pointer-events-none sharp-brutalist">
                 <div className="font-bold text-white mb-1.5 flex items-center gap-2 border-b border-white/10 pb-1.5 font-din uppercase tracking-wider">
-                  <span className="w-1.5 h-1.5 rounded-full bg-cyan shadow-cyan-glow" />
+                  <span className="w-1.5 h-1.5 bg-cyan shadow-cyan-glow" />
                   <span>SPECIFICATION // {title.toUpperCase()}</span>
                 </div>
                 {explanation}
@@ -149,7 +149,7 @@ export const ResourceCard: React.FC<ResourceCardProps> = ({
           </div>
 
           {secondaryValue && (
-            <span className="text-[11px] font-mono text-white/60 tabular-nums bg-white/5 px-2 py-0.5 rounded-md border border-white/5">
+            <span className="text-[11px] font-mono text-white/60 tabular-nums bg-white/5 px-2 py-0.5 border border-white/10 sharp-brutalist">
               {secondaryValue}
             </span>
           )}
@@ -157,9 +157,9 @@ export const ResourceCard: React.FC<ResourceCardProps> = ({
 
         {/* SpaceX Segmented Telemetry Progress Bar */}
         <div className="mt-4 space-y-1.5">
-          <div className="relative w-full h-2 rounded-full bg-black/60 overflow-hidden p-0.5 border border-white/10">
+          <div className="relative w-full h-1.5 bg-black overflow-hidden border border-white/10 sharp-brutalist">
             <div
-              className={`h-full rounded-full transition-all duration-500 ${statusStyles.progress}`}
+              className={`h-full transition-all duration-500 ${statusStyles.progress}`}
               style={{ width: `${Math.min(100, Math.max(3, calcPct))}%` }}
             />
           </div>
@@ -182,7 +182,7 @@ export const ResourceCard: React.FC<ResourceCardProps> = ({
 
       {/* Bottom Avionics Status & Vector */}
       <div className="mt-5 pt-3.5 border-t border-white/10 flex items-center justify-between text-xs">
-        <span className={`px-2.5 py-1 text-[10px] font-mono font-bold rounded-md border tracking-wider uppercase ${statusStyles.badge}`}>
+        <span className={`px-2.5 py-1 text-[10px] font-mono font-bold border tracking-wider uppercase sharp-brutalist ${statusStyles.badge}`}>
           {statusText}
         </span>
 

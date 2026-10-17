@@ -54,33 +54,33 @@
   background-size: 48px 48px;
 }
 
-/* Sleek Aerospace HUD Glassmorphic Panel */
+/* Sleek Aerospace HUD Glassmorphic Panel (SpaceX Monochromatic Brutalism) */
 .hud-panel {
   position: relative;
-  background-color: rgba(13, 15, 20, 0.72);
+  background-color: #080808;
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 0.875rem;
-  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 0px;
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.85);
   transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .hud-panel:hover {
-  border-color: rgba(255, 255, 255, 0.18);
-  box-shadow: 0 16px 40px -10px rgba(0, 0, 0, 0.85);
+  border-color: rgba(255, 255, 255, 0.22);
+  box-shadow: 0 16px 40px -10px rgba(0, 0, 0, 0.95);
 }
 
 /* Sub-panels and inner telemetry modules */
 .hud-inner-panel {
-  background-color: rgba(0, 0, 0, 0.45);
-  border: 1px solid rgba(255, 255, 255, 0.06);
-  border-radius: 0.625rem;
+  background-color: #050505;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 0px;
   transition: all 0.2s ease;
 }
 
 .hud-inner-panel:hover {
-  border-color: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.15);
 }
 
 /* Pulse radar effect */
@@ -91,7 +91,7 @@
   }
   50% {
     opacity: 0.6;
-    transform: scale(1.05);
+    transform: scale(1.03);
   }
 }
 
@@ -101,18 +101,18 @@
 
 /* Glow lines */
 .glow-border-cyan {
-  border-color: #65DDF5 !important;
-  box-shadow: 0 0 15px rgba(101, 221, 245, 0.35);
+  border-color: #00E5FF !important;
+  box-shadow: 0 0 15px rgba(0, 229, 255, 0.35);
 }
 
 .glow-border-red {
-  border-color: #FF6277 !important;
-  box-shadow: 0 0 15px rgba(255, 98, 119, 0.4);
+  border-color: #FF2A4D !important;
+  box-shadow: 0 0 15px rgba(255, 42, 77, 0.4);
 }
 
 .glow-border-amber {
-  border-color: #FFC15A !important;
-  box-shadow: 0 0 15px rgba(255, 193, 90, 0.35);
+  border-color: #FF9900 !important;
+  box-shadow: 0 0 15px rgba(255, 153, 0, 0.35);
 }
 
 .glow-border-teal {
@@ -148,7 +148,59 @@
   transition-timing-function: cubic-bezier(0.19, 1, 0.22, 1);
 }
 
-/* Refined subtle border radius */
+/* Pure Aerospace Sharp Brutalism (Zero border radius, sharp angles) */
 .sharp-brutalist {
-  border-radius: 0.5rem;
+  border-radius: 0px !important;
 }
+
+/* Standardized SpaceX Home-Style CTA Buttons */
+.spacex-btn-primary {
+  border-radius: 0px !important;
+  font-family: 'Barlow Condensed', Oswald, sans-serif;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  background-color: #FFFFFF;
+  color: #050505;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.spacex-btn-primary:hover {
+  background-color: #00E5FF;
+  color: #000000;
+}
+
+.spacex-btn-secondary {
+  border-radius: 0px !important;
+  font-family: 'Barlow Condensed', Oswald, sans-serif;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  background-color: transparent;
+  color: #FFFFFF;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.spacex-btn-secondary:hover {
+  border-color: #FFFFFF;
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Unified Aerospace Eyebrow Tag */
+.spacex-eyebrow {
+  font-family: 'Barlow Condensed', Oswald, sans-serif;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.8);
+}
+

@@ -18,48 +18,46 @@ export const ModelAssumptionsPage: React.FC = () => {
 
   return (
     <div className="space-y-8 font-sans">
-      {/* 0. Aerospace Cinematic Page Header */}
-      <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-5 pb-6 border-b border-white/10">
+      {/* 0. SpaceX Standardized Page Header */}
+      <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 pb-6 border-b border-[#222222]">
         <div>
-          <div className="flex flex-wrap items-center gap-2 mb-2">
-            <span className="text-xs font-mono font-bold px-3 py-1 rounded-full bg-cyan/10 border border-cyan/30 text-cyan">
-              05 / MODEL SPECIFICATIONS
-            </span>
-            <span className="text-xs font-mono text-white/50 tracking-wider">
-              FIRST-PRINCIPLES MATH // NASA CITATIONS // ZERO BLACK-BOX AI
+          <div className="flex items-center gap-2.5 mb-2.5">
+            <span className="w-2 h-2 rounded-full bg-cyan animate-pulse shadow-cyan-glow" />
+            <span className="font-din text-xs sm:text-sm font-bold tracking-[0.2em] text-white/80 uppercase">
+              SPECIFICATIONS // 05 • FIRST-PRINCIPLES MATH // ZERO BLACK-BOX AI
             </span>
           </div>
-          <h1 className="text-3xl sm:text-4xl font-extrabold uppercase tracking-[0.03em] text-white font-din flex items-center gap-3">
-            <BookOpen className="w-7 h-7 text-cyan" />
+          <h1 className="text-3xl sm:text-5xl font-extrabold uppercase tracking-[0.04em] text-white font-din flex items-center gap-4">
+            <BookOpen className="w-8 h-8 text-cyan shrink-0" />
             MODEL SPECIFICATIONS & ENGINEERING RULES
           </h1>
-          <p className="text-xs sm:text-sm text-white/70 max-w-3xl font-sans mt-1 leading-relaxed">
-            Complete mathematical transparency, subsystem physical boundaries, and literature citations for technical evaluation.
+          <p className="text-xs sm:text-sm text-white/70 max-w-3xl font-sans mt-2 leading-relaxed">
+            Deterministic first-principles mathematical formulas, subsystem physical boundaries, and literature citations for technical validation.
           </p>
         </div>
 
         <div className="flex items-center gap-3 shrink-0">
           <button
             onClick={() => navigate('overview')}
-            className="px-4 py-3 rounded-xl bg-white/[0.04] hover:bg-white/10 border border-white/10 hover:border-white/30 text-white/80 hover:text-white font-din font-bold text-xs uppercase tracking-[0.16em] transition-all flex items-center gap-2 cursor-pointer"
+            className="px-5 py-3.5 border border-white/40 hover:border-white bg-transparent hover:bg-white/10 text-white font-din font-bold text-xs uppercase tracking-[0.16em] transition-all sharp-brutalist flex items-center gap-2 cursor-pointer"
           >
-            <LayoutDashboard className="w-3.5 h-3.5" />
+            <LayoutDashboard className="w-4 h-4" />
             <span>AVIONICS</span>
           </button>
           <button
             onClick={() => navigate('digital-twin-3d')}
-            className="px-6 py-3 rounded-xl bg-white hover:bg-cyan text-black font-din font-bold text-xs uppercase tracking-[0.16em] transition-all flex items-center gap-2 cursor-pointer shadow-xl group"
+            className="px-6 py-3.5 bg-white hover:bg-cyan text-black font-din font-bold text-xs uppercase tracking-[0.18em] transition-all duration-300 sharp-brutalist shadow-2xl flex items-center gap-2 cursor-pointer group"
           >
             <Boxes className="w-4 h-4" />
             <span>3D SIMULATION ARENA</span>
-            <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
+            <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
           </button>
         </div>
       </div>
 
       {/* Mandatory Ideathon Disclaimer */}
-      <div className="p-5 rounded-2xl bg-amber/[0.08] border border-amber/30 space-y-2 font-mono backdrop-blur-xl">
-        <div className="flex items-center gap-2 text-amber font-bold text-xs uppercase tracking-wider font-din">
+      <div className="p-5 bg-[#0e0a05] border border-amber/50 space-y-2 font-mono sharp-brutalist">
+        <div className="flex items-center gap-2 text-amber font-bold text-xs uppercase tracking-[0.18em] font-din">
           <AlertTriangle className="w-4 h-4 shrink-0" />
           <span>MANDATORY PROTOTYPE DISCLOSURE // SPACE & BEYOND IDEATHON</span>
         </div>
@@ -69,8 +67,8 @@ export const ModelAssumptionsPage: React.FC = () => {
       </div>
 
       {/* Section 1: Purpose & Scope */}
-      <div className="hud-panel rounded-2xl p-6 sm:p-8 space-y-4 bg-gradient-to-b from-white/[0.04] to-transparent backdrop-blur-xl border border-white/10 shadow-xl">
-        <h2 className="text-sm sm:text-base font-bold text-white uppercase font-din tracking-wide flex items-center gap-2.5">
+      <div className="p-6 sm:p-8 space-y-4 bg-[#080808] border border-[#333333] sharp-brutalist">
+        <h2 className="text-sm sm:text-base font-extrabold text-white uppercase font-din tracking-[0.14em] flex items-center gap-2.5">
           <Cpu className="w-5 h-5 text-cyan" />
           <span>1. PURPOSE & SYSTEM SCOPE</span>
         </h2>
@@ -87,14 +85,14 @@ export const ModelAssumptionsPage: React.FC = () => {
       </div>
 
       {/* Section 2: Baseline Constants & Thresholds Table */}
-      <div className="hud-panel rounded-2xl p-6 sm:p-8 space-y-4 bg-gradient-to-b from-white/[0.04] to-transparent backdrop-blur-xl border border-white/10 shadow-xl">
-        <h2 className="text-sm sm:text-base font-bold text-white uppercase font-din tracking-wide flex items-center gap-2.5">
+      <div className="p-6 sm:p-8 space-y-4 bg-[#080808] border border-[#333333] sharp-brutalist">
+        <h2 className="text-sm sm:text-base font-extrabold text-white uppercase font-din tracking-[0.14em] flex items-center gap-2.5">
           <Layers className="w-5 h-5 text-cyan" />
           <span>2. BASELINE CONSTANTS & DEFINED THRESHOLDS</span>
         </h2>
-        <div className="overflow-x-auto rounded-xl border border-white/10">
+        <div className="overflow-x-auto border border-[#222222] sharp-brutalist">
           <table className="w-full text-left text-xs font-mono">
-            <thead className="bg-white/[0.04] border-b border-white/10 text-[11px] font-mono text-white/60 uppercase tracking-wider">
+            <thead className="bg-[#0c0c0c] border-b border-[#222222] text-[11px] font-mono text-white/60 uppercase tracking-[0.14em]">
               <tr>
                 <th className="px-5 py-3.5">RESOURCE</th>
                 <th className="px-5 py-3.5">STARTING RESERVE</th>
@@ -104,7 +102,7 @@ export const ModelAssumptionsPage: React.FC = () => {
                 <th className="px-5 py-3.5">ENGINEERING MODEL NOTE</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-white/5 text-[11px]">
+            <tbody className="divide-y divide-[#1a1a1a] text-[11px]">
               <tr className="hover:bg-white/[0.02] transition-colors">
                 <td className="px-5 py-3.5 font-bold text-white font-din text-sm uppercase">Battery Storage</td>
                 <td className="px-5 py-3.5 text-cyan font-bold">38.0 kWh</td>
@@ -143,15 +141,15 @@ export const ModelAssumptionsPage: React.FC = () => {
       </div>
 
       {/* Section 3: Mathematical Formulas */}
-      <div className="hud-panel rounded-2xl p-6 sm:p-8 space-y-5 bg-gradient-to-b from-white/[0.04] to-transparent backdrop-blur-xl border border-white/10 shadow-xl">
-        <h2 className="text-sm sm:text-base font-bold text-white uppercase font-din tracking-wide flex items-center gap-2.5">
+      <div className="p-6 sm:p-8 space-y-5 bg-[#080808] border border-[#333333] sharp-brutalist">
+        <h2 className="text-sm sm:text-base font-extrabold text-white uppercase font-din tracking-[0.14em] flex items-center gap-2.5">
           <Cpu className="w-5 h-5 text-cyan" />
           <span>3. PURE MATHEMATICAL FORMULAS & RUNWAY LOGIC</span>
         </h2>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs font-mono">
-          <div className="p-4 sm:p-5 rounded-xl bg-white/[0.03] border border-white/10 space-y-1.5">
-            <span className="text-cyan font-bold block uppercase tracking-wider font-din text-xs">A. POWER BALANCE & BATTERY RUNWAY:</span>
+          <div className="p-4 sm:p-5 bg-[#050505] border border-[#222222] space-y-1.5 sharp-brutalist">
+            <span className="text-cyan font-bold block uppercase tracking-[0.16em] font-din text-xs">A. POWER BALANCE & BATTERY RUNWAY:</span>
             <p className="text-white/60 font-mono">netPowerKW = solar - demand</p>
             <p className="text-white/60 font-mono">netDrainKW = demand - solar</p>
             <p className="text-white/60 font-mono">usable = Math.max(0, batt - floor)</p>
@@ -163,8 +161,8 @@ export const ModelAssumptionsPage: React.FC = () => {
             </p>
           </div>
 
-          <div className="p-4 sm:p-5 rounded-xl bg-white/[0.03] border border-white/10 space-y-1.5">
-            <span className="text-cyan font-bold block uppercase tracking-wider font-din text-xs">B. POTABLE WATER RUNWAY:</span>
+          <div className="p-4 sm:p-5 bg-[#050505] border border-[#222222] space-y-1.5 sharp-brutalist">
+            <span className="text-cyan font-bold block uppercase tracking-[0.16em] font-din text-xs">B. POTABLE WATER RUNWAY:</span>
             <p className="text-white/60 font-mono">usable = Math.max(0, water - floor)</p>
             <p className="text-white font-bold font-mono pt-1">
               runwayDays = usable / netLossLPD
@@ -174,8 +172,8 @@ export const ModelAssumptionsPage: React.FC = () => {
             </p>
           </div>
 
-          <div className="p-4 sm:p-5 rounded-xl bg-white/[0.03] border border-white/10 space-y-1.5">
-            <span className="text-cyan font-bold block uppercase tracking-wider font-din text-xs">C. OXYGEN MARGIN INDICATOR:</span>
+          <div className="p-4 sm:p-5 bg-[#050505] border border-[#222222] space-y-1.5 sharp-brutalist">
+            <span className="text-cyan font-bold block uppercase tracking-[0.16em] font-din text-xs">C. OXYGEN MARGIN INDICATOR:</span>
             <p className="text-white/60 font-mono">usable = Math.max(0, o2 - floor)</p>
             <p className="text-white font-bold font-mono pt-1">
               runwayHours = usable / declineRate
@@ -188,14 +186,14 @@ export const ModelAssumptionsPage: React.FC = () => {
       </div>
 
       {/* Section 4: Primary Solar Scenario Recovery Plan Rules */}
-      <div className="hud-panel rounded-2xl p-6 sm:p-8 space-y-4 bg-gradient-to-b from-white/[0.04] to-transparent backdrop-blur-xl border border-white/10 shadow-xl">
-        <h2 className="text-sm sm:text-base font-bold text-white uppercase font-din tracking-wide flex items-center gap-2.5">
+      <div className="p-6 sm:p-8 space-y-4 bg-[#080808] border border-[#333333] sharp-brutalist">
+        <h2 className="text-sm sm:text-base font-extrabold text-white uppercase font-din tracking-[0.14em] flex items-center gap-2.5">
           <Layers className="w-5 h-5 text-cyan" />
           <span>4. PRIMARY SOLAR FAULT RECOVERY PARAMETER SPECIFICATIONS</span>
         </h2>
-        <div className="overflow-x-auto rounded-xl border border-white/10">
+        <div className="overflow-x-auto border border-[#222222] sharp-brutalist">
           <table className="w-full text-left text-xs font-mono">
-            <thead className="bg-white/[0.04] border-b border-white/10 text-[11px] font-mono text-white/60 uppercase tracking-wider">
+            <thead className="bg-[#0c0c0c] border-b border-[#222222] text-[11px] font-mono text-white/60 uppercase tracking-[0.14em]">
               <tr>
                 <th className="px-5 py-3.5">PLAN</th>
                 <th className="px-5 py-3.5">LOAD REDUCTION</th>
@@ -205,7 +203,7 @@ export const ModelAssumptionsPage: React.FC = () => {
                 <th className="px-5 py-3.5">OPERATIONAL TRADE-OFF</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-white/5 text-[11px]">
+            <tbody className="divide-y divide-[#1a1a1a] text-[11px]">
               <tr className="bg-cyan/[0.03] hover:bg-cyan/[0.06] transition-colors">
                 <td className="px-5 py-3.5 font-bold text-cyan font-din text-sm uppercase">Plan C (Recommended)</td>
                 <td className="px-5 py-3.5 text-white font-bold">-3.5 kW</td>
@@ -236,8 +234,8 @@ export const ModelAssumptionsPage: React.FC = () => {
       </div>
 
       {/* Section 5: Model Limitations & Engineering Assumptions */}
-      <div className="hud-panel rounded-2xl p-6 sm:p-8 space-y-4 bg-gradient-to-b from-white/[0.04] to-transparent backdrop-blur-xl border border-white/10 shadow-xl">
-        <h2 className="text-sm sm:text-base font-bold text-white uppercase font-din tracking-wide flex items-center gap-2.5">
+      <div className="p-6 sm:p-8 space-y-4 bg-[#080808] border border-[#333333] sharp-brutalist">
+        <h2 className="text-sm sm:text-base font-extrabold text-white uppercase font-din tracking-[0.14em] flex items-center gap-2.5">
           <ShieldAlert className="w-5 h-5 text-amber" />
           <span>5. MODEL LIMITATIONS & ENGINEERING ASSUMPTIONS</span>
         </h2>
@@ -250,20 +248,20 @@ export const ModelAssumptionsPage: React.FC = () => {
       </div>
 
       {/* Section 6: Risks & How We Handle Them */}
-      <div className="hud-panel rounded-2xl p-6 sm:p-8 space-y-4 bg-gradient-to-b from-white/[0.04] to-transparent backdrop-blur-xl border border-white/10 shadow-xl">
-        <h2 className="text-sm sm:text-base font-bold text-white uppercase font-din tracking-wide flex items-center gap-2.5">
+      <div className="p-6 sm:p-8 space-y-4 bg-[#080808] border border-[#333333] sharp-brutalist">
+        <h2 className="text-sm sm:text-base font-extrabold text-white uppercase font-din tracking-[0.14em] flex items-center gap-2.5">
           <AlertTriangle className="w-5 h-5 text-cyan" />
           <span>6. TECHNICAL RISKS & DEFENSIBLE MITIGATIONS</span>
         </h2>
-        <div className="overflow-x-auto rounded-xl border border-white/10">
+        <div className="overflow-x-auto border border-[#222222] sharp-brutalist">
           <table className="w-full text-left text-xs font-mono">
-            <thead className="bg-white/[0.04] border-b border-white/10 text-[11px] font-mono text-white/60 uppercase tracking-wider">
+            <thead className="bg-[#0c0c0c] border-b border-[#222222] text-[11px] font-mono text-white/60 uppercase tracking-[0.14em]">
               <tr>
                 <th className="px-5 py-3.5">IDENTIFIED RISK</th>
                 <th className="px-5 py-3.5">HOW ASTRALOOP HANDLES IT</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-white/5 text-[11px] text-white/70">
+            <tbody className="divide-y divide-[#1a1a1a] text-[11px] text-white/70">
               <tr className="hover:bg-white/[0.02] transition-colors">
                 <td className="px-5 py-3.5 font-bold text-white font-din text-sm uppercase">Overclaiming the Science</td>
                 <td className="px-5 py-3.5 font-sans">All values explicitly labeled simulated and illustrative. Real NASA literature cited as motivation, not validation.</td>
@@ -290,15 +288,15 @@ export const ModelAssumptionsPage: React.FC = () => {
       </div>
 
       {/* Section 7: Post-Hackathon Roadmap & Earth Applications */}
-      <div className="hud-panel rounded-2xl p-6 sm:p-8 space-y-5 bg-gradient-to-b from-white/[0.04] to-transparent backdrop-blur-xl border border-white/10 shadow-xl">
-        <h2 className="text-sm sm:text-base font-bold text-white uppercase font-din tracking-wide flex items-center gap-2.5">
+      <div className="p-6 sm:p-8 space-y-5 bg-[#080808] border border-[#333333] sharp-brutalist">
+        <h2 className="text-sm sm:text-base font-extrabold text-white uppercase font-din tracking-[0.14em] flex items-center gap-2.5">
           <Cpu className="w-5 h-5 text-teal" />
           <span>7. POST-HACKATHON ROADMAP & EARTH SPIN-OFF APPLICATIONS</span>
         </h2>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-          <div className="p-5 rounded-xl bg-white/[0.03] border border-white/10 space-y-2.5">
-            <span className="text-sm font-din font-bold uppercase tracking-wider text-cyan block">
+          <div className="p-5 bg-[#050505] border border-[#222222] space-y-2.5 sharp-brutalist">
+            <span className="text-sm font-din font-bold uppercase tracking-[0.14em] text-cyan block">
               Four-Phase Engineering Roadmap
             </span>
             <ul className="text-xs sm:text-sm text-white/70 space-y-2 font-sans">
@@ -309,8 +307,8 @@ export const ModelAssumptionsPage: React.FC = () => {
             </ul>
           </div>
 
-          <div className="p-5 rounded-xl bg-white/[0.03] border border-white/10 space-y-2.5">
-            <span className="text-sm font-din font-bold uppercase tracking-wider text-teal block">
+          <div className="p-5 bg-[#050505] border border-[#222222] space-y-2.5 sharp-brutalist">
+            <span className="text-sm font-din font-bold uppercase tracking-[0.14em] text-teal block">
               Terrestrial Spin-off Applications
             </span>
             <p className="text-xs sm:text-sm text-white/70 leading-relaxed font-sans">
@@ -326,8 +324,8 @@ export const ModelAssumptionsPage: React.FC = () => {
       </div>
 
       {/* Section 8: Official Reference Citations */}
-      <div className="hud-panel rounded-2xl p-6 sm:p-8 space-y-4 bg-gradient-to-b from-white/[0.04] to-transparent backdrop-blur-xl border border-white/10 shadow-xl">
-        <h2 className="text-sm sm:text-base font-bold text-white uppercase font-din tracking-wide flex items-center gap-2.5">
+      <div className="p-6 sm:p-8 space-y-4 bg-[#080808] border border-[#333333] sharp-brutalist">
+        <h2 className="text-sm sm:text-base font-extrabold text-white uppercase font-din tracking-[0.14em] flex items-center gap-2.5">
           <ExternalLink className="w-5 h-5 text-cyan" />
           <span>8. OFFICIAL NASA & TECHNICAL REFERENCE CITATIONS</span>
         </h2>
@@ -340,7 +338,7 @@ export const ModelAssumptionsPage: React.FC = () => {
             href="https://www.nasa.gov/lunar-surface-technology/"
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center justify-between p-4 rounded-xl bg-white/[0.03] border border-white/10 hover:border-white/30 text-white hover:text-cyan transition-all hover:translate-y-[-1px]"
+            className="flex items-center justify-between p-4 bg-[#050505] border border-[#222222] hover:border-white/50 text-white hover:text-cyan transition-all sharp-brutalist"
           >
             <span>[1] NASA Lunar Surface Technology</span>
             <ExternalLink className="w-4 h-4 shrink-0" />
@@ -349,7 +347,7 @@ export const ModelAssumptionsPage: React.FC = () => {
             href="https://www.nasa.gov/reference/environmental-control-and-life-support-systems-eclss/"
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center justify-between p-4 rounded-xl bg-white/[0.03] border border-white/10 hover:border-white/30 text-white hover:text-cyan transition-all hover:translate-y-[-1px]"
+            className="flex items-center justify-between p-4 bg-[#050505] border border-[#222222] hover:border-white/50 text-white hover:text-cyan transition-all sharp-brutalist"
           >
             <span>[2] NASA Environmental Control (ECLSS)</span>
             <ExternalLink className="w-4 h-4 shrink-0" />
@@ -358,23 +356,23 @@ export const ModelAssumptionsPage: React.FC = () => {
             href="https://www.nasa.gov/space-technology-mission-directorate/lunar-surface-innovation-initiative/"
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center justify-between p-4 rounded-xl bg-white/[0.03] border border-white/10 hover:border-white/30 text-white hover:text-cyan transition-all hover:translate-y-[-1px]"
+            className="flex items-center justify-between p-4 bg-[#050505] border border-[#222222] hover:border-white/50 text-white hover:text-cyan transition-all sharp-brutalist"
           >
             <span>[3] NASA Lunar Surface Innovation (LSII)</span>
             <ExternalLink className="w-4 h-4 shrink-0" />
           </a>
-          <div className="flex items-center justify-between p-4 rounded-xl bg-white/[0.02] border border-white/5 text-white/60">
+          <div className="flex items-center justify-between p-4 bg-[#050505] border border-[#222222] text-white/60 sharp-brutalist">
             <span>[4] NASA Class A Flight Software (NPR 7150.2)</span>
-            <span className="text-[10px] font-mono text-cyan font-bold bg-cyan/10 px-2 py-0.5 rounded-full">STANDARD</span>
+            <span className="text-[10px] font-mono text-cyan font-bold bg-cyan/10 border border-cyan/30 px-2 py-0.5">STANDARD</span>
           </div>
         </div>
       </div>
 
       {/* Section 9: Team HackDevs Signature */}
-      <div className="p-5 rounded-2xl bg-white/[0.03] border border-white/10 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs font-mono backdrop-blur-xl">
+      <div className="p-5 bg-[#080808] border border-[#333333] flex flex-col sm:flex-row items-center justify-between gap-3 text-xs font-mono sharp-brutalist">
         <div className="flex items-center gap-2.5">
           <Sparkles className="w-4 h-4 text-cyan" />
-          <span className="font-bold text-white uppercase tracking-wider font-din text-sm">
+          <span className="font-extrabold text-white uppercase tracking-[0.16em] font-din text-sm">
             AstraLoop Prototype Developed by Team HackDevs
           </span>
         </div>

@@ -40,22 +40,23 @@ export const OverviewPage: React.FC = () => {
 
   return (
     <div className="space-y-8 font-sans">
-      {/* 0. Aerospace Cinematic Page Header */}
-      <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-5 pb-6 border-b border-white/10">
+      {/* 0. Aerospace Cinematic Page Header (SpaceX Homepage Style) */}
+      <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-5 pb-6 border-b border-[#333333]">
         <div>
           <div className="flex flex-wrap items-center gap-2 mb-2">
-            <span className="text-xs font-mono font-bold px-3 py-1 rounded-full bg-cyan/10 border border-cyan/30 text-cyan">
+            <span className="w-2 h-2 rounded-full bg-cyan animate-pulse" />
+            <span className="font-din text-xs sm:text-sm font-bold tracking-[0.2em] text-white/80 uppercase block">
               01 / AVIONICS CONSOLE
             </span>
+            <span className="text-white/30 text-xs font-mono">//</span>
             <span className="text-xs font-mono text-white/50 tracking-wider">
-              120V DC POWER BUS // CLOSED-LOOP WRS // ECLSS CORE
+              120V DC POWER BUS • CLOSED-LOOP WRS • ECLSS CORE
             </span>
           </div>
-          <h1 className="text-3xl sm:text-4xl font-extrabold uppercase tracking-[0.03em] text-white font-din flex items-center gap-3">
-            <LayoutDashboard className="w-7 h-7 text-cyan" />
+          <h1 className="font-din text-3xl sm:text-5xl md:text-6xl font-extrabold uppercase tracking-[0.04em] text-white leading-[1.05] mb-3">
             LUNAR HABITAT AVIONICS OVERVIEW
           </h1>
-          <p className="text-xs sm:text-sm text-white/70 max-w-3xl font-sans mt-1 leading-relaxed">
+          <p className="text-white/80 font-sans text-sm md:text-base max-w-3xl leading-relaxed font-normal">
             Live telemetry stream from DEMO-01 on Shackleton Crater rim (89.9°S). Monitor instantaneous power bus equilibrium, water reserve inventory, and trace-contaminant indicator margins.
           </p>
         </div>
@@ -63,7 +64,7 @@ export const OverviewPage: React.FC = () => {
         <div className="flex items-center gap-3 shrink-0">
           <button
             onClick={() => navigate('digital-twin-3d')}
-            className="px-6 py-3 rounded-xl bg-white hover:bg-cyan text-black font-din font-bold text-xs uppercase tracking-[0.16em] transition-all flex items-center gap-2.5 cursor-pointer shadow-xl group"
+            className="px-6 py-3.5 bg-white hover:bg-cyan text-black font-din font-bold text-xs uppercase tracking-[0.18em] transition-all duration-300 flex items-center gap-2.5 cursor-pointer sharp-brutalist shadow-2xl group"
           >
             <Boxes className="w-4 h-4" />
             <span>3D SIMULATION ARENA</span>
@@ -175,14 +176,14 @@ export const OverviewPage: React.FC = () => {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         <div className="lg:col-span-2 space-y-4">
           {/* View Mode Selector Bar */}
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-2.5 rounded-2xl bg-white/[0.03] border border-white/10 backdrop-blur-xl">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-3 bg-[#080808] border border-[#333333] sharp-brutalist">
             <div className="flex items-center gap-2">
               <button
                 onClick={() => setViewMode('3d')}
-                className={`px-4 py-2 rounded-xl text-xs font-din font-bold uppercase tracking-wider flex items-center gap-2 transition-all cursor-pointer ${
+                className={`px-4 py-2.5 text-xs font-din font-bold uppercase tracking-[0.16em] flex items-center gap-2 transition-all cursor-pointer sharp-brutalist ${
                   viewMode === '3d'
                     ? 'bg-white text-black shadow-lg'
-                    : 'text-white/60 hover:text-white hover:bg-white/5 border border-transparent'
+                    : 'text-white/60 hover:text-white hover:bg-white/10 border border-transparent'
                 }`}
               >
                 <Boxes className="w-4 h-4" />
@@ -190,10 +191,10 @@ export const OverviewPage: React.FC = () => {
               </button>
               <button
                 onClick={() => setViewMode('schematic')}
-                className={`px-4 py-2 rounded-xl text-xs font-din font-bold uppercase tracking-wider flex items-center gap-2 transition-all cursor-pointer ${
+                className={`px-4 py-2.5 text-xs font-din font-bold uppercase tracking-[0.16em] flex items-center gap-2 transition-all cursor-pointer sharp-brutalist ${
                   viewMode === 'schematic'
                     ? 'bg-white text-black shadow-lg'
-                    : 'text-white/60 hover:text-white hover:bg-white/5 border border-transparent'
+                    : 'text-white/60 hover:text-white hover:bg-white/10 border border-transparent'
                 }`}
               >
                 <CircuitBoard className="w-4 h-4" />
@@ -203,15 +204,15 @@ export const OverviewPage: React.FC = () => {
 
             <button
               onClick={() => navigate('digital-twin-3d')}
-              className="text-xs font-din font-bold text-cyan hover:text-white tracking-wider uppercase flex items-center gap-1.5 self-end sm:self-auto cursor-pointer px-3 py-1.5 rounded-lg hover:bg-white/5 transition-colors"
+              className="text-xs font-din font-bold text-cyan hover:text-white tracking-[0.16em] uppercase flex items-center gap-1.5 self-end sm:self-auto cursor-pointer px-3 py-1.5 hover:bg-white/5 transition-colors sharp-brutalist"
             >
               <span>FULLSCREEN 3D SIMULATION ARENA</span>
               <ArrowRight className="w-3.5 h-3.5" />
             </button>
           </div>
 
-          {/* Conditional View with Rounded Corners */}
-          <div className="rounded-2xl overflow-hidden border border-white/10 shadow-2xl">
+          {/* Conditional View with Sharp Brutalist Border */}
+          <div className="overflow-hidden border border-[#333333] shadow-2xl sharp-brutalist">
             {viewMode === '3d' ? (
               <LunarHabitat3DCanvas heightClass="h-[460px]" />
             ) : (

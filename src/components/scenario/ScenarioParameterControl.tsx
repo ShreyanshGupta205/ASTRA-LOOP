@@ -26,7 +26,7 @@ export const ScenarioParameterControl: React.FC<Props> = ({
   const isChangedFromBaseline = value !== baselineValue;
 
   return (
-    <div className="p-4 sm:p-5 rounded-xl bg-white/[0.03] border border-white/10 space-y-3 font-mono hover:border-white/20 transition-all">
+    <div className="p-4 sm:p-5 bg-[#050505] border border-white/10 space-y-3 font-mono hover:border-white/30 transition-all sharp-brutalist">
       <div className="flex items-center justify-between text-xs">
         <div>
           <span className="font-bold text-white tracking-wide uppercase text-xs block font-din">
@@ -39,7 +39,7 @@ export const ScenarioParameterControl: React.FC<Props> = ({
             {value} {unit}
           </span>
           {isChangedFromBaseline && (
-            <span className="block text-[9px] text-amber uppercase font-semibold mt-0.5 bg-amber/10 border border-amber/30 px-1.5 py-0.2 rounded">
+            <span className="block text-[9px] text-amber uppercase font-semibold mt-0.5 bg-amber/10 border border-amber/30 px-1.5 py-0.5 sharp-brutalist">
               BASE: {baselineValue} {unit}
             </span>
           )}
@@ -54,13 +54,13 @@ export const ScenarioParameterControl: React.FC<Props> = ({
           step={step}
           value={value}
           onChange={(e) => onChange(parseFloat(e.target.value))}
-          className="w-full h-2.5 rounded-full bg-white/[0.08] appearance-none cursor-pointer accent-cyan border border-white/10"
+          className="w-full h-2 bg-black appearance-none cursor-pointer accent-cyan border border-white/20 sharp-brutalist"
         />
       </div>
 
       <div className="flex justify-between text-[10px] text-white/40 pt-0.5">
         <span>MIN: {min} {unit}</span>
-        <span className="text-cyan font-bold tracking-wider">NOMINAL: {baselineValue} {unit}</span>
+        <span className="text-cyan font-bold tracking-[0.16em] uppercase">NOMINAL: {baselineValue} {unit}</span>
         <span>MAX: {max} {unit}</span>
       </div>
     </div>
