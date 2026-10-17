@@ -44,7 +44,7 @@ export const SpaceXHeroSection: React.FC<SpaceXHeroSectionProps> = ({ onWatchCli
       </div>
 
       {/* Main Bottom-Left Anchored Typography & CTA */}
-      <div className="relative top-[280px] z-10 w-full max-w-[1720px] mx-auto px-6 md:px-16 py-20 md:pb-28 ">
+      <div className="relative top-[50px] z-10 w-full max-w-[1720px] mx-auto px-6 md:px-16 pb-20 md:pb-28">
         <motion.div
           initial={{ opacity: 0, y: 35 }}
           animate={{ opacity: 1, y: 0 }}
